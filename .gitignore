@@ -1,0 +1,32 @@
+
+# Next.js
+**/node_modules/
+**/.next/
+**/out/
+
+# Python
+**/.venv/
+**/__pycache__/
+*.pyc
+
+# Environment variables
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Restricted H&M datasets
+data/raw/
+data/private/
+datasets/raw/
+datasets/hm/
+transactions_train.csv
+articles.csv
+customers.csv
+sample_submission.csv
+
+# Editor and system
+.vscode/
+.DS_Store
