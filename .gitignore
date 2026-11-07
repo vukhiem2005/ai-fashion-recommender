@@ -30,3 +30,6 @@ sample_submission.csv
 # Editor and system
 .vscode/
 .DS_Store
+
+# TypeScript incremental build cache
+**/*.tsbuildinfo
