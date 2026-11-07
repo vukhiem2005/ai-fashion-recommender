@@ -56,7 +56,7 @@ export default function Home() {
             <a href="#home" className="hover:text-[#ae805f]">
               Home
             </a>
-            <a href="#collection" className="hover:text-[#ae805f]">
+            <a href="/shop" className="hover:text-[#ae805f]">
               Collection
             </a>
             <a href="#about" className="hover:text-[#ae805f]">
@@ -95,7 +95,7 @@ export default function Home() {
             </p>
 
             <a
-              href="#collection"
+              href="/shop"
               className="mt-9 inline-block bg-[#24221f] px-9 py-4 text-sm font-medium text-white transition hover:bg-[#ae805f]"
             >
               Explore Collection
