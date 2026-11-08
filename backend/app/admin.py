@@ -1,6 +1,7 @@
 
 import hmac
 import os
+import re
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Header, HTTPException
@@ -287,3 +288,65 @@ def list_admin_products():
             )
 
         return results
+
+class VariantImageUpdate(BaseModel):
+    image_url: str | None
+
+
+@router.patch(
+    "/products/{product_id}/variants/{sku}/image"
+)
+def update_variant_image(
+    product_id: str,
+    sku: str,
+    payload: VariantImageUpdate,
+):
+    image_url = payload.image_url
+
+    # Accept only local product image paths.
+    if image_url is not None:
+        valid_path = re.fullmatch(
+            r"/products/[A-Za-z0-9][A-Za-z0-9._-]*"
+            r"\.(?:jpg|jpeg|png|webp)",
+            image_url,
+            flags=re.IGNORECASE,
+        )
+
+        if not valid_path:
+            raise HTTPException(
+                status_code=422,
+                detail="Invalid product image path",
+            )
+
+    with Session(engine) as session:
+        product = session.get(Product, product_id)
+
+        if product is None:
+            raise HTTPException(
+                status_code=404,
+                detail="Product not found",
+            )
+
+        variant = session.get(ProductVariant, sku)
+
+        if (
+            variant is None
+            or variant.product_id != product_id
+        ):
+            raise HTTPException(
+                status_code=404,
+                detail="Product variant not found",
+            )
+
+        variant.image_url = image_url
+
+        session.add(variant)
+        session.commit()
+        session.refresh(variant)
+
+        return {
+            "message": "Variant image updated successfully",
+            "product_id": product_id,
+            "sku": variant.sku,
+            "image_url": variant.image_url,
+        }

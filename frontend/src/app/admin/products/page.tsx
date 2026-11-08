@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import AddProductForm from "@/components/AddProductForm";
 import EditProductForm from "@/components/EditProductForm";
+import ManageProductImages from "@/components/ManageProductImages";
+
 interface AdminVariant {
   sku: string;
   color: string;
@@ -47,6 +49,9 @@ const [updatingId, setUpdatingId] = useState<string | null>(
 );
 
 const [editingProduct, setEditingProduct] =
+  useState<AdminProduct | null>(null);
+
+const [imageProduct, setImageProduct] =
   useState<AdminProduct | null>(null);
 
 
@@ -437,6 +442,14 @@ async function changeProductStatus(
 
 <button
   type="button"
+  onClick={() => setImageProduct(product)}
+  className="mr-2 border border-[#ddd6cf] px-3 py-2 text-xs font-medium transition hover:border-[#ae805f]"
+>
+  Images
+</button>
+
+<button
+  type="button"
   onClick={() => setEditingProduct(product)}
   className="mr-2 border border-[#ddd6cf] px-4 py-2 text-xs font-medium transition hover:border-[#ae805f]"
 >
@@ -494,6 +507,17 @@ async function changeProductStatus(
     onClose={() => setEditingProduct(null)}
   />
 )}
+
+{imageProduct !== null && (
+  <ManageProductImages
+    key={imageProduct.id}
+    product={imageProduct}
+    adminKey={adminKey}
+    onSaved={() => loadProducts()}
+    onClose={() => setImageProduct(null)}
+  />
+)}
+
     </div>
   );
 }
