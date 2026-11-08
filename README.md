@@ -113,7 +113,7 @@ The script recalculates metrics from committed CSV inputs, without invoking reco
 ### 1. Backend (Terminal 1)
 
 ```powershell
-git clone https://github.com/khimneae/ai-fashion-recommender.git
+git clone https://github.com/vankhiem1609/ai-fashion-recommender.git
 cd ai-fashion-recommender\backend
 
 py -m venv .venv
