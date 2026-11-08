@@ -1,5 +1,6 @@
 
 from contextlib import asynccontextmanager
+from app.recommendations import router as recommendations_router
 
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import text
@@ -22,7 +23,7 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan,
 )
-
+app.include_router(recommendations_router)
 app.include_router(admin_router)
 
 

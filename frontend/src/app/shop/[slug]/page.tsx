@@ -1,9 +1,11 @@
 "use client";
+import YouMayAlsoLike from "@/components/YouMayAlsoLike";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
 
 import {
   formatPrice,
@@ -328,7 +330,9 @@ function ProductDetailContent({ slug }: { slug: string }) {
             </p>
           </div>
         </div>
+        <YouMayAlsoLike productId={product.id} />
       </main>
+
 
       <footer className="mt-20 bg-[#24221f] px-6 py-10 text-center text-xs text-white">
         ÉLAN. — AI Fashion Recommendation E-Commerce

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   formatPrice,
@@ -19,6 +19,8 @@ import {
 type CategoryFilter = "All" | ProductCategory;
 type SortOption = "featured" | "price-asc" | "price-desc";
 
+const PAGE_SIZE = 24;
+
 export default function ShopPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] =
@@ -28,6 +30,8 @@ export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const filtersRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -112,10 +116,36 @@ export default function ShopPage() {
       return a.id.localeCompare(b.id);
     });
 
+  // Filter and sort the full catalog before selecting the current page.
+  const totalPages = Math.max(
+    1,
+    Math.ceil(visibleProducts.length / PAGE_SIZE)
+  );
+  const currentPage = Math.min(page, totalPages);
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const pageProducts = visibleProducts.slice(
+    startIndex,
+    startIndex + PAGE_SIZE
+  );
+  const firstShown = visibleProducts.length === 0 ? 0 : startIndex + 1;
+  const lastShown = Math.min(
+    startIndex + PAGE_SIZE,
+    visibleProducts.length
+  );
+
+  function changePage(nextPage: number) {
+    setPage(Math.max(1, Math.min(nextPage, totalPages)));
+    filtersRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
   function resetFilters() {
     setSearch("");
     setCategory("All");
     setSort("featured");
+    setPage(1);
   }
 
   return (
@@ -176,6 +206,7 @@ export default function ShopPage() {
 
         {/* Search, Filters, Sorting */}
         <section
+          ref={filtersRef}
           aria-label="Product filters"
           className="mb-10 space-y-6 border-y border-[#e7e2dc] py-6"
         >
@@ -183,9 +214,10 @@ export default function ShopPage() {
             <input
               type="search"
               value={search}
-              onChange={(event) =>
-                setSearch(event.target.value)
-              }
+              onChange={(event) => {
+                setSearch(event.target.value);
+                setPage(1);
+              }}
               placeholder="Search products..."
               aria-label="Search products"
               className="w-full border border-[#ddd6cf] bg-white px-5 py-3 text-sm outline-none focus:border-[#ae805f] md:max-w-md"
@@ -193,9 +225,10 @@ export default function ShopPage() {
 
             <select
               value={sort}
-              onChange={(event) =>
-                setSort(event.target.value as SortOption)
-              }
+              onChange={(event) => {
+                setSort(event.target.value as SortOption);
+                setPage(1);
+              }}
               aria-label="Sort products"
               className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm outline-none md:ml-auto"
             >
@@ -217,7 +250,10 @@ export default function ShopPage() {
               <button
                 key={item}
                 type="button"
-                onClick={() => setCategory(item)}
+                onClick={() => {
+                  setCategory(item);
+                  setPage(1);
+                }}
                 aria-pressed={category === item}
                 className={`border px-4 py-2 text-xs transition ${
                   category === item
@@ -239,8 +275,11 @@ export default function ShopPage() {
                 ? "Product list unavailable"
                 : (
                   <>
-                    Showing {visibleProducts.length} of{" "}
-                    {products.length} products
+                    Showing {firstShown}–{lastShown} of{" "}
+                    {visibleProducts.length} products
+                    {visibleProducts.length !== products.length && (
+                      <> (filtered from {products.length} total)</>
+                    )}
                   </>
                 )}
           </p>
@@ -278,7 +317,7 @@ export default function ShopPage() {
             aria-label="Product catalog"
             className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {visibleProducts.map((product) => (
+            {pageProducts.map((product) => (
               <article
                 key={product.id}
                 className="group"
@@ -370,6 +409,38 @@ export default function ShopPage() {
               </article>
             ))}
           </section>
+        )}
+
+        {/* Client-side pagination: only 24 cards render per page. */}
+        {!loading && !loadError && visibleProducts.length > PAGE_SIZE && (
+          <nav
+            aria-label="Product pagination"
+            className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#e7e2dc] pt-6 sm:flex-row"
+          >
+            <p className="text-sm text-[#817a72]">
+              Page {currentPage} of {totalPages}
+            </p>
+
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => changePage(currentPage - 1)}
+                disabled={currentPage === 1}
+                className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm transition hover:border-[#ae805f] disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Previous
+              </button>
+
+              <button
+                type="button"
+                onClick={() => changePage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm transition hover:border-[#ae805f] disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Next
+              </button>
+            </div>
+          </nav>
         )}
 
         {/* Demo Disclaimer */}
