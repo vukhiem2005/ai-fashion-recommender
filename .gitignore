@@ -33,3 +33,6 @@ sample_submission.csv
 
 # TypeScript incremental build cache
 **/*.tsbuildinfo
+
+# Local SQLite database
+/backend/data/

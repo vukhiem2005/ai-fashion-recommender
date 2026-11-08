@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
 import {
   products,
   formatPrice,
@@ -67,10 +68,12 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-[#faf9f6] text-[#24221f]">
+      {/* Announcement Bar */}
       <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
         ÉLAN Fashion Store — Portfolio Demo
       </div>
 
+      {/* Navigation */}
       <header className="border-b border-[#e9e6e1] bg-white">
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
           <Link
@@ -81,9 +84,13 @@ export default function ShopPage() {
           </Link>
 
           <div className="flex items-center gap-6 text-sm">
-            <Link href="/" className="hover:text-[#ae805f]">
+            <Link
+              href="/"
+              className="hover:text-[#ae805f]"
+            >
               Home
             </Link>
+
             <Link
               href="/shop"
               className="font-semibold text-[#ae805f]"
@@ -99,6 +106,7 @@ export default function ShopPage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-6 py-12 md:py-16">
+        {/* Page Heading */}
         <div className="mb-12">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
             The ÉLAN Collection
@@ -114,6 +122,7 @@ export default function ShopPage() {
           </p>
         </div>
 
+        {/* Search, Filters, Sorting */}
         <section
           aria-label="Product filters"
           className="mb-10 space-y-6 border-y border-[#e7e2dc] py-6"
@@ -138,7 +147,9 @@ export default function ShopPage() {
               aria-label="Sort products"
               className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm outline-none md:ml-auto"
             >
-              <option value="featured">Featured</option>
+              <option value="featured">
+                Featured
+              </option>
               <option value="price-asc">
                 Price: Low to High
               </option>
@@ -148,6 +159,7 @@ export default function ShopPage() {
             </select>
           </div>
 
+          {/* Category Filters */}
           <div className="flex flex-wrap gap-2">
             {categories.map((item) => (
               <button
@@ -161,7 +173,9 @@ export default function ShopPage() {
                     : "border-[#ddd6cf] bg-white hover:border-[#ae805f]"
                 }`}
               >
-                {item === "All" ? "All Products" : item}
+                {item === "All"
+                  ? "All Products"
+                  : item}
               </button>
             ))}
           </div>
@@ -172,14 +186,17 @@ export default function ShopPage() {
           </p>
         </section>
 
+        {/* Product Grid */}
         {visibleProducts.length === 0 ? (
           <div className="py-20 text-center">
             <h2 className="font-serif text-3xl">
               No products found
             </h2>
+
             <p className="mt-3 text-sm text-[#817a72]">
               Try another search or category.
             </p>
+
             <button
               type="button"
               onClick={resetFilters}
@@ -194,39 +211,55 @@ export default function ShopPage() {
             className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
           >
             {visibleProducts.map((product) => (
-              <article key={product.id}>
-                <div className="relative aspect-[3/4] overflow-hidden bg-[#eee8e0]">
+              <article
+                key={product.id}
+                className="group"
+              >
+                {/* Clickable Product Image */}
+                <Link
+                  href={`/shop/${product.slug}`}
+                  aria-label={`View ${product.name}`}
+                  className="relative block aspect-[3/4] overflow-hidden bg-[#eee8e0]"
+                >
                   {product.imageUrl ? (
                     <Image
                       src={product.imageUrl}
                       alt={`Product image: ${product.name}`}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover"
+                      className="object-cover transition duration-500 group-hover:scale-105"
                     />
                   ) : (
                     <div className="flex h-full flex-col items-center justify-center px-6 text-center">
                       <span className="font-serif text-4xl tracking-widest text-[#b5a79a]">
                         ÉLAN.
                       </span>
+
                       <p className="mt-5 text-xs uppercase tracking-widest text-[#a39385]">
                         Product Image Coming Soon
                       </p>
                     </div>
                   )}
 
-                  <span className="absolute left-4 top-4 bg-white px-3 py-2 text-[10px] font-semibold tracking-wider">
+                  <span className="pointer-events-none absolute left-4 top-4 bg-white px-3 py-2 text-[10px] font-semibold tracking-wider">
                     DEMO
                   </span>
-                </div>
+                </Link>
 
+                {/* Product Information */}
                 <div className="mt-5">
                   <p className="text-xs uppercase tracking-widest text-[#a58a76]">
                     {product.category}
                   </p>
 
+                  {/* Clickable Product Name */}
                   <h2 className="mt-2 text-xl font-medium">
-                    {product.name}
+                    <Link
+                      href={`/shop/${product.slug}`}
+                      className="transition hover:text-[#ae805f]"
+                    >
+                      {product.name}
+                    </Link>
                   </h2>
 
                   <p className="mt-2 text-base font-semibold">
@@ -237,6 +270,7 @@ export default function ShopPage() {
                     {product.id}
                   </p>
 
+                  {/* Product Details Summary */}
                   <details className="mt-5 border-t border-[#e7e2dc] pt-4">
                     <summary className="cursor-pointer text-sm font-medium">
                       Product Information
@@ -244,26 +278,37 @@ export default function ShopPage() {
 
                     <div className="space-y-3 pt-4 text-sm text-[#77716b]">
                       <p>{product.description}</p>
+
                       <p>
                         <strong>Colors:</strong>{" "}
                         {product.colors.join(", ")}
                       </p>
+
                       <p>
                         <strong>Sizes:</strong>{" "}
                         {product.sizes.join(", ")}
                       </p>
                     </div>
                   </details>
+
+                  {/* Product Detail Navigation */}
+                  <Link
+                    href={`/shop/${product.slug}`}
+                    className="mt-5 inline-block border-b border-[#24221f] pb-1 text-sm font-medium transition hover:border-[#ae805f] hover:text-[#ae805f]"
+                  >
+                    View Product Details
+                  </Link>
                 </div>
               </article>
             ))}
           </section>
         )}
 
+        {/* Demo Disclaimer */}
         <p className="mt-16 border-t border-[#e7e2dc] pt-6 text-xs leading-6 text-[#817a72]">
           Demonstration catalog with illustrative prices.
-          Product images will be added after asset
-          verification. No real purchases are processed.
+          Product images are for demonstration only.
+          No real purchases are processed.
         </p>
       </main>
 

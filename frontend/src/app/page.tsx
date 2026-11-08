@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import Image from "next/image";
 
 const products = [
@@ -53,13 +54,24 @@ export default function Home() {
           </a>
 
           <div className="hidden items-center gap-8 text-sm md:flex">
-            <a href="#home" className="hover:text-[#ae805f]">
+            <a
+              href="#home"
+              className="hover:text-[#ae805f]"
+            >
               Home
             </a>
-            <a href="/shop" className="hover:text-[#ae805f]">
+
+            <Link
+              href="/shop"
+              className="hover:text-[#ae805f]"
+            >
               Collection
-            </a>
-            <a href="#about" className="hover:text-[#ae805f]">
+            </Link>
+
+            <a
+              href="#about"
+              className="hover:text-[#ae805f]"
+            >
               About
             </a>
           </div>
@@ -85,21 +97,24 @@ export default function Home() {
               <br />
               speaks for
               <br />
-              <span className="italic text-[#ae805f]">you.</span>
+              <span className="italic text-[#ae805f]">
+                you.
+              </span>
             </h1>
 
             <p className="mt-7 max-w-md leading-8 text-[#77716b]">
-              Discover contemporary fashion through a smarter
-              shopping experience. Explore curated styles and
-              personalized recommendations.
+              Discover contemporary fashion through a
+              smarter shopping experience. Explore
+              curated styles and personalized
+              recommendations.
             </p>
 
-            <a
+            <Link
               href="/shop"
               className="mt-9 inline-block bg-[#24221f] px-9 py-4 text-sm font-medium text-white transition hover:bg-[#ae805f]"
             >
               Explore Collection
-            </a>
+            </Link>
           </div>
 
           <div className="relative h-[480px] overflow-hidden bg-[#e8ded3] md:h-[600px]">
@@ -110,6 +125,7 @@ export default function Home() {
               sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
             />
+
             <div className="absolute bottom-6 left-6 bg-white/90 px-5 py-3 text-xs uppercase tracking-[0.2em]">
               The Modern Edit
             </div>
@@ -125,6 +141,7 @@ export default function Home() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
                 Curated Collection
               </p>
+
               <h2 className="font-serif text-4xl">
                 Discover Your Style
               </h2>
@@ -137,7 +154,10 @@ export default function Home() {
 
           <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product) => (
-              <article key={product.id} className="group">
+              <article
+                key={product.id}
+                className="group"
+              >
                 <div className="relative aspect-[3/4] overflow-hidden bg-[#e9e5df]">
                   <Image
                     src={product.image}
@@ -146,6 +166,7 @@ export default function Home() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                     className="object-cover transition duration-500 group-hover:scale-105"
                   />
+
                   <span className="absolute left-4 top-4 bg-white px-3 py-2 text-[10px] font-semibold tracking-wider">
                     DEMO
                   </span>
@@ -155,9 +176,11 @@ export default function Home() {
                   <p className="text-xs uppercase tracking-wider text-[#9b9289]">
                     {product.category}
                   </p>
+
                   <h3 className="mt-2 text-lg font-medium">
                     {product.name}
                   </h3>
+
                   <p className="mt-2 text-sm font-semibold">
                     {product.price}
                   </p>
@@ -174,16 +197,21 @@ export default function Home() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#a27b60]">
             Intelligent Fashion Discovery
           </p>
+
           <h2 className="mx-auto mt-5 max-w-2xl font-serif text-4xl leading-tight md:text-5xl">
             A smarter way to discover fashion.
           </h2>
+
           <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-[#706961]">
-            Our AI recommendation engine will learn product
-            relationships and shopping preferences to suggest
-            relevant fashion items.
+            Our AI recommendation engine will learn
+            product relationships and shopping
+            preferences to suggest relevant fashion
+            items.
           </p>
+
           <p className="mt-5 text-xs text-[#85796e]">
-            AI recommendations are planned and not yet active.
+            AI recommendations are planned and not
+            yet active.
           </p>
         </section>
       </main>
@@ -193,14 +221,17 @@ export default function Home() {
           <span className="font-serif text-2xl tracking-widest">
             ÉLAN.
           </span>
+
           <p className="text-xs text-[#c2bab2]">
-            AI Fashion Recommendation E-Commerce · Portfolio Project
+            AI Fashion Recommendation E-Commerce ·
+            Portfolio Project
           </p>
         </div>
+
         <p className="mx-auto mt-5 max-w-7xl text-xs text-[#a9a19a]">
           Demo-only products and illustrative prices.
-          Editorial images from Unsplash; not H&M product SKUs.
-          No real purchases or payments.
+          Editorial images from Unsplash; not H&M
+          product SKUs. No real purchases or payments.
         </p>
       </footer>
     </div>
