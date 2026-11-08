@@ -1,36 +1,112 @@
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   formatPrice,
-  getProductBySlug,
+  type Product,
 } from "@/data/products";
+import {
+  toStorefrontProduct,
+  type BackendProduct,
+} from "@/data/product-api";
 
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
 
-  const product = getProductBySlug(slug);
+  // Remount when the URL changes so that color/size selection
+  // never carries over to a different product.
+  return <ProductDetailContent key={slug} slug={slug} />;
+}
 
-  const [selectedSku, setSelectedSku] = useState<
-    string | null
-  >(null);
+function ProductDetailContent({ slug }: { slug: string }) {
+  const [product, setProduct] = useState<Product | null>(null);
+  const [selectedSku, setSelectedSku] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadProduct() {
+      try {
+        const response = await fetch("/api/products", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to load products: ${response.status}`);
+        }
+
+        const data: unknown = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid product response");
+        }
+
+        const backendProduct = (data as BackendProduct[]).find(
+          (item) => item.slug === slug && item.is_active
+        );
+
+        if (!controller.signal.aborted) {
+          setProduct(
+            backendProduct ? toStorefrontProduct(backendProduct) : null
+          );
+        }
+      } catch {
+        if (!controller.signal.aborted) {
+          setLoadError("Unable to load product information. Please try again.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void loadProduct();
+
+    return () => controller.abort();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-6">
+        <p role="status" className="text-sm text-[#77716b]">
+          Loading product...
+        </p>
+      </main>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6 text-center">
+        <h1 className="font-serif text-4xl">Unable to load product</h1>
+        <p role="alert" className="mt-4 text-[#77716b]">
+          {loadError}
+        </p>
+        <Link
+          href="/shop"
+          className="mt-8 bg-[#24221f] px-8 py-3 text-sm text-white"
+        >
+          Back to Shop
+        </Link>
+      </main>
+    );
+  }
 
   if (!product) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6">
-        <h1 className="font-serif text-4xl">
-          Product not found
-        </h1>
-
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6 text-center">
+        <h1 className="font-serif text-4xl">Product not found</h1>
         <p className="mt-4 text-[#77716b]">
           This product is not available in our demo catalog.
         </p>
-
         <Link
           href="/shop"
           className="mt-8 bg-[#24221f] px-8 py-3 text-sm text-white"
@@ -42,45 +118,40 @@ export default function ProductDetailPage() {
   }
 
   const selectedVariant =
-    product.variants.find(
-      (variant) => variant.sku === selectedSku
-    ) ?? product.variants[0];
+    product.variants.find((variant) => variant.sku === selectedSku) ??
+    product.variants[0];
 
   if (!selectedVariant) {
     return (
-      <main className="p-12 text-center">
-        No product variants available.
+      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6 text-center">
+        <p className="text-[#77716b]">No product variants available.</p>
+        <Link href="/shop" className="mt-8 underline">
+          Back to Shop
+        </Link>
       </main>
     );
   }
 
   const availableColors = [
-    ...new Set(
-      product.variants.map((variant) => variant.color)
-    ),
+    ...new Set(product.variants.map((variant) => variant.color)),
   ];
 
   const availableSizes = [
     ...new Set(
       product.variants
-        .filter(
-          (variant) =>
-            variant.color === selectedVariant.color
-        )
+        .filter((variant) => variant.color === selectedVariant.color)
         .map((variant) => variant.size)
     ),
   ];
 
   function chooseColor(color: string) {
+    if (!product) return;
+
     const variant =
-      product!.variants.find(
+      product.variants.find(
         (item) =>
-          item.color === color &&
-          item.size === selectedVariant.size
-      ) ??
-      product!.variants.find(
-        (item) => item.color === color
-      );
+          item.color === color && item.size === selectedVariant.size
+      ) ?? product.variants.find((item) => item.color === color);
 
     if (variant) {
       setSelectedSku(variant.sku);
@@ -88,10 +159,11 @@ export default function ProductDetailPage() {
   }
 
   function chooseSize(size: string) {
-    const variant = product!.variants.find(
+    if (!product) return;
+
+    const variant = product.variants.find(
       (item) =>
-        item.color === selectedVariant.color &&
-        item.size === size
+        item.color === selectedVariant.color && item.size === size
     );
 
     if (variant) {
@@ -119,10 +191,7 @@ export default function ProductDetailPage() {
               Home
             </Link>
 
-            <Link
-              href="/shop"
-              className="hover:text-[#ae805f]"
-            >
+            <Link href="/shop" className="hover:text-[#ae805f]">
               Shop
             </Link>
           </div>
@@ -141,9 +210,7 @@ export default function ProductDetailPage() {
           {" / "}
           {product.category}
           {" / "}
-          <span className="text-[#24221f]">
-            {product.name}
-          </span>
+          <span className="text-[#24221f]">{product.name}</span>
         </div>
 
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
@@ -202,9 +269,7 @@ export default function ProductDetailPage() {
                     key={color}
                     type="button"
                     onClick={() => chooseColor(color)}
-                    aria-pressed={
-                      selectedVariant.color === color
-                    }
+                    aria-pressed={selectedVariant.color === color}
                     className={`border px-5 py-3 text-sm transition ${
                       selectedVariant.color === color
                         ? "border-[#24221f] bg-[#24221f] text-white"
@@ -218,9 +283,7 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="mt-8">
-              <p className="mb-4 text-sm font-medium">
-                Select Size
-              </p>
+              <p className="mb-4 text-sm font-medium">Select Size</p>
 
               <div className="flex flex-wrap gap-3">
                 {availableSizes.map((size) => (
@@ -228,9 +291,7 @@ export default function ProductDetailPage() {
                     key={size}
                     type="button"
                     onClick={() => chooseSize(size)}
-                    aria-pressed={
-                      selectedVariant.size === size
-                    }
+                    aria-pressed={selectedVariant.size === size}
                     className={`min-w-14 border px-4 py-3 text-sm transition ${
                       selectedVariant.size === size
                         ? "border-[#24221f] bg-[#24221f] text-white"
@@ -262,8 +323,8 @@ export default function ProductDetailPage() {
             </button>
 
             <p className="mt-5 text-xs leading-6 text-[#817a72]">
-              Portfolio demonstration only. Product
-              availability and checkout are not active.
+              Portfolio demonstration only. Product availability and checkout
+              are not active.
             </p>
           </div>
         </div>

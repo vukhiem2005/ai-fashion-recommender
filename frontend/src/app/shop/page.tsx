@@ -1,23 +1,23 @@
-
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 
 import {
-  products,
   formatPrice,
+  type Product,
   type ProductCategory,
 } from "@/data/products";
 
+import {
+  toStorefrontProduct,
+  type BackendProduct,
+} from "@/data/product-api";
+
 type CategoryFilter = "All" | ProductCategory;
 type SortOption = "featured" | "price-asc" | "price-desc";
-
-const categories: CategoryFilter[] = [
-  "All",
-  ...Array.from(new Set(products.map((p) => p.category))),
-];
 
 export default function ShopPage() {
   const [search, setSearch] = useState("");
@@ -25,6 +25,58 @@ export default function ShopPage() {
     useState<CategoryFilter>("All");
   const [sort, setSort] =
     useState<SortOption>("featured");
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadProducts() {
+      try {
+        const response = await fetch("/api/products", {
+          cache: "no-store",
+          signal: controller.signal,
+        });
+
+        if (!response.ok) {
+          throw new Error(`Failed to load products: ${response.status}`);
+        }
+
+        const data: unknown = await response.json();
+
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid product response");
+        }
+
+        const activeProducts = (data as BackendProduct[])
+          .filter((product) => product.is_active)
+          .map(toStorefrontProduct);
+
+        if (!controller.signal.aborted) {
+          setProducts(activeProducts);
+          setLoadError(null);
+        }
+      } catch {
+        if (!controller.signal.aborted) {
+          setLoadError("Unable to load products. Please refresh the page.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void loadProducts();
+
+    return () => controller.abort();
+  }, []);
+
+  const categories: CategoryFilter[] = [
+    "All",
+    ...Array.from(new Set(products.map((product) => product.category))),
+  ];
 
   const query = search.trim().toLowerCase();
 
@@ -181,13 +233,29 @@ export default function ShopPage() {
           </div>
 
           <p className="text-sm text-[#817a72]">
-            Showing {visibleProducts.length} of{" "}
-            {products.length} products
+            {loading
+              ? "Loading collection..."
+              : loadError
+                ? "Product list unavailable"
+                : (
+                  <>
+                    Showing {visibleProducts.length} of{" "}
+                    {products.length} products
+                  </>
+                )}
           </p>
         </section>
 
         {/* Product Grid */}
-        {visibleProducts.length === 0 ? (
+        {loading ? (
+          <p role="status" className="py-20 text-center text-[#817a72]">
+            Loading products...
+          </p>
+        ) : loadError ? (
+          <p role="alert" className="py-20 text-center text-red-700">
+            {loadError}
+          </p>
+        ) : visibleProducts.length === 0 ? (
           <div className="py-20 text-center">
             <h2 className="font-serif text-3xl">
               No products found
