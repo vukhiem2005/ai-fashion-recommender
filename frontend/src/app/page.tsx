@@ -1,13 +1,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
+import StoreHeader from "@/components/StoreHeader";
 const products = [
   {
     id: "demo-001",
     name: "Modern City Style",
     category: "Women's Fashion",
-    price: "899.000 ₫",
     image:
       "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&q=85",
   },
@@ -15,7 +14,6 @@ const products = [
     id: "demo-002",
     name: "Everyday Essentials",
     category: "Casual Collection",
-    price: "549.000 ₫",
     image:
       "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=900&q=85",
   },
@@ -23,7 +21,6 @@ const products = [
     id: "demo-003",
     name: "Minimal Wardrobe",
     category: "Contemporary Fashion",
-    price: "749.000 ₫",
     image:
       "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=900&q=85",
   },
@@ -31,7 +28,6 @@ const products = [
     id: "demo-004",
     name: "Urban Collection",
     category: "New Arrivals",
-    price: "990.000 ₫",
     image:
       "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=900&q=85",
   },
@@ -43,57 +39,7 @@ export default function Home() {
       <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
         AI Fashion Store — Portfolio Demo
       </div>
-
-      <header className="border-b border-[#e9e6e1] bg-white">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <a
-            href="#home"
-            className="font-serif text-3xl font-bold tracking-widest"
-          >
-            ÉLAN.
-          </a>
-
-          <div className="hidden items-center gap-8 text-sm md:flex">
-            <a
-              href="#home"
-              className="hover:text-[#ae805f]"
-            >
-              Home
-            </a>
-
-            <Link
-              href="/shop"
-              className="hover:text-[#ae805f]"
-            >
-              Collection
-            </Link>
-
-            <a
-              href="#about"
-              className="hover:text-[#ae805f]"
-            >
-              About
-            </a>
-          </div>
-
-<div className="flex items-center gap-4 text-xs text-[#80776e]">
-  <Link
-    href="/admin/products"
-    className="hover:text-[#ae805f]"
-  >
-    Admin
-  </Link>
-
-  <Link href="/cart" className="hover:text-[#ae805f]">
-  Shopping Bag
-</Link>
-</div>
-
-
-
-        </nav>
-      </header>
-
+<StoreHeader />
       <main>
         <section
           id="home"
@@ -155,13 +101,13 @@ export default function Home() {
               </p>
 
               <h2 className="font-serif text-4xl">
-                Discover Your Style
+              Explore Style Inspirations
               </h2>
             </div>
 
             <span className="text-sm text-[#817a72]">
-              Featured Fashion · Demo Catalog
-            </span>
+  Curated Fashion Editorial · Style Inspiration
+</span>
           </div>
 
           <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4">
@@ -193,16 +139,17 @@ export default function Home() {
                     {product.name}
                   </h3>
 
-                  <p className="mt-2 text-sm font-semibold">
-                    {product.price}
-                  </p>
+                  <Link
+  href="/shop"
+  className="mt-3 inline-block text-sm font-medium text-[#ae805f] underline hover:text-[#24221f]"
+>
+  Explore the Collection
+</Link>
                 </div>
               </article>
             ))}
           </div>
         </section>
-
-
 <section
   id="about"
   className="bg-[#eee8e0] px-6 py-20"
@@ -263,15 +210,6 @@ export default function Home() {
           the similarities behind each suggestion.
         </p>
       </div>
-    </div>
-
-    <div className="mt-10 text-center">
-      <Link
-        href="/shop"
-        className="inline-block bg-[#24221f] px-9 py-4 text-sm font-medium text-white transition hover:bg-[#ae805f]"
-      >
-        Explore AI-Powered Fashion
-      </Link>
     </div>
   </div>
 </section>

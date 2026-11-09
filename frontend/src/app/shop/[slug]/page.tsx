@@ -1,6 +1,7 @@
 "use client";
 
 import YouMayAlsoLike from "@/components/YouMayAlsoLike";
+import StoreHeader from "@/components/StoreHeader";
 import { addToCart } from "@/lib/cart";
 import Image from "next/image";
 import Link from "next/link";
@@ -218,35 +219,7 @@ function ProductDetailContent({ slug }: { slug: string }) {
         ÉLAN Fashion Store — Portfolio Demo
       </div>
 
-      <header className="border-b border-[#e9e6e1] bg-white">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <Link
-            href="/"
-            className="font-serif text-3xl font-bold tracking-widest"
-          >
-            ÉLAN.
-          </Link>
-<div className="flex gap-8 text-sm">
-  <Link href="/" className="hover:text-[#ae805f]">
-    Home
-  </Link>
-
-  <Link href="/shop" className="hover:text-[#ae805f]">
-    Shop
-  </Link>
-
-  <Link href="/cart" className="hover:text-[#ae805f]">
-    Cart
-  </Link>
-</div>
-
-
-          <span className="hidden text-xs text-[#80776e] sm:block">
-            Fashion Discovery
-          </span>
-        </nav>
-      </header>
-
+      <StoreHeader />
       <main className="mx-auto max-w-7xl px-6 py-12">
         <div className="mb-10 text-sm text-[#80776e]">
           <Link href="/shop" className="hover:underline">

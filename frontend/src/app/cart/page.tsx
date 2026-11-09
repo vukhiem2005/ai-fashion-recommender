@@ -1,5 +1,5 @@
 "use client";
-
+import StoreHeader from "@/components/StoreHeader";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -54,22 +54,7 @@ export default function CartPage() {
         ÉLAN Fashion Store — Portfolio Demo
       </div>
 
-      <header className="border-b border-[#e9e6e1] bg-white">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-6">
-          <Link href="/" className="font-serif text-3xl font-bold tracking-widest">
-            ÉLAN.
-          </Link>
-          <div className="flex items-center gap-6 text-sm">
-            <Link href="/" className="hover:text-[#ae805f]">
-              Home
-            </Link>
-            <Link href="/shop" className="hover:text-[#ae805f]">
-              Shop
-            </Link>
-            <span className="font-semibold text-[#ae805f]">Bag</span>
-          </div>
-        </nav>
-      </header>
+      <StoreHeader />
 
       <main className="mx-auto max-w-7xl px-6 py-12 md:py-16">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
