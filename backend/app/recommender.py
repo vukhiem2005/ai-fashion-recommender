@@ -18,9 +18,9 @@ from typing import Any
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from .database import DATABASE_FILE
 
-
-DEFAULT_DATABASE = Path(__file__).resolve().parent.parent / "data" / "elan.db"
+DEFAULT_DATABASE = DATABASE_FILE
 
 
 def _load_catalog(database_path: Path) -> list[dict[str, Any]]:
