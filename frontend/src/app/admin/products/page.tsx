@@ -1,7 +1,7 @@
 
 "use client";
 
-import Link from "next/link";
+import StoreHeader from "@/components/StoreHeader";
 import { useState } from "react";
 import AddProductForm from "@/components/AddProductForm";
 import EditProductForm from "@/components/EditProductForm";
@@ -205,27 +205,7 @@ async function changeProductStatus(
 
   return (
     <div className="min-h-screen bg-[#f8f7f5] text-[#24221f]">
-      <header className="border-b border-[#e7e2dc] bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
-          <Link
-            href="/"
-            className="font-serif text-3xl font-bold tracking-widest"
-          >
-            ÉLAN.
-          </Link>
-
-          <span className="text-sm font-medium">
-            Administration
-          </span>
-
-          <Link
-            href="/shop"
-            className="text-sm text-[#80776e] hover:text-black"
-          >
-            View Store
-          </Link>
-        </div>
-      </header>
+     <StoreHeader />
 
       <main className="mx-auto max-w-7xl px-6 py-12">
         <div className="mb-10">
