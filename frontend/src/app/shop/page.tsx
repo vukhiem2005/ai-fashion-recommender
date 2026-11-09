@@ -164,22 +164,29 @@ export default function ShopPage() {
           >
             ÉLAN.
           </Link>
+<div className="flex items-center gap-6 text-sm">
+  <Link
+    href="/"
+    className="hover:text-[#ae805f]"
+  >
+    Home
+  </Link>
 
-          <div className="flex items-center gap-6 text-sm">
-            <Link
-              href="/"
-              className="hover:text-[#ae805f]"
-            >
-              Home
-            </Link>
+  <Link
+    href="/shop"
+    className="font-semibold text-[#ae805f]"
+  >
+    Shop
+  </Link>
 
-            <Link
-              href="/shop"
-              className="font-semibold text-[#ae805f]"
-            >
-              Shop
-            </Link>
-          </div>
+  <Link
+    href="/cart"
+    className="hover:text-[#ae805f]"
+  >
+    Cart
+  </Link>
+</div>
+
 
           <span className="hidden text-xs text-[#80776e] sm:block">
             Curated Fashion

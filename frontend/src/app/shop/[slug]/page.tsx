@@ -1,11 +1,11 @@
 "use client";
-import YouMayAlsoLike from "@/components/YouMayAlsoLike";
 
+import YouMayAlsoLike from "@/components/YouMayAlsoLike";
+import { addToCart } from "@/lib/cart";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
 
 import {
   formatPrice,
@@ -29,6 +29,10 @@ function ProductDetailContent({ slug }: { slug: string }) {
   const [selectedSku, setSelectedSku] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [cartFeedback, setCartFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -157,9 +161,9 @@ function ProductDetailContent({ slug }: { slug: string }) {
 
     if (variant) {
       setSelectedSku(variant.sku);
+      setCartFeedback(null);
     }
   }
-
   function chooseSize(size: string) {
     if (!product) return;
 
@@ -170,6 +174,41 @@ function ProductDetailContent({ slug }: { slug: string }) {
 
     if (variant) {
       setSelectedSku(variant.sku);
+      setCartFeedback(null);
+    }
+  }
+
+  function handleAddToCart() {
+    // The click handler is a separate closure: guard both values here
+    // so TypeScript knows they exist when the button is clicked.
+    if (!product || !selectedVariant) {
+      setCartFeedback({
+        type: "error",
+        message: "Please select an available product variant.",
+      });
+      return;
+    }
+
+    try {
+      addToCart({
+        productId: product.id,
+        sku: selectedVariant.sku,
+        name: product.name,
+        color: selectedVariant.color,
+        size: selectedVariant.size,
+        priceCents: Math.round(product.price * 100),
+        imageUrl: selectedVariant.imageUrl,
+      });
+
+      setCartFeedback({
+        type: "success",
+        message: `${product.name} (${selectedVariant.color} / ${selectedVariant.size}) added to your bag.`,
+      });
+    } catch {
+      setCartFeedback({
+        type: "error",
+        message: "Unable to save your shopping bag. Please try again.",
+      });
     }
   }
 
@@ -187,16 +226,20 @@ function ProductDetailContent({ slug }: { slug: string }) {
           >
             ÉLAN.
           </Link>
+<div className="flex gap-8 text-sm">
+  <Link href="/" className="hover:text-[#ae805f]">
+    Home
+  </Link>
 
-          <div className="flex gap-8 text-sm">
-            <Link href="/" className="hover:text-[#ae805f]">
-              Home
-            </Link>
+  <Link href="/shop" className="hover:text-[#ae805f]">
+    Shop
+  </Link>
 
-            <Link href="/shop" className="hover:text-[#ae805f]">
-              Shop
-            </Link>
-          </div>
+  <Link href="/cart" className="hover:text-[#ae805f]">
+    Cart
+  </Link>
+</div>
+
 
           <span className="hidden text-xs text-[#80776e] sm:block">
             Fashion Discovery
@@ -318,21 +361,43 @@ function ProductDetailContent({ slug }: { slug: string }) {
 
             <button
               type="button"
-              disabled
-              className="mt-10 w-full cursor-not-allowed bg-[#24221f] px-8 py-5 text-sm font-medium text-white opacity-60"
+              onClick={handleAddToCart}
+              className="mt-10 w-full bg-[#24221f] px-8 py-5 text-sm font-medium text-white transition hover:bg-[#ae805f]"
             >
-              Add to Cart — Coming Soon
+              Add to Cart
             </button>
 
+            {cartFeedback && (
+              <p
+                role={cartFeedback.type === "error" ? "alert" : "status"}
+                aria-live="polite"
+                className={`mt-4 text-sm ${
+                  cartFeedback.type === "success"
+                    ? "text-green-700"
+                    : "text-red-700"
+                }`}
+              >
+                {cartFeedback.message}
+              </p>
+            )}
+{cartFeedback?.type === "success" && (
+  <Link
+    href="/cart"
+    className="mt-3 inline-block text-sm font-semibold text-[#ae805f] underline"
+  >
+    View Shopping Bag
+  </Link>
+)}
+
+
             <p className="mt-5 text-xs leading-6 text-[#817a72]">
-              Portfolio demonstration only. Product availability and checkout
-              are not active.
+              Portfolio demo only. Your shopping bag is saved in this browser.
+              Checkout and payments are not active.
             </p>
           </div>
         </div>
         <YouMayAlsoLike productId={product.id} />
       </main>
-
 
       <footer className="mt-20 bg-[#24221f] px-6 py-10 text-center text-xs text-white">
         ÉLAN. — AI Fashion Recommendation E-Commerce

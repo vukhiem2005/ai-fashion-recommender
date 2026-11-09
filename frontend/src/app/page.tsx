@@ -75,7 +75,7 @@ export default function Home() {
               About
             </a>
           </div>
-          
+
 <div className="flex items-center gap-4 text-xs text-[#80776e]">
   <Link
     href="/admin/products"
@@ -84,13 +84,13 @@ export default function Home() {
     Admin
   </Link>
 
-  <span className="hidden sm:inline">
-    Cart · Coming Soon
-  </span>
+  <Link href="/cart" className="hover:text-[#ae805f]">
+  Shopping Bag
+</Link>
 </div>
 
 
-          
+
         </nav>
       </header>
 
@@ -202,7 +202,7 @@ export default function Home() {
           </div>
         </section>
 
-        
+
 <section
   id="about"
   className="bg-[#eee8e0] px-6 py-20"
