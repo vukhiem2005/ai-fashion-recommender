@@ -75,10 +75,22 @@ export default function Home() {
               About
             </a>
           </div>
+          
+<div className="flex items-center gap-4 text-xs text-[#80776e]">
+  <Link
+    href="/admin/products"
+    className="hover:text-[#ae805f]"
+  >
+    Admin
+  </Link>
 
-          <span className="text-xs text-[#80776e]">
-            Shopping Cart · Coming Soon
-          </span>
+  <span className="hidden sm:inline">
+    Cart · Coming Soon
+  </span>
+</div>
+
+
+          
         </nav>
       </header>
 
@@ -190,30 +202,80 @@ export default function Home() {
           </div>
         </section>
 
-        <section
-          id="about"
-          className="bg-[#eee8e0] px-6 py-20 text-center"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#a27b60]">
-            Intelligent Fashion Discovery
-          </p>
+        
+<section
+  id="about"
+  className="bg-[#eee8e0] px-6 py-20"
+>
+  <div className="mx-auto max-w-6xl">
+    <div className="mx-auto max-w-2xl text-center">
+      <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#a27b60]">
+        Intelligent Fashion Discovery
+      </p>
 
-          <h2 className="mx-auto mt-5 max-w-2xl font-serif text-4xl leading-tight md:text-5xl">
-            A smarter way to discover fashion.
-          </h2>
+      <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
+        Fashion discovery, powered by AI.
+      </h2>
 
-          <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-[#706961]">
-            Our AI recommendation engine will learn
-            product relationships and shopping
-            preferences to suggest relevant fashion
-            items.
-          </p>
+      <p className="mt-6 text-sm leading-7 text-[#706961]">
+        Explore fashion through content-based recommendations.
+        ÉLAN compares product descriptions, categories and colors
+        using TF-IDF and cosine similarity to discover related styles.
+      </p>
+    </div>
 
-          <p className="mt-5 text-xs text-[#85796e]">
-            AI recommendations are planned and not
-            yet active.
-          </p>
-        </section>
+    <div className="mt-12 grid gap-5 md:grid-cols-3">
+      <div className="bg-white/75 p-7">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
+          01 / Explore
+        </p>
+        <h3 className="mt-4 font-serif text-2xl">
+          Discover the Collection
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-[#706961]">
+          Browse fashion products, explore categories,
+          and find styles that match your interests.
+        </p>
+      </div>
+
+      <div className="bg-white/75 p-7">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
+          02 / Intelligence
+        </p>
+        <h3 className="mt-4 font-serif text-2xl">
+          AI Similarity Matching
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-[#706961]">
+          Our recommendation engine compares product
+          attributes to rank similar items.
+        </p>
+      </div>
+
+      <div className="bg-white/75 p-7">
+        <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
+          03 / Recommendation
+        </p>
+        <h3 className="mt-4 font-serif text-2xl">
+          You May Also Like
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-[#706961]">
+          View five recommended products and understand
+          the similarities behind each suggestion.
+        </p>
+      </div>
+    </div>
+
+    <div className="mt-10 text-center">
+      <Link
+        href="/shop"
+        className="inline-block bg-[#24221f] px-9 py-4 text-sm font-medium text-white transition hover:bg-[#ae805f]"
+      >
+        Explore AI-Powered Fashion
+      </Link>
+    </div>
+  </div>
+</section>
+
       </main>
 
       <footer className="bg-[#24221f] px-6 py-10 text-white">
