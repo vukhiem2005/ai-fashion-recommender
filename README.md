@@ -2,7 +2,7 @@
 
 **A full-stack fashion storefront with content-based recommendations, reproducible model evaluation, and a public live demo.**
 
-[**Live Website**](https://elan-fashion-store.vercel.app/) | [**Backend Health**](https://elan-fashion-api.onrender.com/health) | [**Source Repository**](https://github.com/vankhiem1609/ai-fashion-recommender)
+[**Live Website**](https://elan-fashion-store.vercel.app/) | [**Backend Health**](https://elan-fashion-api.onrender.com/health) | [**Source Repository**](https://github.com/vukhiem2005/ai-fashion-recommender)
 
 ÉLAN combines a Next.js storefront, a FastAPI product service, a SQLite product catalog, and a TF-IDF recommendation engine. The central engineering goal is to build and evaluate a transparent, maintainable similar-product recommendation system, not to present unvalidated improvements as production-ready.
 
@@ -144,7 +144,7 @@ This script recalculates metrics from committed CSV inputs, without executing re
 ### 1. Backend (Terminal 1)
 
 ```powershell
-git clone https://github.com/vankhiem1609/ai-fashion-recommender.git
+git clone https://github.com/vukhiem2005/ai-fashion-recommender.git
 cd ai-fashion-recommender\backend
 
 py -m venv .venv
