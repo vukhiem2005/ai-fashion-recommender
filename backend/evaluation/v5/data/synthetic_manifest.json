@@ -1,0 +1,130 @@
+{
+  "dataset_type": "SYNTHETIC_SIMULATION_ONLY",
+  "data_source": "SYNTHETIC_SIMULATION_V5",
+  "is_synthetic": true,
+  "scientific_disclaimer": "Synthetic user-item interactions generated from catalog attributes and simulation rules. For offline pipeline and model mechanics validation only; never claim real-world recommendation improvements from this dataset.",
+  "seed": 20260501,
+  "split_windows_utc": {
+    "train": [
+      "2026-01-01T00:00:00Z",
+      "2026-03-04T23:59:59Z"
+    ],
+    "val": [
+      "2026-03-05T00:00:00Z",
+      "2026-03-17T23:59:59Z"
+    ],
+    "test": [
+      "2026-03-18T00:00:00Z",
+      "2026-03-31T23:59:59Z"
+    ]
+  },
+  "forbidden_latent_columns_in_model_data": [
+    "persona_id",
+    "primary_categories",
+    "preferred_subtypes",
+    "preferred_color_family",
+    "preferred_style",
+    "price_tier_preference",
+    "price_sensitivity",
+    "exploration_noise_rate",
+    "activity_level",
+    "session_intent",
+    "anchor_product_id",
+    "origin_signal",
+    "latent_utility"
+  ],
+  "statistics": {
+    "design_assumptions": {
+      "target_users": 600,
+      "target_catalog_products": 328,
+      "target_overall_sparsity_range": [
+        0.91,
+        0.96
+      ],
+      "min_train_catalog_coverage_threshold": 0.98,
+      "target_multi_item_order_ratio_range": [
+        0.5,
+        0.75
+      ],
+      "is_repeat_interaction_policy": "Derived at evaluation time by comparing (user_id, product_id) pairs against earlier chronological splits; NOT stored in raw interaction CSVs to keep event tables purely observational."
+    },
+    "measured_outcomes": {
+      "generation_runtime_seconds": 2.6529,
+      "active_catalog_products": 328,
+      "synthetic_users": 600,
+      "shopping_sessions": 3827,
+      "total_interactions": 23335,
+      "event_type_counts": {
+        "view": 14953,
+        "add_to_cart": 5497,
+        "purchase": 2885
+      },
+      "total_orders": 1470,
+      "total_order_items": 2885,
+      "multi_item_orders": 993,
+      "multi_item_order_ratio": 0.6755,
+      "mean_distinct_items_per_order": 1.9626,
+      "view_to_cart_rate": 0.3676,
+      "cart_session_to_order_conversion_rate": 0.486,
+      "overall_unique_user_item_pairs": 13885,
+      "train_unique_user_item_pairs": 9821,
+      "val_unique_user_item_pairs": 2333,
+      "test_unique_user_item_pairs": 2311,
+      "overall_matrix_density": 0.0706,
+      "overall_matrix_sparsity": 0.9294,
+      "train_matrix_density": 0.0499,
+      "train_matrix_sparsity": 0.9501,
+      "catalog_coverage_overall_count": 328,
+      "catalog_coverage_overall_ratio": 1.0,
+      "catalog_coverage_train_count": 328,
+      "catalog_coverage_train_ratio": 1.0,
+      "catalog_coverage_val_count": 327,
+      "catalog_coverage_test_count": 324,
+      "train_coverage_threshold_satisfied": true,
+      "top_10_percent_products_view_share": 0.2249,
+      "split_session_counts": {
+        "train": 2624,
+        "val": 609,
+        "test": 594
+      },
+      "split_event_counts": {
+        "train": 16091,
+        "val": 3609,
+        "test": 3635
+      },
+      "split_order_counts": {
+        "train": 1016,
+        "val": 229,
+        "test": 225
+      },
+      "eval_derived_val_repeat_pairs_from_train": 239,
+      "eval_derived_val_novel_pairs": 2094,
+      "eval_derived_test_repeat_pairs_from_prior": 341,
+      "eval_derived_test_novel_pairs": 1970,
+      "audit_persona_counts": {
+        "casual_denim_basics": 150,
+        "eclectic_explorer": 57,
+        "summer_resort_edit": 76,
+        "minimalist_knit_layering": 114,
+        "tailored_office": 87,
+        "occasion_dresses_accessories": 116
+      },
+      "audit_view_origin_signal_counts": {
+        "persona_match": 9054,
+        "random_noise": 1689,
+        "outfit_complement": 3451,
+        "popularity_prior": 759
+      }
+    }
+  },
+  "file_sha256": {
+    "data/synthetic_users.csv": "a2bc316a124c1cdf5fc4ca995d01b8990f312f0ab76948be5693eea919a8b02a",
+    "data/synthetic_sessions.csv": "a42748c60fb24f95a4d5142561107fabc824f57f46dbe59a9374a13b26db9167",
+    "data/synthetic_interactions.csv": "4e622ac11125c581f74d8ace392ef55fc0e3ba6e02cba16f9c18291181f6d656",
+    "data/synthetic_orders.csv": "f25988ebba2ff7fcba9fb570a290b5931b61c75fed99be4ace5c139d245d5edc",
+    "data/synthetic_order_items.csv": "d0ed873b68fba883fb68c7e93a09d7eb27d4817065754d4295259f94d2f4c75f",
+    "audit/synthetic_users_latent_audit_only.csv": "64ac8a0a73e3d0dc5e166bd3c819721a5f2a80c9848ab15c5489e2ed46dc43f9",
+    "audit/synthetic_sessions_latent_audit_only.csv": "2daa613d63c5e697c1fc58b516608fcd7b0529ae6a0debc777e4b2329b256f5b",
+    "audit/synthetic_interactions_latent_audit_only.csv": "15cbb8a33de4fa62ff06ddefa8ca9e1d7929ee67b3321c9bbda9a109407ecc4d"
+  }
+}
