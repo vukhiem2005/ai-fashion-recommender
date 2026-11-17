@@ -32,9 +32,9 @@ from app.recommender import DEFAULT_DATABASE, _document, _load_catalog, recommen
 
 logger = logging.getLogger(__name__)
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+BACKEND_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_CLIP_NPZ_PATH = (
-    REPO_ROOT / "backend" / "evaluation" / "v5" / "data" / "clip_embeddings.npz"
+    BACKEND_DIR / "evaluation" / "v5" / "data" / "clip_embeddings.npz"
 )
 
 # Frozen Dev-18-selected CLIP Late Fusion configuration
