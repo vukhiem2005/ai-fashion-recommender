@@ -1,0 +1,180 @@
+{
+  "milestone": "Milestone 5 — Hybrid Recommendation MVP & Offline Evaluation",
+  "data_provenance": {
+    "user_item_and_basket_splits": "SYNTHETIC_SIMULATION_V5 (train=16,091 events / 1,016 orders; test=3,635 events / 225 orders, 155 multi-item baskets)",
+    "item_similarity_reference": "Phase 4B locked Holdout-18 historical benchmark (CLIP Late Fusion nDCG@5 = 0.7625 vs V1 0.6967, +9.44%); NOT retuned in Milestone 5.",
+    "disclaimer": "Synthetic user-item and basket-completion metrics validate hybrid pipeline integration, modality normalization, and cold-start routing under simulation rules. They do not establish real-world consumer uplift."
+  },
+  "default_fusion_config": {
+    "w_content": 0.5,
+    "w_cf": 0.35,
+    "w_arm": 0.15,
+    "normalization": "Per-query min-max normalization into [0, 1] over eligible candidates + modality-normalized weight sum"
+  },
+  "track1_synthetic_user_ranking_test": {
+    "1_v1_content_tfidf": {
+      "evaluated_users": 545,
+      "precision_at_5": 0.0239,
+      "recall_at_5": 0.0294,
+      "ndcg_binary_at_5": 0.0259,
+      "ndcg_graded_at_5": 0.023,
+      "low_history_users_le5_count": 0,
+      "low_history_ndcg_graded_at_5": 0.0,
+      "active_users_gt5_count": 545,
+      "active_users_ndcg_graded_at_5": 0.023,
+      "catalog_coverage_at_5": 0.8049,
+      "unique_recommended_items_at_5": 264,
+      "arm_activation_rate": 0.0,
+      "cold_start_fallback_count": 0,
+      "mean_query_latency_ms": 1.1382
+    },
+    "2_clip_late_fusion_content": {
+      "evaluated_users": 545,
+      "precision_at_5": 0.0183,
+      "recall_at_5": 0.0238,
+      "ndcg_binary_at_5": 0.0199,
+      "ndcg_graded_at_5": 0.0161,
+      "low_history_users_le5_count": 0,
+      "low_history_ndcg_graded_at_5": 0.0,
+      "active_users_gt5_count": 545,
+      "active_users_ndcg_graded_at_5": 0.0161,
+      "catalog_coverage_at_5": 0.5976,
+      "unique_recommended_items_at_5": 196,
+      "arm_activation_rate": 0.0,
+      "cold_start_fallback_count": 0,
+      "mean_query_latency_ms": 1.0575
+    },
+    "3_itemknn_cf": {
+      "evaluated_users": 545,
+      "precision_at_5": 0.0411,
+      "recall_at_5": 0.0561,
+      "ndcg_binary_at_5": 0.0538,
+      "ndcg_graded_at_5": 0.0514,
+      "low_history_users_le5_count": 0,
+      "low_history_ndcg_graded_at_5": 0.0,
+      "active_users_gt5_count": 545,
+      "active_users_ndcg_graded_at_5": 0.0514,
+      "catalog_coverage_at_5": 0.3659,
+      "unique_recommended_items_at_5": 120,
+      "arm_activation_rate": 0.0,
+      "cold_start_fallback_count": 0,
+      "mean_query_latency_ms": 0.9986
+    },
+    "4_hybrid_content_cf": {
+      "evaluated_users": 545,
+      "precision_at_5": 0.0396,
+      "recall_at_5": 0.0568,
+      "ndcg_binary_at_5": 0.0502,
+      "ndcg_graded_at_5": 0.0501,
+      "low_history_users_le5_count": 0,
+      "low_history_ndcg_graded_at_5": 0.0,
+      "active_users_gt5_count": 545,
+      "active_users_ndcg_graded_at_5": 0.0501,
+      "catalog_coverage_at_5": 0.4573,
+      "unique_recommended_items_at_5": 150,
+      "arm_activation_rate": 0.0,
+      "cold_start_fallback_count": 0,
+      "mean_query_latency_ms": 1.1894
+    },
+    "5_hybrid_content_cf_arm": {
+      "evaluated_users": 545,
+      "precision_at_5": 0.0389,
+      "recall_at_5": 0.0559,
+      "ndcg_binary_at_5": 0.05,
+      "ndcg_graded_at_5": 0.0493,
+      "low_history_users_le5_count": 0,
+      "low_history_ndcg_graded_at_5": 0.0,
+      "active_users_gt5_count": 545,
+      "active_users_ndcg_graded_at_5": 0.0493,
+      "catalog_coverage_at_5": 0.4695,
+      "unique_recommended_items_at_5": 154,
+      "arm_activation_rate": 0.8239,
+      "cold_start_fallback_count": 0,
+      "mean_query_latency_ms": 1.2873
+    }
+  },
+  "track2_synthetic_basket_completion_test": {
+    "1_v1_content_tfidf": {
+      "evaluated_baskets": 155,
+      "hit_rate_at_5": 0.0645,
+      "ndcg_at_5": 0.0325,
+      "catalog_coverage_at_5": 0.7652,
+      "unique_recommended_items_at_5": 251,
+      "arm_activation_rate": 0.0,
+      "mean_query_latency_ms": 1.4792
+    },
+    "2_clip_late_fusion_content": {
+      "evaluated_baskets": 155,
+      "hit_rate_at_5": 0.0645,
+      "ndcg_at_5": 0.0466,
+      "catalog_coverage_at_5": 0.7561,
+      "unique_recommended_items_at_5": 248,
+      "arm_activation_rate": 0.0,
+      "mean_query_latency_ms": 1.42
+    },
+    "3_itemknn_cf": {
+      "evaluated_baskets": 155,
+      "hit_rate_at_5": 0.0516,
+      "ndcg_at_5": 0.0354,
+      "catalog_coverage_at_5": 0.5793,
+      "unique_recommended_items_at_5": 190,
+      "arm_activation_rate": 0.0,
+      "mean_query_latency_ms": 1.1228
+    },
+    "4_apriori_arm_pop_fallback": {
+      "evaluated_baskets": 155,
+      "hit_rate_at_5": 0.0839,
+      "ndcg_at_5": 0.0536,
+      "catalog_coverage_at_5": 0.1463,
+      "unique_recommended_items_at_5": 48,
+      "arm_activation_rate": 0.3871,
+      "mean_query_latency_ms": 0.915
+    },
+    "5_hybrid_content_cf": {
+      "evaluated_baskets": 155,
+      "hit_rate_at_5": 0.0581,
+      "ndcg_at_5": 0.0379,
+      "catalog_coverage_at_5": 0.6159,
+      "unique_recommended_items_at_5": 202,
+      "arm_activation_rate": 0.0,
+      "mean_query_latency_ms": 0.9198
+    },
+    "6_hybrid_content_cf_arm": {
+      "evaluated_baskets": 155,
+      "hit_rate_at_5": 0.0645,
+      "ndcg_at_5": 0.0379,
+      "catalog_coverage_at_5": 0.622,
+      "unique_recommended_items_at_5": 204,
+      "arm_activation_rate": 0.3871,
+      "mean_query_latency_ms": 0.9729
+    }
+  },
+  "behavioral_probes": {
+    "cold_start_zero_history_user": {
+      "cold_start_fallback": true,
+      "active_modalities": [
+        "popularity_fallback"
+      ],
+      "top5_ids": [
+        "HM-0555364011",
+        "HM-0797312005",
+        "ELAN-TEST-001",
+        "HM-0609813009",
+        "HM-0814594009"
+      ]
+    },
+    "missing_image_anchor_HM_0398947001": {
+      "missing_image_fallback": true,
+      "active_modalities": [
+        "content"
+      ],
+      "top5_ids": [
+        "HM-0639404002",
+        "HM-0573373001",
+        "HM-0360950014",
+        "HM-0798842002",
+        "HM-0292453013"
+      ]
+    }
+  }
+}
