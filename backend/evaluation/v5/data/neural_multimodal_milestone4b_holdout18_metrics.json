@@ -1,0 +1,514 @@
+{
+  "milestone": "Milestone 4B.3C — Locked Holdout-18 & Protocol M2 Final Benchmark",
+  "holdout18_evaluation_count": 1,
+  "post_holdout_tuning": false,
+  "holdout_dataset_provenance": "Historically reused holdout set (holdout_v4_blind_labeled.csv: 18 disjoint references, 140 judged pairs). Previously consulted during V4/Phase 4A; reported transparently as historical evaluation material rather than a newly collected blind test.",
+  "preflight": {
+    "preflight_passed": true,
+    "locked_config_file_sha256": "f6ed98abe2dd630e10acebb4f7af1265ac666d3a09b67c4794cedca857a0ad17",
+    "locked_models_canonical_sha256": "5014a546502069baa79a286ea068b024a8ae15e8f0d2764183fee4f4b087d55a",
+    "clip_npz_sha256": "4265a3a69611ef57c3f3350cdcdd971e31e10d56db4005b07a328ec410af1e7f",
+    "phase4a_npz_sha256": "cfa7af1cabed44767f610b724c3d28683a079eae38c79a84327e0c06afba1ae6",
+    "models_verified": 7
+  },
+  "locked_config_sha256": "f6ed98abe2dd630e10acebb4f7af1265ac666d3a09b67c4794cedca857a0ad17",
+  "locked_models": {
+    "1_exact_v1_tfidf": {
+      "type": "ExactV1TFIDFRecommender"
+    },
+    "2_phase4a_image_only": {
+      "visual_dim": 148
+    },
+    "3_phase4a_early_fusion": {
+      "visual_dim": 32,
+      "alpha_vis": 0.05
+    },
+    "4_phase4a_late_fusion": {
+      "visual_dim": 148,
+      "w_vis": 0.5,
+      "text_gate_threshold": 0.15,
+      "require_same_category_for_visual": true
+    },
+    "5_phase4b_clip_image_only": {
+      "type": "CLIPImageOnlyRecommender",
+      "default": true
+    },
+    "6_phase4b_clip_text_image": {
+      "w_t2i": 0.5,
+      "w_i2t": 0.5,
+      "w_t2t": 0.0,
+      "fallback_missing_query_to_v1": false
+    },
+    "7_phase4b_clip_late_fusion": {
+      "text_source": "v1_tfidf",
+      "w_vis": 0.5,
+      "text_gate_threshold": 0.0,
+      "require_same_category_for_visual": false
+    }
+  },
+  "holdout_18_stats": {
+    "source_file": "holdout_v4_blind_labeled.csv",
+    "num_references": 18,
+    "num_judged_pairs": 140,
+    "reference_overlap_with_dev18": 0
+  },
+  "models_holdout18_protocol_m1": {
+    "1_exact_v1_tfidf": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.6667,
+      "strict_precision_at_5": 0.2444,
+      "ndcg_at_5": 0.6967
+    },
+    "2_phase4a_image_only": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.7,
+      "strict_precision_at_5": 0.2333,
+      "ndcg_at_5": 0.6823
+    },
+    "3_phase4a_early_fusion": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.7111,
+      "strict_precision_at_5": 0.2556,
+      "ndcg_at_5": 0.7338
+    },
+    "4_phase4a_late_fusion": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.7,
+      "strict_precision_at_5": 0.2444,
+      "ndcg_at_5": 0.7282
+    },
+    "5_phase4b_clip_image_only": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.7222,
+      "strict_precision_at_5": 0.2333,
+      "ndcg_at_5": 0.7091
+    },
+    "6_phase4b_clip_text_image": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.7667,
+      "strict_precision_at_5": 0.2333,
+      "ndcg_at_5": 0.7066
+    },
+    "7_phase4b_clip_late_fusion": {
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "precision_at_5": 0.7111,
+      "strict_precision_at_5": 0.2667,
+      "ndcg_at_5": 0.7625
+    }
+  },
+  "dev_vs_holdout_and_v1_deltas": {
+    "1_exact_v1_tfidf": {
+      "dev18_ndcg_at_5": 0.7699,
+      "holdout18_ndcg_at_5": 0.6967,
+      "dev18_p_at_5": 0.5667,
+      "holdout18_p_at_5": 0.6667,
+      "dev18_strict_p_at_5": 0.2,
+      "holdout18_strict_p_at_5": 0.2444,
+      "holdout_abs_ndcg_delta_vs_v1": 0.0,
+      "holdout_rel_ndcg_pct_vs_v1": 0.0
+    },
+    "2_phase4a_image_only": {
+      "dev18_ndcg_at_5": 0.6731,
+      "holdout18_ndcg_at_5": 0.6823,
+      "dev18_p_at_5": 0.6111,
+      "holdout18_p_at_5": 0.7,
+      "dev18_strict_p_at_5": 0.1778,
+      "holdout18_strict_p_at_5": 0.2333,
+      "holdout_abs_ndcg_delta_vs_v1": -0.0144,
+      "holdout_rel_ndcg_pct_vs_v1": -2.07
+    },
+    "3_phase4a_early_fusion": {
+      "dev18_ndcg_at_5": 0.7781,
+      "holdout18_ndcg_at_5": 0.7338,
+      "dev18_p_at_5": 0.5889,
+      "holdout18_p_at_5": 0.7111,
+      "dev18_strict_p_at_5": 0.2111,
+      "holdout18_strict_p_at_5": 0.2556,
+      "holdout_abs_ndcg_delta_vs_v1": 0.0371,
+      "holdout_rel_ndcg_pct_vs_v1": 5.33
+    },
+    "4_phase4a_late_fusion": {
+      "dev18_ndcg_at_5": 0.8023,
+      "holdout18_ndcg_at_5": 0.7282,
+      "dev18_p_at_5": 0.6111,
+      "holdout18_p_at_5": 0.7,
+      "dev18_strict_p_at_5": 0.1889,
+      "holdout18_strict_p_at_5": 0.2444,
+      "holdout_abs_ndcg_delta_vs_v1": 0.0315,
+      "holdout_rel_ndcg_pct_vs_v1": 4.52
+    },
+    "5_phase4b_clip_image_only": {
+      "dev18_ndcg_at_5": 0.8425,
+      "holdout18_ndcg_at_5": 0.7091,
+      "dev18_p_at_5": 0.7,
+      "holdout18_p_at_5": 0.7222,
+      "dev18_strict_p_at_5": 0.2111,
+      "holdout18_strict_p_at_5": 0.2333,
+      "holdout_abs_ndcg_delta_vs_v1": 0.0124,
+      "holdout_rel_ndcg_pct_vs_v1": 1.78
+    },
+    "6_phase4b_clip_text_image": {
+      "dev18_ndcg_at_5": 0.8819,
+      "holdout18_ndcg_at_5": 0.7066,
+      "dev18_p_at_5": 0.7556,
+      "holdout18_p_at_5": 0.7667,
+      "dev18_strict_p_at_5": 0.2111,
+      "holdout18_strict_p_at_5": 0.2333,
+      "holdout_abs_ndcg_delta_vs_v1": 0.0099,
+      "holdout_rel_ndcg_pct_vs_v1": 1.42
+    },
+    "7_phase4b_clip_late_fusion": {
+      "dev18_ndcg_at_5": 0.8933,
+      "holdout18_ndcg_at_5": 0.7625,
+      "dev18_p_at_5": 0.6889,
+      "holdout18_p_at_5": 0.7111,
+      "dev18_strict_p_at_5": 0.2222,
+      "holdout18_strict_p_at_5": 0.2667,
+      "holdout_abs_ndcg_delta_vs_v1": 0.0658,
+      "holdout_rel_ndcg_pct_vs_v1": 9.44
+    }
+  },
+  "protocol_m2_catalog_diagnostics": {
+    "1_exact_v1_tfidf": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 317,
+      "catalog_coverage_at_5": 0.9665,
+      "same_category_at_5": 0.7665,
+      "mean_top5_overlap_with_v1": 1.0,
+      "dev18_unjudged_top5_slot_rate": 0.0,
+      "dev18_unjudged_slots": "0/90",
+      "holdout18_unjudged_top5_slot_rate": 0.0,
+      "holdout18_unjudged_slots": "0/90",
+      "total_inference_time_ms_328_queries": 244.31,
+      "mean_query_latency_ms": 0.7448
+    },
+    "2_phase4a_image_only": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 316,
+      "catalog_coverage_at_5": 0.9634,
+      "same_category_at_5": 0.2793,
+      "mean_top5_overlap_with_v1": 0.0848,
+      "dev18_unjudged_top5_slot_rate": 0.9222,
+      "dev18_unjudged_slots": "83/90",
+      "holdout18_unjudged_top5_slot_rate": 0.9,
+      "holdout18_unjudged_slots": "81/90",
+      "total_inference_time_ms_328_queries": 236.19,
+      "mean_query_latency_ms": 0.7201
+    },
+    "3_phase4a_early_fusion": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 315,
+      "catalog_coverage_at_5": 0.9604,
+      "same_category_at_5": 0.75,
+      "mean_top5_overlap_with_v1": 0.8433,
+      "dev18_unjudged_top5_slot_rate": 0.1,
+      "dev18_unjudged_slots": "9/90",
+      "holdout18_unjudged_top5_slot_rate": 0.1,
+      "holdout18_unjudged_slots": "9/90",
+      "total_inference_time_ms_328_queries": 243.99,
+      "mean_query_latency_ms": 0.7439
+    },
+    "4_phase4a_late_fusion": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 319,
+      "catalog_coverage_at_5": 0.9726,
+      "same_category_at_5": 0.8287,
+      "mean_top5_overlap_with_v1": 0.6713,
+      "dev18_unjudged_top5_slot_rate": 0.2,
+      "dev18_unjudged_slots": "18/90",
+      "holdout18_unjudged_top5_slot_rate": 0.2556,
+      "holdout18_unjudged_slots": "23/90",
+      "total_inference_time_ms_328_queries": 225.85,
+      "mean_query_latency_ms": 0.6886
+    },
+    "5_phase4b_clip_image_only": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 299,
+      "catalog_coverage_at_5": 0.9116,
+      "same_category_at_5": 0.6232,
+      "mean_top5_overlap_with_v1": 0.1896,
+      "dev18_unjudged_top5_slot_rate": 0.6889,
+      "dev18_unjudged_slots": "62/90",
+      "holdout18_unjudged_top5_slot_rate": 0.8444,
+      "holdout18_unjudged_slots": "76/90",
+      "total_inference_time_ms_328_queries": 280.35,
+      "mean_query_latency_ms": 0.8547
+    },
+    "6_phase4b_clip_text_image": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 282,
+      "catalog_coverage_at_5": 0.8598,
+      "same_category_at_5": 0.7299,
+      "mean_top5_overlap_with_v1": 0.2841,
+      "dev18_unjudged_top5_slot_rate": 0.6222,
+      "dev18_unjudged_slots": "56/90",
+      "holdout18_unjudged_top5_slot_rate": 0.7333,
+      "holdout18_unjudged_slots": "66/90",
+      "total_inference_time_ms_328_queries": 215.44,
+      "mean_query_latency_ms": 0.6568
+    },
+    "7_phase4b_clip_late_fusion": {
+      "catalog_size": 328,
+      "unique_recommended_items_at_5": 313,
+      "catalog_coverage_at_5": 0.9543,
+      "same_category_at_5": 0.803,
+      "mean_top5_overlap_with_v1": 0.6683,
+      "dev18_unjudged_top5_slot_rate": 0.2444,
+      "dev18_unjudged_slots": "22/90",
+      "holdout18_unjudged_top5_slot_rate": 0.2111,
+      "holdout18_unjudged_slots": "19/90",
+      "total_inference_time_ms_328_queries": 159.08,
+      "mean_query_latency_ms": 0.485
+    }
+  },
+  "per_query_holdout18": [
+    {
+      "reference_id": "HM-0680396001",
+      "reference_name": "Zitta Scarf",
+      "reference_category": "Accessories",
+      "pool_size": 6,
+      "v1_ndcg5": 0.7808,
+      "p4a_late_ndcg5": 0.9904,
+      "clip_img_ndcg5": 0.6094,
+      "clip_t2i_ndcg5": 0.8286,
+      "clip_late_ndcg5": 1.0,
+      "delta_clip_t2i_vs_v1": 0.0478,
+      "delta_clip_late_vs_v1": 0.2192
+    },
+    {
+      "reference_id": "HM-0752869003",
+      "reference_name": "MAGIC GLOVES",
+      "reference_category": "Accessories",
+      "pool_size": 11,
+      "v1_ndcg5": 0.0,
+      "p4a_late_ndcg5": 0.0,
+      "clip_img_ndcg5": 0.0,
+      "clip_t2i_ndcg5": 0.0,
+      "clip_late_ndcg5": 0.0,
+      "delta_clip_t2i_vs_v1": 0.0,
+      "delta_clip_late_vs_v1": 0.0
+    },
+    {
+      "reference_id": "HM-0715599001",
+      "reference_name": "Alma Onesie",
+      "reference_category": "Accessories",
+      "pool_size": 9,
+      "v1_ndcg5": 0.0,
+      "p4a_late_ndcg5": 0.0,
+      "clip_img_ndcg5": 0.0,
+      "clip_t2i_ndcg5": 0.0,
+      "clip_late_ndcg5": 0.0,
+      "delta_clip_t2i_vs_v1": 0.0,
+      "delta_clip_late_vs_v1": 0.0
+    },
+    {
+      "reference_id": "HM-0574428009",
+      "reference_name": "Sivert 5-pocket",
+      "reference_category": "Bottoms",
+      "pool_size": 8,
+      "v1_ndcg5": 0.5847,
+      "p4a_late_ndcg5": 0.7869,
+      "clip_img_ndcg5": 0.8684,
+      "clip_t2i_ndcg5": 0.9355,
+      "clip_late_ndcg5": 0.8262,
+      "delta_clip_t2i_vs_v1": 0.3508,
+      "delta_clip_late_vs_v1": 0.2415
+    },
+    {
+      "reference_id": "HM-0786627001",
+      "reference_name": "Mini Sunrise Jumpsuit",
+      "reference_category": "Bottoms",
+      "pool_size": 10,
+      "v1_ndcg5": 1.0,
+      "p4a_late_ndcg5": 1.0,
+      "clip_img_ndcg5": 1.0,
+      "clip_t2i_ndcg5": 0.5,
+      "clip_late_ndcg5": 1.0,
+      "delta_clip_t2i_vs_v1": -0.5,
+      "delta_clip_late_vs_v1": 0.0
+    },
+    {
+      "reference_id": "HM-0567805003",
+      "reference_name": "Freddie Linen",
+      "reference_category": "Bottoms",
+      "pool_size": 7,
+      "v1_ndcg5": 0.6716,
+      "p4a_late_ndcg5": 0.7727,
+      "clip_img_ndcg5": 0.7638,
+      "clip_t2i_ndcg5": 0.7979,
+      "clip_late_ndcg5": 0.913,
+      "delta_clip_t2i_vs_v1": 0.1263,
+      "delta_clip_late_vs_v1": 0.2414
+    },
+    {
+      "reference_id": "HM-0633535001",
+      "reference_name": "AG Sorrel",
+      "reference_category": "Dresses",
+      "pool_size": 5,
+      "v1_ndcg5": 1.0,
+      "p4a_late_ndcg5": 0.9578,
+      "clip_img_ndcg5": 1.0,
+      "clip_t2i_ndcg5": 0.9355,
+      "clip_late_ndcg5": 1.0,
+      "delta_clip_t2i_vs_v1": -0.0645,
+      "delta_clip_late_vs_v1": 0.0
+    },
+    {
+      "reference_id": "HM-0611924001",
+      "reference_name": "Holly off shoulder dress",
+      "reference_category": "Dresses",
+      "pool_size": 7,
+      "v1_ndcg5": 0.738,
+      "p4a_late_ndcg5": 0.9578,
+      "clip_img_ndcg5": 0.839,
+      "clip_t2i_ndcg5": 0.7968,
+      "clip_late_ndcg5": 0.8167,
+      "delta_clip_t2i_vs_v1": 0.0588,
+      "delta_clip_late_vs_v1": 0.0787
+    },
+    {
+      "reference_id": "HM-0627725003",
+      "reference_name": "BILLIE set",
+      "reference_category": "Dresses",
+      "pool_size": 7,
+      "v1_ndcg5": 1.0,
+      "p4a_late_ndcg5": 0.7979,
+      "clip_img_ndcg5": 0.7979,
+      "clip_t2i_ndcg5": 0.8508,
+      "clip_late_ndcg5": 0.8508,
+      "delta_clip_t2i_vs_v1": -0.1492,
+      "delta_clip_late_vs_v1": -0.1492
+    },
+    {
+      "reference_id": "HM-0542917001",
+      "reference_name": "Tage Sweater",
+      "reference_category": "Knitwear",
+      "pool_size": 8,
+      "v1_ndcg5": 0.7744,
+      "p4a_late_ndcg5": 0.9131,
+      "clip_img_ndcg5": 0.7226,
+      "clip_t2i_ndcg5": 0.7034,
+      "clip_late_ndcg5": 0.8107,
+      "delta_clip_t2i_vs_v1": -0.071,
+      "delta_clip_late_vs_v1": 0.0363
+    },
+    {
+      "reference_id": "HM-0825924001",
+      "reference_name": "Erika 2 pack",
+      "reference_category": "Knitwear",
+      "pool_size": 7,
+      "v1_ndcg5": 0.6508,
+      "p4a_late_ndcg5": 1.0,
+      "clip_img_ndcg5": 0.7654,
+      "clip_t2i_ndcg5": 0.7328,
+      "clip_late_ndcg5": 0.7654,
+      "delta_clip_t2i_vs_v1": 0.082,
+      "delta_clip_late_vs_v1": 0.1146
+    },
+    {
+      "reference_id": "HM-0555364011",
+      "reference_name": "Spencer Shirt Sweater",
+      "reference_category": "Knitwear",
+      "pool_size": 7,
+      "v1_ndcg5": 1.0,
+      "p4a_late_ndcg5": 1.0,
+      "clip_img_ndcg5": 1.0,
+      "clip_t2i_ndcg5": 1.0,
+      "clip_late_ndcg5": 1.0,
+      "delta_clip_t2i_vs_v1": 0.0,
+      "delta_clip_late_vs_v1": 0.0
+    },
+    {
+      "reference_id": "HM-0553092017",
+      "reference_name": "Hunter Super Skinny",
+      "reference_category": "Outerwear",
+      "pool_size": 8,
+      "v1_ndcg5": 0.7116,
+      "p4a_late_ndcg5": 0.6464,
+      "clip_img_ndcg5": 1.0,
+      "clip_t2i_ndcg5": 0.8437,
+      "clip_late_ndcg5": 0.9271,
+      "delta_clip_t2i_vs_v1": 0.1321,
+      "delta_clip_late_vs_v1": 0.2155
+    },
+    {
+      "reference_id": "HM-0513373021",
+      "reference_name": "Hepburn top",
+      "reference_category": "Outerwear",
+      "pool_size": 6,
+      "v1_ndcg5": 0.9307,
+      "p4a_late_ndcg5": 0.9377,
+      "clip_img_ndcg5": 0.6135,
+      "clip_t2i_ndcg5": 0.8732,
+      "clip_late_ndcg5": 0.9195,
+      "delta_clip_t2i_vs_v1": -0.0575,
+      "delta_clip_late_vs_v1": -0.0112
+    },
+    {
+      "reference_id": "HM-0699070010",
+      "reference_name": "Price tank / Filippa",
+      "reference_category": "Outerwear",
+      "pool_size": 5,
+      "v1_ndcg5": 0.7979,
+      "p4a_late_ndcg5": 0.7699,
+      "clip_img_ndcg5": 1.0,
+      "clip_t2i_ndcg5": 0.7979,
+      "clip_late_ndcg5": 0.8508,
+      "delta_clip_t2i_vs_v1": 0.0,
+      "delta_clip_late_vs_v1": 0.0529
+    },
+    {
+      "reference_id": "HM-0672957001",
+      "reference_name": "MC Charlie",
+      "reference_category": "Tops",
+      "pool_size": 8,
+      "v1_ndcg5": 0.6729,
+      "p4a_late_ndcg5": 0.5342,
+      "clip_img_ndcg5": 0.5994,
+      "clip_t2i_ndcg5": 0.5994,
+      "clip_late_ndcg5": 0.6729,
+      "delta_clip_t2i_vs_v1": -0.0735,
+      "delta_clip_late_vs_v1": 0.0
+    },
+    {
+      "reference_id": "HM-0708464002",
+      "reference_name": "STORK FANCY",
+      "reference_category": "Tops",
+      "pool_size": 10,
+      "v1_ndcg5": 0.2381,
+      "p4a_late_ndcg5": 0.1942,
+      "clip_img_ndcg5": 0.4161,
+      "clip_t2i_ndcg5": 0.6899,
+      "clip_late_ndcg5": 0.4794,
+      "delta_clip_t2i_vs_v1": 0.4518,
+      "delta_clip_late_vs_v1": 0.2413
+    },
+    {
+      "reference_id": "HM-0614634004",
+      "reference_name": "Babe tee",
+      "reference_category": "Tops",
+      "pool_size": 11,
+      "v1_ndcg5": 0.9891,
+      "p4a_late_ndcg5": 0.8481,
+      "clip_img_ndcg5": 0.7694,
+      "clip_t2i_ndcg5": 0.8328,
+      "clip_late_ndcg5": 0.8933,
+      "delta_clip_t2i_vs_v1": -0.1563,
+      "delta_clip_late_vs_v1": -0.0958
+    }
+  ],
+  "missing_image_fallback_check": {
+    "query_id": "HM-0398947001",
+    "clip_image_only_exact_v1_match": true,
+    "clip_late_fusion_exact_v1_match": true,
+    "clip_text_image_fallback_used": false,
+    "clip_text_image_uses_valid_text_embedding": true
+  }
+}

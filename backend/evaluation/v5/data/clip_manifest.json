@@ -1,0 +1,57 @@
+{
+  "milestone": "Milestone 4B.2C — Offline CLIP Catalog Embedding Cache",
+  "model_repository": "openai/clip-vit-base-patch32",
+  "model_revision_sha": "d15b5f29721ca72dac15f8526b284be910de18be",
+  "model_weight_file": "model.safetensors",
+  "model_weight_sha256": "99d28a652e6ec46629ab7047a0ac82c69b1fe11e0ce672c43af65d3a9a3fc05d",
+  "external_snapshot_path": "C:\\Users\\vuvan\\Projects\\_hf_cache\\elan-v5-clip\\models--openai--clip-vit-base-patch32\\snapshots\\d15b5f29721ca72dac15f8526b284be910de18be",
+  "source_catalog": {
+    "database_path": "backend\\data\\elan_release.db",
+    "query_filter": "is_active = 1 ORDER BY id",
+    "total_active_products": 328
+  },
+  "library_versions": {
+    "python": "3.13.15",
+    "torch": "2.15.0+cpu",
+    "transformers": "4.57.6",
+    "numpy": "2.5.5",
+    "pillow": "11.3.0",
+    "scikit_learn": "1.9.1"
+  },
+  "embedding_specification": {
+    "embedding_dim": 512,
+    "dtype": "float32",
+    "normalization": "L2 unit norm (p=2, dim=-1) on valid rows; zero vector placeholder on invalid rows",
+    "text_construction_template": "\"{category}: {name}. Colors: {colors_csv}. {description}\" (omitting empty segments; whitespace-normalized; BPE-truncated to 77 tokens)",
+    "text_max_bpe_tokens": 77,
+    "processor_use_fast": false
+  },
+  "extraction_statistics": {
+    "batch_size": 8,
+    "total_products": 328,
+    "valid_image_embeddings": 327,
+    "missing_or_failed_image_embeddings": 1,
+    "valid_text_embeddings": 328,
+    "missing_or_failed_text_embeddings": 0,
+    "image_extraction_duration_s": 32.289,
+    "text_extraction_duration_s": 13.039,
+    "total_extraction_duration_s": 47.298,
+    "current_process_rss_mb": 932.69,
+    "peak_process_rss_mb": 940.26,
+    "failed_or_skipped_records": [
+      {
+        "product_id": "HM-0398947001",
+        "modality": "image",
+        "status": "skipped_missing_image",
+        "reason": "Product has no valid local image asset (image_url is NULL or missing); zero placeholder + image_valid=False."
+      }
+    ]
+  },
+  "artifacts": {
+    "npz_path": "backend\\evaluation\\v5\\data\\clip_embeddings.npz",
+    "npz_file_size_bytes": 1248900,
+    "npz_sha256": "4265a3a69611ef57c3f3350cdcdd971e31e10d56db4005b07a328ec410af1e7f",
+    "remaining_disk_free_gb": 12.397
+  },
+  "reproduction_command": "C:\\Users\\vuvan\\Projects\\_venvs\\elan-v5-clip\\Scripts\\python.exe -m backend.evaluation.v5.extract_clip_embeddings"
+}

@@ -1,0 +1,40 @@
+{
+  "milestone": "Milestone 4B.3C — Frozen Dev-18 Configurations",
+  "source_dev18_metrics_file": "backend\\evaluation\\v5\\data\\neural_multimodal_milestone4b_dev18_metrics.json",
+  "source_dev18_metrics_sha256": "5d0e7719c599a1d0dcd33e6cc4751b463ff1ebdf372cfbd953bffe994f516f89",
+  "locked_models": {
+    "1_exact_v1_tfidf": {
+      "type": "ExactV1TFIDFRecommender"
+    },
+    "2_phase4a_image_only": {
+      "visual_dim": 148
+    },
+    "3_phase4a_early_fusion": {
+      "visual_dim": 32,
+      "alpha_vis": 0.05
+    },
+    "4_phase4a_late_fusion": {
+      "visual_dim": 148,
+      "w_vis": 0.5,
+      "text_gate_threshold": 0.15,
+      "require_same_category_for_visual": true
+    },
+    "5_phase4b_clip_image_only": {
+      "type": "CLIPImageOnlyRecommender",
+      "default": true
+    },
+    "6_phase4b_clip_text_image": {
+      "w_t2i": 0.5,
+      "w_i2t": 0.5,
+      "w_t2t": 0.0,
+      "fallback_missing_query_to_v1": false
+    },
+    "7_phase4b_clip_late_fusion": {
+      "text_source": "v1_tfidf",
+      "w_vis": 0.5,
+      "text_gate_threshold": 0.0,
+      "require_same_category_for_visual": false
+    }
+  },
+  "locked_models_canonical_sha256": "5014a546502069baa79a286ea068b024a8ae15e8f0d2764183fee4f4b087d55a"
+}
