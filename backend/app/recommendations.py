@@ -5,7 +5,7 @@ import sqlite3
 
 from fastapi import APIRouter, HTTPException, Query
 
-from app.recommender import recommend_products
+from app.clip_service import recommend_products_with_clip_fallback
 
 
 router = APIRouter(
@@ -19,10 +19,10 @@ def get_recommendations(
     product_id: str,
     top_k: int = Query(default=5, ge=1, le=20),
 ):
-    """Return similar products using TF-IDF + cosine similarity."""
+    """Return similar products using V1 TF-IDF or feature-flagged CLIP Late Fusion."""
 
     try:
-        results = recommend_products(
+        results, model_name = recommend_products_with_clip_fallback(
             product_id=product_id,
             top_k=top_k,
         )
@@ -49,7 +49,7 @@ def get_recommendations(
 
     return {
         "reference_product_id": product_id,
-        "model": "tfidf_cosine_v1",
+        "model": model_name,
         "count": len(results),
         "recommendations": results,
     }
