@@ -1,0 +1,994 @@
+{
+  "model": "itemknn_cf_synthetic_demo",
+  "is_synthetic_simulation": true,
+  "data_source": "SYNTHETIC_SIMULATION_V5 (train split only)",
+  "itemknn_config": {
+    "dedup_mode": "log_sum",
+    "iuf_exponent": 0.5,
+    "shrinkage": 20.0,
+    "k_neighbors": 100,
+    "normalize_sim_columns": false
+  },
+  "profiles": [
+    {
+      "user_id": "SYN-U0001",
+      "display_label": "Simulated Shopper 01 — Tops & Casual Edit",
+      "is_cold_start": false,
+      "interaction_summary": {
+        "total_train_events": 19,
+        "distinct_products_seen": 14,
+        "views": 14,
+        "add_to_carts": 5,
+        "purchases": 0,
+        "top_categories": [
+          "Tops",
+          "Bottoms"
+        ]
+      },
+      "recent_history": [
+        {
+          "product_id": "HM-0614634004",
+          "name": "Babe tee",
+          "category": "Tops",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "HM-0636265001",
+          "name": "Super Skinny 5pkt",
+          "category": "Bottoms",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "HM-0797312005",
+          "name": "Marimoo shorts",
+          "category": "Bottoms",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "HM-0805986003",
+          "name": "DIV Babe LS",
+          "category": "Tops",
+          "event_type": "add_to_cart"
+        }
+      ],
+      "recommendations": [
+        {
+          "product_id": "HM-0743908017",
+          "score": 0.116893,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0635896001",
+          "score": 0.09778,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "ELAN-TEST-001",
+          "score": 0.088575,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0479095011",
+          "score": 0.082944,
+          "reason": "Co-interacted pattern with Marimoo shorts"
+        },
+        {
+          "product_id": "HM-0375585025",
+          "score": 0.082456,
+          "reason": "Co-interacted pattern with Marimoo shorts"
+        },
+        {
+          "product_id": "HM-0602010001",
+          "score": 0.081096,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0551045078",
+          "score": 0.079697,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0626257017",
+          "score": 0.071972,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0577935004",
+          "score": 0.070815,
+          "reason": "Co-interacted pattern with Marimoo shorts"
+        },
+        {
+          "product_id": "HM-0677589002",
+          "score": 0.066181,
+          "reason": "Co-interacted pattern with Eastwood Tee"
+        },
+        {
+          "product_id": "HM-0607390004",
+          "score": 0.064087,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0651893005",
+          "score": 0.062237,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0591466028",
+          "score": 0.059508,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0575523001",
+          "score": 0.058059,
+          "reason": "Co-interacted pattern with Eastwood Tee"
+        },
+        {
+          "product_id": "HM-0518754001",
+          "score": 0.055251,
+          "reason": "Co-interacted pattern with Eastwood Tee"
+        },
+        {
+          "product_id": "HM-0609813009",
+          "score": 0.052407,
+          "reason": "Co-interacted pattern with Marimoo shorts"
+        },
+        {
+          "product_id": "HM-0379780043",
+          "score": 0.051429,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0449570053",
+          "score": 0.050777,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0909529001",
+          "score": 0.047583,
+          "reason": "Co-interacted pattern with Babe tee"
+        },
+        {
+          "product_id": "HM-0564048010",
+          "score": 0.04732,
+          "reason": "Co-interacted pattern with Eastwood Tee"
+        }
+      ]
+    },
+    {
+      "user_id": "SYN-U0002",
+      "display_label": "Simulated Shopper 02 — Dresses & Occasion Edit",
+      "is_cold_start": false,
+      "interaction_summary": {
+        "total_train_events": 29,
+        "distinct_products_seen": 15,
+        "views": 15,
+        "add_to_carts": 9,
+        "purchases": 5,
+        "top_categories": [
+          "Dresses",
+          "Bottoms"
+        ]
+      },
+      "recent_history": [
+        {
+          "product_id": "HM-0513733001",
+          "name": "Majken SS/öppen",
+          "category": "Dresses",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0537920001",
+          "name": "Ross lace dress",
+          "category": "Dresses",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0576812002",
+          "name": "Flirty Stina flower hb",
+          "category": "Accessories",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0651424003",
+          "name": "Jackson Quilted Jacket",
+          "category": "Outerwear",
+          "event_type": "purchase"
+        }
+      ],
+      "recommendations": [
+        {
+          "product_id": "HM-0611924001",
+          "score": 0.047308,
+          "reason": "Co-interacted pattern with Jenner skater dress velvet"
+        },
+        {
+          "product_id": "HM-0648950003",
+          "score": 0.041726,
+          "reason": "Co-interacted pattern with Jenner skater dress velvet"
+        },
+        {
+          "product_id": "HM-0555364011",
+          "score": 0.041501,
+          "reason": "Co-interacted pattern with IRON sweater"
+        },
+        {
+          "product_id": "HM-0577935004",
+          "score": 0.038937,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0716360001",
+          "score": 0.036541,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0613371001",
+          "score": 0.036132,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0225286014",
+          "score": 0.035876,
+          "reason": "Co-interacted pattern with IRON sweater"
+        },
+        {
+          "product_id": "HM-0398947001",
+          "score": 0.035006,
+          "reason": "Co-interacted pattern with Jenner skater dress velvet"
+        },
+        {
+          "product_id": "HM-0529861001",
+          "score": 0.034962,
+          "reason": "Co-interacted pattern with IRON sweater"
+        },
+        {
+          "product_id": "HM-0797312005",
+          "score": 0.034779,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0698234002",
+          "score": 0.032359,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0615042006",
+          "score": 0.031917,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0651461003",
+          "score": 0.031483,
+          "reason": "Co-interacted pattern with IRON sweater"
+        },
+        {
+          "product_id": "HM-0625043002",
+          "score": 0.031215,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0292453013",
+          "score": 0.030954,
+          "reason": "Co-interacted pattern with Ross lace dress"
+        },
+        {
+          "product_id": "HM-0619884017",
+          "score": 0.030191,
+          "reason": "Co-interacted pattern with Mini Sunrise Jumpsuit"
+        },
+        {
+          "product_id": "HM-0772349015",
+          "score": 0.029762,
+          "reason": "Co-interacted pattern with Jackson Quilted Jacket"
+        },
+        {
+          "product_id": "HM-0663007011",
+          "score": 0.029343,
+          "reason": "Co-interacted pattern with IRON sweater"
+        },
+        {
+          "product_id": "HM-0621558005",
+          "score": 0.029001,
+          "reason": "Co-interacted pattern with Jenner skater dress velvet"
+        },
+        {
+          "product_id": "HM-0532578028",
+          "score": 0.028147,
+          "reason": "Co-interacted pattern with IRON sweater"
+        }
+      ]
+    },
+    {
+      "user_id": "SYN-U0003",
+      "display_label": "Simulated Shopper 03 — Outerwear & Tailoring",
+      "is_cold_start": false,
+      "interaction_summary": {
+        "total_train_events": 17,
+        "distinct_products_seen": 11,
+        "views": 12,
+        "add_to_carts": 3,
+        "purchases": 2,
+        "top_categories": [
+          "Outerwear",
+          "Tops"
+        ]
+      },
+      "recent_history": [
+        {
+          "product_id": "HM-0512725001",
+          "name": "Lars",
+          "category": "Outerwear",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0677589002",
+          "name": "Chewie long hoodie",
+          "category": "Tops",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0495560002",
+          "name": "FS Connery tuxedo shirt",
+          "category": "Tops",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "HM-0296366031",
+          "name": "Flirty Fiffi flower headband",
+          "category": "Accessories",
+          "event_type": "view"
+        }
+      ],
+      "recommendations": [
+        {
+          "product_id": "ELAN-TEST-001",
+          "score": 0.102868,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0555364011",
+          "score": 0.071678,
+          "reason": "Co-interacted pattern with SB Chris puff jkt"
+        },
+        {
+          "product_id": "HM-0613371001",
+          "score": 0.070355,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0609813009",
+          "score": 0.070071,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0602010001",
+          "score": 0.06941,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0577935004",
+          "score": 0.063482,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0814594009",
+          "score": 0.06172,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0825719003",
+          "score": 0.058839,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0894762002",
+          "score": 0.056577,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0743908017",
+          "score": 0.053742,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0635896001",
+          "score": 0.053133,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0615042006",
+          "score": 0.051723,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0654410007",
+          "score": 0.05086,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0551045078",
+          "score": 0.050623,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0341242026",
+          "score": 0.044678,
+          "reason": "Co-interacted pattern with SB Chris puff jkt"
+        },
+        {
+          "product_id": "HM-0614634004",
+          "score": 0.044644,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0641008026",
+          "score": 0.043465,
+          "reason": "Co-interacted pattern with FS Connery tuxedo shirt"
+        },
+        {
+          "product_id": "HM-0607390004",
+          "score": 0.043026,
+          "reason": "Co-interacted pattern with Chewie long hoodie"
+        },
+        {
+          "product_id": "HM-0651424003",
+          "score": 0.042963,
+          "reason": "Co-interacted pattern with Lars"
+        },
+        {
+          "product_id": "HM-0635957003",
+          "score": 0.042916,
+          "reason": "Co-interacted pattern with Lars"
+        }
+      ]
+    },
+    {
+      "user_id": "SYN-U0007",
+      "display_label": "Simulated Shopper 07 — Bottoms & Denim",
+      "is_cold_start": false,
+      "interaction_summary": {
+        "total_train_events": 19,
+        "distinct_products_seen": 11,
+        "views": 11,
+        "add_to_carts": 6,
+        "purchases": 2,
+        "top_categories": [
+          "Bottoms",
+          "Knitwear"
+        ]
+      },
+      "recent_history": [
+        {
+          "product_id": "HM-0516903025",
+          "name": "Sally Structure TVP",
+          "category": "Knitwear",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0872085001",
+          "name": "PAPAYA MINI SKIRT S.1",
+          "category": "Bottoms",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0624917001",
+          "name": "Southampton 5-pkt jogger",
+          "category": "Bottoms",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "HM-0625043002",
+          "name": "SB Chris puff jkt",
+          "category": "Outerwear",
+          "event_type": "add_to_cart"
+        }
+      ],
+      "recommendations": [
+        {
+          "product_id": "HM-0797312005",
+          "score": 0.056606,
+          "reason": "Co-interacted pattern with Sally Structure TVP"
+        },
+        {
+          "product_id": "HM-0894762002",
+          "score": 0.055627,
+          "reason": "Co-interacted pattern with SB Chris puff jkt"
+        },
+        {
+          "product_id": "HM-0551045078",
+          "score": 0.046548,
+          "reason": "Co-interacted pattern with PAPAYA MINI SKIRT S.1"
+        },
+        {
+          "product_id": "HM-0555364011",
+          "score": 0.045758,
+          "reason": "Co-interacted pattern with PAPAYA MINI SKIRT S.1"
+        },
+        {
+          "product_id": "ELAN-TEST-001",
+          "score": 0.041969,
+          "reason": "Co-interacted pattern with Southampton 5-pkt jogger"
+        },
+        {
+          "product_id": "HM-0609813009",
+          "score": 0.041038,
+          "reason": "Co-interacted pattern with PAPAYA MINI SKIRT S.1"
+        },
+        {
+          "product_id": "HM-0375585025",
+          "score": 0.040813,
+          "reason": "Co-interacted pattern with SB Chris puff jkt"
+        },
+        {
+          "product_id": "HM-0348330039",
+          "score": 0.037985,
+          "reason": "Co-interacted pattern with PAPAYA MINI SKIRT S.1"
+        },
+        {
+          "product_id": "HM-0709407002",
+          "score": 0.034416,
+          "reason": "Co-interacted pattern with PAPAYA MINI SKIRT S.1"
+        },
+        {
+          "product_id": "HM-0825719003",
+          "score": 0.033703,
+          "reason": "Co-interacted pattern with Hood W Zip"
+        },
+        {
+          "product_id": "HM-0651424003",
+          "score": 0.033347,
+          "reason": "Co-interacted pattern with SB Chris puff jkt"
+        },
+        {
+          "product_id": "HM-0456245004",
+          "score": 0.032933,
+          "reason": "Co-interacted pattern with SB Chris puff jkt"
+        },
+        {
+          "product_id": "HM-0591466028",
+          "score": 0.031571,
+          "reason": "Co-interacted pattern with Southampton 5-pkt jogger"
+        },
+        {
+          "product_id": "HM-0575523001",
+          "score": 0.031447,
+          "reason": "Co-interacted pattern with Southampton 5-pkt jogger"
+        },
+        {
+          "product_id": "HM-0760250002",
+          "score": 0.031279,
+          "reason": "Co-interacted pattern with Sally Structure TVP"
+        },
+        {
+          "product_id": "HM-0479095011",
+          "score": 0.031,
+          "reason": "Co-interacted pattern with Charlie Top"
+        },
+        {
+          "product_id": "HM-0654410007",
+          "score": 0.030968,
+          "reason": "Co-interacted pattern with Southampton 5-pkt jogger"
+        },
+        {
+          "product_id": "HM-0814594009",
+          "score": 0.03047,
+          "reason": "Co-interacted pattern with Southampton 5-pkt jogger"
+        },
+        {
+          "product_id": "HM-0739510002",
+          "score": 0.02999,
+          "reason": "Co-interacted pattern with Charlie Top"
+        },
+        {
+          "product_id": "HM-0614634004",
+          "score": 0.029623,
+          "reason": "Co-interacted pattern with PAPAYA MINI SKIRT S.1"
+        }
+      ]
+    },
+    {
+      "user_id": "SYN-U0016",
+      "display_label": "Simulated Shopper 16 — Knitwear Layering",
+      "is_cold_start": false,
+      "interaction_summary": {
+        "total_train_events": 33,
+        "distinct_products_seen": 23,
+        "views": 24,
+        "add_to_carts": 6,
+        "purchases": 3,
+        "top_categories": [
+          "Knitwear",
+          "Outerwear"
+        ]
+      },
+      "recent_history": [
+        {
+          "product_id": "ELAN-005",
+          "name": "Soft Knit Cardigan",
+          "category": "Knitwear",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0613371001",
+          "name": "SEQUINS CREW",
+          "category": "Knitwear",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0713986007",
+          "name": "Manson slim blazer",
+          "category": "Outerwear",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0576447003",
+          "name": "Bloom sweater",
+          "category": "Knitwear",
+          "event_type": "add_to_cart"
+        }
+      ],
+      "recommendations": [
+        {
+          "product_id": "HM-0555364011",
+          "score": 0.075536,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0635957003",
+          "score": 0.073381,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0577935004",
+          "score": 0.065081,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0651461003",
+          "score": 0.062116,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0537042002",
+          "score": 0.060911,
+          "reason": "Co-interacted pattern with Soft Knit Cardigan"
+        },
+        {
+          "product_id": "HM-0737852003",
+          "score": 0.058828,
+          "reason": "Co-interacted pattern with Alex plisse"
+        },
+        {
+          "product_id": "HM-0625043002",
+          "score": 0.058275,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0894762002",
+          "score": 0.055943,
+          "reason": "Co-interacted pattern with Manson slim blazer"
+        },
+        {
+          "product_id": "HM-0479095011",
+          "score": 0.0508,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0447692025",
+          "score": 0.048145,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0375585025",
+          "score": 0.045009,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0446224002",
+          "score": 0.04381,
+          "reason": "Co-interacted pattern with Soft Knit Cardigan"
+        },
+        {
+          "product_id": "HM-0614634004",
+          "score": 0.042167,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0619884017",
+          "score": 0.039736,
+          "reason": "Co-interacted pattern with Bloom sweater"
+        },
+        {
+          "product_id": "HM-0529861001",
+          "score": 0.039381,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0734919002",
+          "score": 0.039168,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0577249005",
+          "score": 0.038327,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0743908017",
+          "score": 0.038164,
+          "reason": "Co-interacted pattern with Alex plisse"
+        },
+        {
+          "product_id": "HM-0797394009",
+          "score": 0.036753,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        },
+        {
+          "product_id": "HM-0721388005",
+          "score": 0.036718,
+          "reason": "Co-interacted pattern with SEQUINS CREW"
+        }
+      ]
+    },
+    {
+      "user_id": "SYN-U0048",
+      "display_label": "Simulated Shopper 48 — Accessories Focus",
+      "is_cold_start": false,
+      "interaction_summary": {
+        "total_train_events": 12,
+        "distinct_products_seen": 7,
+        "views": 8,
+        "add_to_carts": 3,
+        "purchases": 1,
+        "top_categories": [
+          "Accessories",
+          "Outerwear"
+        ]
+      },
+      "recent_history": [
+        {
+          "product_id": "HM-0360950014",
+          "name": "Sunglasses Edward",
+          "category": "Accessories",
+          "event_type": "purchase"
+        },
+        {
+          "product_id": "HM-0272591023",
+          "name": "Lena Rib Dress (1)",
+          "category": "Dresses",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "HM-0599945019",
+          "name": "Simz anorak",
+          "category": "Outerwear",
+          "event_type": "add_to_cart"
+        },
+        {
+          "product_id": "ELAN-006",
+          "name": "Everyday Crossbody Bag",
+          "category": "Accessories",
+          "event_type": "view"
+        }
+      ],
+      "recommendations": [
+        {
+          "product_id": "HM-0616705002",
+          "score": 0.0653,
+          "reason": "Co-interacted pattern with Lena Rib Dress (1)"
+        },
+        {
+          "product_id": "HM-0292453013",
+          "score": 0.062003,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0582536001",
+          "score": 0.058542,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0790315001",
+          "score": 0.048632,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0516806002",
+          "score": 0.045493,
+          "reason": "Co-interacted pattern with Lena Rib Dress (1)"
+        },
+        {
+          "product_id": "HM-0611924001",
+          "score": 0.0449,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0532928001",
+          "score": 0.041941,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0576112001",
+          "score": 0.039589,
+          "reason": "Co-interacted pattern with Simz anorak"
+        },
+        {
+          "product_id": "HM-0626257017",
+          "score": 0.038531,
+          "reason": "Co-interacted pattern with Essential Cotton Tee"
+        },
+        {
+          "product_id": "HM-0607541004",
+          "score": 0.038315,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0865457002",
+          "score": 0.037148,
+          "reason": "Co-interacted pattern with Lena Rib Dress (1)"
+        },
+        {
+          "product_id": "HM-0361401005",
+          "score": 0.036394,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0719258001",
+          "score": 0.036074,
+          "reason": "Co-interacted pattern with Everyday Crossbody Bag"
+        },
+        {
+          "product_id": "HM-0765945001",
+          "score": 0.034238,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0375585025",
+          "score": 0.034131,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0716304006",
+          "score": 0.033782,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0635896001",
+          "score": 0.033685,
+          "reason": "Co-interacted pattern with Essential Cotton Tee"
+        },
+        {
+          "product_id": "HM-0743908017",
+          "score": 0.033428,
+          "reason": "Co-interacted pattern with Essential Cotton Tee"
+        },
+        {
+          "product_id": "HM-0615042006",
+          "score": 0.032918,
+          "reason": "Co-interacted pattern with Sunglasses Edward"
+        },
+        {
+          "product_id": "HM-0677589002",
+          "score": 0.032428,
+          "reason": "Co-interacted pattern with Essential Cotton Tee"
+        }
+      ]
+    },
+    {
+      "user_id": "SYN-COLD-START",
+      "display_label": "Cold-Start Visitor — Zero History (Popularity Fallback)",
+      "is_cold_start": true,
+      "interaction_summary": {
+        "total_train_events": 0,
+        "distinct_products_seen": 0,
+        "views": 0,
+        "add_to_carts": 0,
+        "purchases": 0,
+        "top_categories": []
+      },
+      "recent_history": [],
+      "recommendations": [
+        {
+          "product_id": "HM-0555364011",
+          "score": 1.0,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0797312005",
+          "score": 0.955043,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "ELAN-TEST-001",
+          "score": 0.954722,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0609813009",
+          "score": 0.876261,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0814594009",
+          "score": 0.853122,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0743908017",
+          "score": 0.767245,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0577935004",
+          "score": 0.75753,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0375585025",
+          "score": 0.75633,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0614634004",
+          "score": 0.728002,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0635896001",
+          "score": 0.710823,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0654410007",
+          "score": 0.698807,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0602010001",
+          "score": 0.692859,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0651424003",
+          "score": 0.683148,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0626257017",
+          "score": 0.667566,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0479095011",
+          "score": 0.653676,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0613371001",
+          "score": 0.629302,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0551045078",
+          "score": 0.586947,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0894762002",
+          "score": 0.572058,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0677589002",
+          "score": 0.571682,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        },
+        {
+          "product_id": "HM-0360950014",
+          "score": 0.554657,
+          "reason": "Popular across simulated catalog sessions (cold-start fallback)"
+        }
+      ]
+    }
+  ]
+}

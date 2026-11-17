@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import PersonalizedDemo from "@/components/PersonalizedDemo";
 import StoreHeader from "@/components/StoreHeader";
 import { useEffect, useRef, useState } from "react";
 
@@ -413,6 +414,8 @@ export default function ShopPage() {
             </div>
           </nav>
         )}
+
+        <PersonalizedDemo />
 
         {/* Demo Disclaimer */}
         <p className="mt-16 border-t border-[#e7e2dc] pt-6 text-xs leading-6 text-[#817a72]">
