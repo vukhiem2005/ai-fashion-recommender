@@ -1,0 +1,1297 @@
+{
+  "milestone": "Milestone 4 Phase 4A — Lightweight Visual Embedding Baseline",
+  "feature_representation": "148-dim handcrafted studio-garment visual descriptors (4-zone HSV/RGB color histograms + moments, foreground silhouette geometry, 3-zone Sobel gradient orientation histograms) + TruncatedSVD — NOT neural embeddings",
+  "experimental_dependencies": {
+    "Pillow": "11.3.0",
+    "install_mode": "--no-deps in backend/.venv"
+  },
+  "extraction_efficiency": {
+    "extraction_time_ms": 9807.04,
+    "peak_extraction_memory_kb": 25349.74,
+    "npz_file_size_bytes": 5217721,
+    "npz_sha256": "cfa7af1cabed44767f610b724c3d28683a079eae38c79a84327e0c06afba1ae6",
+    "manifest_sha256": "88a48403d11c5f412517f25236f28082624478603aef1aca1345325329489d10"
+  },
+  "image_audit_summary": {
+    "active_products_total": 328,
+    "active_products_with_valid_image": 327,
+    "active_products_missing_image_count": 1,
+    "active_products_missing_image_ids": [
+      "HM-0398947001"
+    ],
+    "product_image_coverage_ratio": 0.997,
+    "total_variants": 343,
+    "variants_with_valid_file": 341,
+    "variants_with_null_image_url": [
+      [
+        "ELAN-007-WHITE-S",
+        "ELAN-007"
+      ],
+      [
+        "HM-0398947001-BASE",
+        "HM-0398947001"
+      ]
+    ],
+    "variants_with_missing_file_on_disk": [],
+    "total_image_files_in_public_products": 335,
+    "distinct_referenced_image_files": 332,
+    "unreferenced_image_files_on_disk": [
+      "/products/ELAN-001-BGE-L-32f8dcec-62e6-4a91-a6b0-930bf1ccee3f.jpg",
+      "/products/ELAN-004-BLK-M-9aa8ecbc-f830-4e2a-b469-e3c5303b0be5.webp",
+      "/products/ELAN-004-BLK-S-e383c3f6-ed4f-4635-b1d2-e36b0679d5ff.webp"
+    ],
+    "multi_image_products": {
+      "ELAN-001": [
+        "/products/ELAN-001-BGE-L-fc3e0da5-eee3-4da2-950b-592176362a86.jpg",
+        "/products/classic-beige-blazer.jpg"
+      ],
+      "ELAN-004": [
+        "/products/ELAN-004-BLK-L-39bfd2e3-9f09-438e-b455-0efafcbad354.webp",
+        "/products/ELAN-004-BLK-M-933cf22f-5bdb-4fba-a168-b9e9e6fe4ec7.webp",
+        "/products/ELAN-004-BLK-S-b4be9f80-428d-4ea1-b360-8066e98fcd05.webp"
+      ],
+      "ELAN-007": [
+        "/products/ELAN-007-WHITE-L-451e8fdd-3d6f-4e21-8a02-842a0dd799cd.webp",
+        "/products/ELAN-007-WHITE-M-bc5c1d1c-67a0-4829-bd50-cf5116d55352.webp"
+      ],
+      "ELAN-TEST-001": [
+        "/products/ELAN-TEST-001-WHT-M-9b472ccd-d28f-495a-a690-d2d6a4b70298.jpg",
+        "/products/ELAN-TEST-001-WHT-S-7d891791-8438-4689-986e-7d8b366240f3.jpg"
+      ]
+    }
+  },
+  "evaluation_splits": {
+    "dev_18": {
+      "source_files": [
+        "v1_v2_candidate_union.csv",
+        "holdout_v1_v2_candidate_union.csv"
+      ],
+      "num_references": 18,
+      "num_judged_pairs": 130,
+      "purpose": "Hyperparameter selection (visual_dim, alpha_vis, w_vis, text_gate_threshold, same_category_gate)"
+    },
+    "holdout_18": {
+      "source_files": [
+        "holdout_v4_blind_labeled.csv"
+      ],
+      "num_references": 18,
+      "num_judged_pairs": 140,
+      "reference_overlap_with_dev_18": 0,
+      "purpose": "Historical holdout evaluation with locked hyperparameters (previously inspected in repository history; not claimed as a fresh blind test)"
+    }
+  },
+  "selected_hyperparameters": {
+    "image_only": {
+      "visual_dim": 148,
+      "dev_ndcg_at_5": 0.6731,
+      "dev_precision_at_5": 0.6111,
+      "dev_strict_precision_at_5": 0.1778
+    },
+    "early_fusion": {
+      "visual_dim": 32,
+      "alpha_vis": 0.05,
+      "dev_ndcg_at_5": 0.7781,
+      "dev_precision_at_5": 0.5889,
+      "dev_strict_precision_at_5": 0.2111
+    },
+    "late_fusion": {
+      "visual_dim": 148,
+      "w_vis": 0.5,
+      "text_gate_threshold": 0.15,
+      "require_same_category_for_visual": true,
+      "dev_ndcg_at_5": 0.8023,
+      "dev_precision_at_5": 0.6111,
+      "dev_strict_precision_at_5": 0.1889
+    }
+  },
+  "hyperparameter_search_summary": {
+    "image_only_candidates_evaluated": 4,
+    "image_only_grid": [
+      {
+        "visual_dim": 148,
+        "dev_ndcg_at_5": 0.6731,
+        "dev_precision_at_5": 0.6111,
+        "dev_strict_precision_at_5": 0.1778
+      },
+      {
+        "visual_dim": 64,
+        "dev_ndcg_at_5": 0.6655,
+        "dev_precision_at_5": 0.6,
+        "dev_strict_precision_at_5": 0.1778
+      },
+      {
+        "visual_dim": 48,
+        "dev_ndcg_at_5": 0.6571,
+        "dev_precision_at_5": 0.6222,
+        "dev_strict_precision_at_5": 0.1667
+      },
+      {
+        "visual_dim": 32,
+        "dev_ndcg_at_5": 0.6571,
+        "dev_precision_at_5": 0.6111,
+        "dev_strict_precision_at_5": 0.1667
+      }
+    ],
+    "early_fusion_candidates_evaluated": 24,
+    "early_fusion_top5_configs": [
+      {
+        "visual_dim": 32,
+        "alpha_vis": 0.05,
+        "dev_ndcg_at_5": 0.7781,
+        "dev_precision_at_5": 0.5889,
+        "dev_strict_precision_at_5": 0.2111
+      },
+      {
+        "visual_dim": 48,
+        "alpha_vis": 0.05,
+        "dev_ndcg_at_5": 0.7781,
+        "dev_precision_at_5": 0.5889,
+        "dev_strict_precision_at_5": 0.2111
+      },
+      {
+        "visual_dim": 64,
+        "alpha_vis": 0.05,
+        "dev_ndcg_at_5": 0.7781,
+        "dev_precision_at_5": 0.5889,
+        "dev_strict_precision_at_5": 0.2111
+      },
+      {
+        "visual_dim": 148,
+        "alpha_vis": 0.05,
+        "dev_ndcg_at_5": 0.7781,
+        "dev_precision_at_5": 0.5889,
+        "dev_strict_precision_at_5": 0.2111
+      },
+      {
+        "visual_dim": 64,
+        "alpha_vis": 0.3,
+        "dev_ndcg_at_5": 0.7641,
+        "dev_precision_at_5": 0.6222,
+        "dev_strict_precision_at_5": 0.1778
+      }
+    ],
+    "late_fusion_candidates_evaluated": 192,
+    "late_fusion_top5_configs": [
+      {
+        "visual_dim": 148,
+        "w_vis": 0.5,
+        "text_gate_threshold": 0.15,
+        "require_same_category_for_visual": true,
+        "dev_ndcg_at_5": 0.8023,
+        "dev_precision_at_5": 0.6111,
+        "dev_strict_precision_at_5": 0.1889
+      },
+      {
+        "visual_dim": 48,
+        "w_vis": 0.3,
+        "text_gate_threshold": 0.15,
+        "require_same_category_for_visual": true,
+        "dev_ndcg_at_5": 0.7998,
+        "dev_precision_at_5": 0.6,
+        "dev_strict_precision_at_5": 0.2
+      },
+      {
+        "visual_dim": 48,
+        "w_vis": 0.3,
+        "text_gate_threshold": 0.15,
+        "require_same_category_for_visual": false,
+        "dev_ndcg_at_5": 0.7986,
+        "dev_precision_at_5": 0.6111,
+        "dev_strict_precision_at_5": 0.2
+      },
+      {
+        "visual_dim": 32,
+        "w_vis": 0.15,
+        "text_gate_threshold": 0.15,
+        "require_same_category_for_visual": true,
+        "dev_ndcg_at_5": 0.7969,
+        "dev_precision_at_5": 0.5778,
+        "dev_strict_precision_at_5": 0.2111
+      },
+      {
+        "visual_dim": 32,
+        "w_vis": 0.3,
+        "text_gate_threshold": 0.15,
+        "require_same_category_for_visual": true,
+        "dev_ndcg_at_5": 0.7964,
+        "dev_precision_at_5": 0.5889,
+        "dev_strict_precision_at_5": 0.2
+      }
+    ]
+  },
+  "models": {
+    "v1_tfidf_exact": {
+      "description": "Exact V1 TF-IDF + Cosine Similarity baseline (full-precision sorting)",
+      "dev_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 130,
+        "precision_at_5": 0.5667,
+        "strict_precision_at_5": 0.2,
+        "ndcg_at_5": 0.7699
+      },
+      "holdout_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 140,
+        "precision_at_5": 0.6667,
+        "strict_precision_at_5": 0.2444,
+        "ndcg_at_5": 0.6967
+      },
+      "protocol_m2_catalog_diagnostics": {
+        "catalog_size": 328,
+        "unique_recommended_items_at_5": 317,
+        "catalog_coverage_at_5": 0.9665,
+        "same_category_at_5": 0.7665,
+        "mean_top5_overlap_with_v1": 1.0,
+        "dev18_unjudged_top5_slot_rate": 0.0,
+        "dev18_unjudged_slots": "0/90",
+        "holdout18_unjudged_top5_slot_rate": 0.0,
+        "holdout18_unjudged_slots": "0/90",
+        "total_inference_time_ms_328_queries": 102.49,
+        "mean_query_latency_ms": 0.3125
+      }
+    },
+    "image_only": {
+      "description": "Handcrafted visual cosine similarity (visual_dim=148) with V1 fallback for missing images",
+      "hyperparameters": {
+        "visual_dim": 148,
+        "dev_ndcg_at_5": 0.6731,
+        "dev_precision_at_5": 0.6111,
+        "dev_strict_precision_at_5": 0.1778
+      },
+      "dev_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 130,
+        "precision_at_5": 0.6111,
+        "strict_precision_at_5": 0.1778,
+        "ndcg_at_5": 0.6731
+      },
+      "holdout_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 140,
+        "precision_at_5": 0.7,
+        "strict_precision_at_5": 0.2333,
+        "ndcg_at_5": 0.6823
+      },
+      "protocol_m2_catalog_diagnostics": {
+        "catalog_size": 328,
+        "unique_recommended_items_at_5": 316,
+        "catalog_coverage_at_5": 0.9634,
+        "same_category_at_5": 0.2793,
+        "mean_top5_overlap_with_v1": 0.0848,
+        "dev18_unjudged_top5_slot_rate": 0.9222,
+        "dev18_unjudged_slots": "83/90",
+        "holdout18_unjudged_top5_slot_rate": 0.9,
+        "holdout18_unjudged_slots": "81/90",
+        "total_inference_time_ms_328_queries": 144.5,
+        "mean_query_latency_ms": 0.4406
+      }
+    },
+    "early_fusion": {
+      "description": "Feature-level L2-normalized concatenation (visual_dim=32, alpha_vis=0.05)",
+      "hyperparameters": {
+        "visual_dim": 32,
+        "alpha_vis": 0.05,
+        "dev_ndcg_at_5": 0.7781,
+        "dev_precision_at_5": 0.5889,
+        "dev_strict_precision_at_5": 0.2111
+      },
+      "dev_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 130,
+        "precision_at_5": 0.5889,
+        "strict_precision_at_5": 0.2111,
+        "ndcg_at_5": 0.7781
+      },
+      "holdout_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 140,
+        "precision_at_5": 0.7111,
+        "strict_precision_at_5": 0.2556,
+        "ndcg_at_5": 0.7338
+      },
+      "protocol_m2_catalog_diagnostics": {
+        "catalog_size": 328,
+        "unique_recommended_items_at_5": 315,
+        "catalog_coverage_at_5": 0.9604,
+        "same_category_at_5": 0.75,
+        "mean_top5_overlap_with_v1": 0.8433,
+        "dev18_unjudged_top5_slot_rate": 0.1,
+        "dev18_unjudged_slots": "9/90",
+        "holdout18_unjudged_top5_slot_rate": 0.1,
+        "holdout18_unjudged_slots": "9/90",
+        "total_inference_time_ms_328_queries": 108.91,
+        "mean_query_latency_ms": 0.332
+      }
+    },
+    "late_fusion": {
+      "description": "Modality-normalized non-attenuating gated score fusion (visual_dim=148, w_vis=0.5, tau=0.15, same_cat=True)",
+      "hyperparameters": {
+        "visual_dim": 148,
+        "w_vis": 0.5,
+        "text_gate_threshold": 0.15,
+        "require_same_category_for_visual": true,
+        "dev_ndcg_at_5": 0.8023,
+        "dev_precision_at_5": 0.6111,
+        "dev_strict_precision_at_5": 0.1889
+      },
+      "dev_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 130,
+        "precision_at_5": 0.6111,
+        "strict_precision_at_5": 0.1889,
+        "ndcg_at_5": 0.8023
+      },
+      "holdout_18_protocol_m1": {
+        "num_references": 18,
+        "num_judged_pairs": 140,
+        "precision_at_5": 0.7,
+        "strict_precision_at_5": 0.2444,
+        "ndcg_at_5": 0.7282
+      },
+      "protocol_m2_catalog_diagnostics": {
+        "catalog_size": 328,
+        "unique_recommended_items_at_5": 319,
+        "catalog_coverage_at_5": 0.9726,
+        "same_category_at_5": 0.8287,
+        "mean_top5_overlap_with_v1": 0.6713,
+        "dev18_unjudged_top5_slot_rate": 0.2,
+        "dev18_unjudged_slots": "18/90",
+        "holdout18_unjudged_top5_slot_rate": 0.2556,
+        "holdout18_unjudged_slots": "23/90",
+        "total_inference_time_ms_328_queries": 111.34,
+        "mean_query_latency_ms": 0.3394
+      }
+    }
+  },
+  "missing_image_diagnostics": {
+    "missing_image_product_id": "HM-0398947001",
+    "missing_image_product_name": "Astrid round sunglasses",
+    "missing_image_product_category": "Accessories",
+    "query_fallback_exact_v1_match": true,
+    "image_only_fallback_flag": true,
+    "late_fusion_fallback_flag": true,
+    "v1_top5_for_missing_query": [
+      {
+        "product_id": "HM-0639404002",
+        "score": 0.391656
+      },
+      {
+        "product_id": "HM-0573373001",
+        "score": 0.389518
+      },
+      {
+        "product_id": "HM-0360950014",
+        "score": 0.384166
+      },
+      {
+        "product_id": "HM-0798842002",
+        "score": 0.334978
+      },
+      {
+        "product_id": "HM-0292453013",
+        "score": 0.254538
+      }
+    ],
+    "candidate_behavior_on_HM_0292453013": {
+      "reference_id": "HM-0292453013",
+      "candidate_id": "HM-0398947001",
+      "v1_text_similarity": 0.254538,
+      "early_fusion_similarity": 0.254538,
+      "late_fusion_similarity": 0.254538,
+      "exact_text_preservation_when_candidate_missing_image": true
+    }
+  },
+  "notable_per_reference_changes": [
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0292453013",
+      "reference_name": "Flirty Chantal earring",
+      "reference_category": "Accessories",
+      "v1_ndcg_at_5": 0.6309,
+      "early_fusion_ndcg_at_5": 0.5,
+      "late_fusion_ndcg_at_5": 0.6309,
+      "image_only_ndcg_at_5": 0.5,
+      "delta_late_vs_v1": 0.0,
+      "delta_early_vs_v1": -0.1309,
+      "v1_top5_relevances": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "late_top5_relevances": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "early_top5_relevances": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0375585025",
+      "reference_name": "Sigge shorts",
+      "reference_category": "Bottoms",
+      "v1_ndcg_at_5": 0.7713,
+      "early_fusion_ndcg_at_5": 0.7653,
+      "late_fusion_ndcg_at_5": 0.7653,
+      "image_only_ndcg_at_5": 0.8726,
+      "delta_late_vs_v1": -0.006,
+      "delta_early_vs_v1": -0.006,
+      "v1_top5_relevances": [
+        2,
+        1,
+        2,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        2,
+        0,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0341242026",
+      "reference_name": "Dave waistcoat",
+      "reference_category": "Outerwear",
+      "v1_ndcg_at_5": 0.8348,
+      "early_fusion_ndcg_at_5": 0.9218,
+      "late_fusion_ndcg_at_5": 0.8348,
+      "image_only_ndcg_at_5": 0.6856,
+      "delta_late_vs_v1": 0.0,
+      "delta_early_vs_v1": 0.087,
+      "v1_top5_relevances": [
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0635240006",
+      "reference_name": "Gracie Cross Bag",
+      "reference_category": "Accessories",
+      "v1_ndcg_at_5": 0.8402,
+      "early_fusion_ndcg_at_5": 0.8402,
+      "late_fusion_ndcg_at_5": 0.926,
+      "image_only_ndcg_at_5": 0.9475,
+      "delta_late_vs_v1": 0.0858,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        2,
+        2,
+        0,
+        0,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      "early_top5_relevances": [
+        2,
+        2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0695166001",
+      "reference_name": "Edith 2p headband",
+      "reference_category": "Accessories",
+      "v1_ndcg_at_5": 0.7699,
+      "early_fusion_ndcg_at_5": 0.7522,
+      "late_fusion_ndcg_at_5": 0.7699,
+      "image_only_ndcg_at_5": 0.7699,
+      "delta_late_vs_v1": 0.0,
+      "delta_early_vs_v1": -0.0177,
+      "v1_top5_relevances": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "late_top5_relevances": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "early_top5_relevances": [
+        1,
+        1,
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0558981004",
+      "reference_name": "Gilda",
+      "reference_category": "Bottoms",
+      "v1_ndcg_at_5": 0.8904,
+      "early_fusion_ndcg_at_5": 0.9056,
+      "late_fusion_ndcg_at_5": 0.9056,
+      "image_only_ndcg_at_5": 0.9904,
+      "delta_late_vs_v1": 0.0152,
+      "delta_early_vs_v1": 0.0152,
+      "v1_top5_relevances": [
+        2,
+        1,
+        0,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0571598018",
+      "reference_name": "NILS basic shorts SB",
+      "reference_category": "Bottoms",
+      "v1_ndcg_at_5": 0.8569,
+      "early_fusion_ndcg_at_5": 0.8569,
+      "late_fusion_ndcg_at_5": 0.7364,
+      "image_only_ndcg_at_5": 0.6219,
+      "delta_late_vs_v1": -0.1205,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        2,
+        0,
+        2,
+        2,
+        1
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        0,
+        2,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        0,
+        2,
+        2,
+        1
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0636140003",
+      "reference_name": "Katja knot dress",
+      "reference_category": "Dresses",
+      "v1_ndcg_at_5": 0.5585,
+      "early_fusion_ndcg_at_5": 0.5856,
+      "late_fusion_ndcg_at_5": 0.8048,
+      "image_only_ndcg_at_5": 1.0,
+      "delta_late_vs_v1": 0.2463,
+      "delta_early_vs_v1": 0.0271,
+      "v1_top5_relevances": [
+        1,
+        0,
+        0,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "early_top5_relevances": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0666354005",
+      "reference_name": "Christie Dress",
+      "reference_category": "Dresses",
+      "v1_ndcg_at_5": 0.4026,
+      "early_fusion_ndcg_at_5": 0.5559,
+      "late_fusion_ndcg_at_5": 0.7163,
+      "image_only_ndcg_at_5": 0.6259,
+      "delta_late_vs_v1": 0.3137,
+      "delta_early_vs_v1": 0.1533,
+      "v1_top5_relevances": [
+        1,
+        0,
+        2,
+        0,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        0,
+        1,
+        1
+      ],
+      "early_top5_relevances": [
+        1,
+        0,
+        0,
+        2,
+        2
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0378447043",
+      "reference_name": "V-Neck Milan TVP",
+      "reference_category": "Knitwear",
+      "v1_ndcg_at_5": 0.8955,
+      "early_fusion_ndcg_at_5": 0.8885,
+      "late_fusion_ndcg_at_5": 0.7696,
+      "image_only_ndcg_at_5": 0.7361,
+      "delta_late_vs_v1": -0.1259,
+      "delta_early_vs_v1": -0.007,
+      "v1_top5_relevances": [
+        2,
+        1,
+        2,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        1,
+        2,
+        2,
+        0,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        2,
+        0,
+        1
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0751320001",
+      "reference_name": "ELVIRA jacket",
+      "reference_category": "Outerwear",
+      "v1_ndcg_at_5": 0.4226,
+      "early_fusion_ndcg_at_5": 0.4491,
+      "late_fusion_ndcg_at_5": 0.5414,
+      "image_only_ndcg_at_5": 0.2803,
+      "delta_late_vs_v1": 0.1188,
+      "delta_early_vs_v1": 0.0265,
+      "v1_top5_relevances": [
+        0,
+        0,
+        1,
+        1,
+        2
+      ],
+      "late_top5_relevances": [
+        1,
+        0,
+        0,
+        2,
+        1
+      ],
+      "early_top5_relevances": [
+        0,
+        1,
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0701574005",
+      "reference_name": "Nat ls linnen mix solid",
+      "reference_category": "Tops",
+      "v1_ndcg_at_5": 1.0,
+      "early_fusion_ndcg_at_5": 1.0,
+      "late_fusion_ndcg_at_5": 0.8286,
+      "image_only_ndcg_at_5": 0.7712,
+      "delta_late_vs_v1": -0.1714,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        2,
+        1,
+        1,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        1,
+        2,
+        1,
+        0,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "split": "Dev-18",
+      "reference_id": "HM-0532928001",
+      "reference_name": "Vanessa",
+      "reference_category": "Tops",
+      "v1_ndcg_at_5": 0.6241,
+      "early_fusion_ndcg_at_5": 0.6241,
+      "late_fusion_ndcg_at_5": 0.8503,
+      "image_only_ndcg_at_5": 0.8503,
+      "delta_late_vs_v1": 0.2262,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "late_top5_relevances": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "early_top5_relevances": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0680396001",
+      "reference_name": "Zitta Scarf",
+      "reference_category": "Accessories",
+      "v1_ndcg_at_5": 0.7808,
+      "early_fusion_ndcg_at_5": 0.8382,
+      "late_fusion_ndcg_at_5": 0.9904,
+      "image_only_ndcg_at_5": 0.8521,
+      "delta_late_vs_v1": 0.2096,
+      "delta_early_vs_v1": 0.0574,
+      "v1_top5_relevances": [
+        1,
+        1,
+        2,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        1,
+        0,
+        1
+      ],
+      "early_top5_relevances": [
+        1,
+        2,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0574428009",
+      "reference_name": "Sivert 5-pocket",
+      "reference_category": "Bottoms",
+      "v1_ndcg_at_5": 0.5847,
+      "early_fusion_ndcg_at_5": 0.7715,
+      "late_fusion_ndcg_at_5": 0.7869,
+      "image_only_ndcg_at_5": 0.6086,
+      "delta_late_vs_v1": 0.2022,
+      "delta_early_vs_v1": 0.1868,
+      "v1_top5_relevances": [
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        0,
+        2,
+        0,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        0,
+        0,
+        2
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0567805003",
+      "reference_name": "Freddie Linen",
+      "reference_category": "Bottoms",
+      "v1_ndcg_at_5": 0.6716,
+      "early_fusion_ndcg_at_5": 0.7638,
+      "late_fusion_ndcg_at_5": 0.7727,
+      "image_only_ndcg_at_5": 0.7727,
+      "delta_late_vs_v1": 0.1011,
+      "delta_early_vs_v1": 0.0922,
+      "v1_top5_relevances": [
+        1,
+        2,
+        0,
+        1,
+        0
+      ],
+      "late_top5_relevances": [
+        1,
+        2,
+        1,
+        1,
+        0
+      ],
+      "early_top5_relevances": [
+        1,
+        2,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0633535001",
+      "reference_name": "AG Sorrel",
+      "reference_category": "Dresses",
+      "v1_ndcg_at_5": 1.0,
+      "early_fusion_ndcg_at_5": 1.0,
+      "late_fusion_ndcg_at_5": 0.9578,
+      "image_only_ndcg_at_5": 0.7604,
+      "delta_late_vs_v1": -0.0422,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        2,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0611924001",
+      "reference_name": "Holly off shoulder dress",
+      "reference_category": "Dresses",
+      "v1_ndcg_at_5": 0.738,
+      "early_fusion_ndcg_at_5": 0.738,
+      "late_fusion_ndcg_at_5": 0.9578,
+      "image_only_ndcg_at_5": 0.9578,
+      "delta_late_vs_v1": 0.2198,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        1,
+        1,
+        1,
+        2,
+        2
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        2,
+        1,
+        1
+      ],
+      "early_top5_relevances": [
+        1,
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0627725003",
+      "reference_name": "BILLIE set",
+      "reference_category": "Dresses",
+      "v1_ndcg_at_5": 1.0,
+      "early_fusion_ndcg_at_5": 1.0,
+      "late_fusion_ndcg_at_5": 0.7979,
+      "image_only_ndcg_at_5": 0.7699,
+      "delta_late_vs_v1": -0.2021,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ],
+      "late_top5_relevances": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0542917001",
+      "reference_name": "Tage Sweater",
+      "reference_category": "Knitwear",
+      "v1_ndcg_at_5": 0.7744,
+      "early_fusion_ndcg_at_5": 0.7744,
+      "late_fusion_ndcg_at_5": 0.9131,
+      "image_only_ndcg_at_5": 0.7936,
+      "delta_late_vs_v1": 0.1387,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        1,
+        1,
+        2,
+        2,
+        2
+      ],
+      "late_top5_relevances": [
+        2,
+        1,
+        1,
+        2,
+        2
+      ],
+      "early_top5_relevances": [
+        1,
+        1,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0825924001",
+      "reference_name": "Erika 2 pack",
+      "reference_category": "Knitwear",
+      "v1_ndcg_at_5": 0.6508,
+      "early_fusion_ndcg_at_5": 0.9469,
+      "late_fusion_ndcg_at_5": 1.0,
+      "image_only_ndcg_at_5": 1.0,
+      "delta_late_vs_v1": 0.3492,
+      "delta_early_vs_v1": 0.2961,
+      "v1_top5_relevances": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "late_top5_relevances": [
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "early_top5_relevances": [
+        1,
+        1,
+        0,
+        0,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0553092017",
+      "reference_name": "Hunter Super Skinny",
+      "reference_category": "Outerwear",
+      "v1_ndcg_at_5": 0.7116,
+      "early_fusion_ndcg_at_5": 0.7116,
+      "late_fusion_ndcg_at_5": 0.6464,
+      "image_only_ndcg_at_5": 0.4788,
+      "delta_late_vs_v1": -0.0652,
+      "delta_early_vs_v1": 0.0,
+      "v1_top5_relevances": [
+        2,
+        1,
+        2,
+        0,
+        0
+      ],
+      "late_top5_relevances": [
+        2,
+        0,
+        1,
+        0,
+        2
+      ],
+      "early_top5_relevances": [
+        2,
+        1,
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0513373021",
+      "reference_name": "Hepburn top",
+      "reference_category": "Outerwear",
+      "v1_ndcg_at_5": 0.9307,
+      "early_fusion_ndcg_at_5": 1.0,
+      "late_fusion_ndcg_at_5": 0.9377,
+      "image_only_ndcg_at_5": 1.0,
+      "delta_late_vs_v1": 0.007,
+      "delta_early_vs_v1": 0.0693,
+      "v1_top5_relevances": [
+        2,
+        2,
+        1,
+        0,
+        1
+      ],
+      "late_top5_relevances": [
+        2,
+        2,
+        1,
+        1,
+        0
+      ],
+      "early_top5_relevances": [
+        2,
+        2,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0699070010",
+      "reference_name": "Price tank / Filippa",
+      "reference_category": "Outerwear",
+      "v1_ndcg_at_5": 0.7979,
+      "early_fusion_ndcg_at_5": 0.7699,
+      "late_fusion_ndcg_at_5": 0.7699,
+      "image_only_ndcg_at_5": 0.7699,
+      "delta_late_vs_v1": -0.028,
+      "delta_early_vs_v1": -0.028,
+      "v1_top5_relevances": [
+        1,
+        1,
+        2,
+        1,
+        1
+      ],
+      "late_top5_relevances": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "early_top5_relevances": [
+        1,
+        1,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0672957001",
+      "reference_name": "MC Charlie",
+      "reference_category": "Tops",
+      "v1_ndcg_at_5": 0.6729,
+      "early_fusion_ndcg_at_5": 0.6365,
+      "late_fusion_ndcg_at_5": 0.5342,
+      "image_only_ndcg_at_5": 0.533,
+      "delta_late_vs_v1": -0.1387,
+      "delta_early_vs_v1": -0.0364,
+      "v1_top5_relevances": [
+        1,
+        0,
+        2,
+        2,
+        1
+      ],
+      "late_top5_relevances": [
+        1,
+        0,
+        2,
+        1,
+        1
+      ],
+      "early_top5_relevances": [
+        1,
+        0,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0708464002",
+      "reference_name": "STORK FANCY",
+      "reference_category": "Tops",
+      "v1_ndcg_at_5": 0.2381,
+      "early_fusion_ndcg_at_5": 0.2576,
+      "late_fusion_ndcg_at_5": 0.1942,
+      "image_only_ndcg_at_5": 0.601,
+      "delta_late_vs_v1": -0.0439,
+      "delta_early_vs_v1": 0.0195,
+      "v1_top5_relevances": [
+        1,
+        0,
+        0,
+        0,
+        1
+      ],
+      "late_top5_relevances": [
+        0,
+        1,
+        1,
+        0,
+        0
+      ],
+      "early_top5_relevances": [
+        1,
+        0,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "split": "Holdout-18",
+      "reference_id": "HM-0614634004",
+      "reference_name": "Babe tee",
+      "reference_category": "Tops",
+      "v1_ndcg_at_5": 0.9891,
+      "early_fusion_ndcg_at_5": 1.0,
+      "late_fusion_ndcg_at_5": 0.8481,
+      "image_only_ndcg_at_5": 0.7522,
+      "delta_late_vs_v1": -0.141,
+      "delta_early_vs_v1": 0.0109,
+      "v1_top5_relevances": [
+        2,
+        2,
+        2,
+        1,
+        2
+      ],
+      "late_top5_relevances": [
+        1,
+        2,
+        2,
+        2,
+        2
+      ],
+      "early_top5_relevances": [
+        2,
+        2,
+        2,
+        2,
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4330 @@
+{
+  "milestone": "Milestone 4 Phase 4A — Lightweight Visual Embedding Cache",
+  "feature_type": "HANDCRAFTED_STUDIO_VISUAL_DESCRIPTORS_NOT_NEURAL",
+  "seed": 20260501,
+  "standard_image_size": [
+    128,
+    128
+  ],
+  "raw_visual_feature_dim": 148,
+  "available_visual_dimensions": [
+    32,
+    48,
+    64,
+    148
+  ],
+  "text_tfidf_feature_dim": 4761,
+  "npz_file_size_bytes": 5217721,
+  "npz_sha256": "cfa7af1cabed44767f610b724c3d28683a079eae38c79a84327e0c06afba1ae6",
+  "image_audit_summary": {
+    "active_products_total": 328,
+    "active_products_with_valid_image": 327,
+    "active_products_missing_image_count": 1,
+    "active_products_missing_image_ids": [
+      "HM-0398947001"
+    ],
+    "product_image_coverage_ratio": 0.997,
+    "total_variants": 343,
+    "variants_with_valid_file": 341,
+    "variants_with_null_image_url": [
+      [
+        "ELAN-007-WHITE-S",
+        "ELAN-007"
+      ],
+      [
+        "HM-0398947001-BASE",
+        "HM-0398947001"
+      ]
+    ],
+    "variants_with_missing_file_on_disk": [],
+    "total_image_files_in_public_products": 335,
+    "distinct_referenced_image_files": 332,
+    "unreferenced_image_files_on_disk": [
+      "/products/ELAN-001-BGE-L-32f8dcec-62e6-4a91-a6b0-930bf1ccee3f.jpg",
+      "/products/ELAN-004-BLK-M-9aa8ecbc-f830-4e2a-b469-e3c5303b0be5.webp",
+      "/products/ELAN-004-BLK-S-e383c3f6-ed4f-4635-b1d2-e36b0679d5ff.webp"
+    ],
+    "multi_image_products": {
+      "ELAN-001": [
+        "/products/ELAN-001-BGE-L-fc3e0da5-eee3-4da2-950b-592176362a86.jpg",
+        "/products/classic-beige-blazer.jpg"
+      ],
+      "ELAN-004": [
+        "/products/ELAN-004-BLK-L-39bfd2e3-9f09-438e-b455-0efafcbad354.webp",
+        "/products/ELAN-004-BLK-M-933cf22f-5bdb-4fba-a168-b9e9e6fe4ec7.webp",
+        "/products/ELAN-004-BLK-S-b4be9f80-428d-4ea1-b360-8066e98fcd05.webp"
+      ],
+      "ELAN-007": [
+        "/products/ELAN-007-WHITE-L-451e8fdd-3d6f-4e21-8a02-842a0dd799cd.webp",
+        "/products/ELAN-007-WHITE-M-bc5c1d1c-67a0-4829-bd50-cf5116d55352.webp"
+      ],
+      "ELAN-TEST-001": [
+        "/products/ELAN-TEST-001-WHT-M-9b472ccd-d28f-495a-a690-d2d6a4b70298.jpg",
+        "/products/ELAN-TEST-001-WHT-S-7d891791-8438-4689-986e-7d8b366240f3.jpg"
+      ]
+    }
+  },
+  "product_image_manifest": [
+    {
+      "product_id": "ELAN-001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-001-BGE-L-fc3e0da5-eee3-4da2-950b-592176362a86.jpg",
+      "variant_image_count": 2,
+      "image_format": "JPEG",
+      "image_size": [
+        1500,
+        2000
+      ],
+      "image_sha256": "30c25282439ec225f172f0b04b6eb905d4f5308c4c4eb58cf46a2ce37ae04fad"
+    },
+    {
+      "product_id": "ELAN-002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/essential-white-shirt.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1400,
+        1867
+      ],
+      "image_sha256": "4fd2323d6bf94b4d4b5ceaa0ff201d403f7cb7fb517acfde0f86f58a2c02bac6"
+    },
+    {
+      "product_id": "ELAN-003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-003-BLU-L-ae7b2291-001e-4733-bf1d-ebb31e5a8c27.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        148,
+        148
+      ],
+      "image_sha256": "be639738a44857e44e8713fab7d10295aacb9aef1454059e54a7c3e02da429d0"
+    },
+    {
+      "product_id": "ELAN-004",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-004-BLK-L-39bfd2e3-9f09-438e-b455-0efafcbad354.webp",
+      "variant_image_count": 3,
+      "image_format": "WEBP",
+      "image_size": [
+        249,
+        320
+      ],
+      "image_sha256": "d1c3666ec90a54cb0781e2869512924d59fc4a94df33389afb2b646da16f6597"
+    },
+    {
+      "product_id": "ELAN-005",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-005-CRM-L-a62701d3-876e-4ef0-83b6-af5258a49651.webp",
+      "variant_image_count": 1,
+      "image_format": "WEBP",
+      "image_size": [
+        249,
+        320
+      ],
+      "image_sha256": "d1c3666ec90a54cb0781e2869512924d59fc4a94df33389afb2b646da16f6597"
+    },
+    {
+      "product_id": "ELAN-006",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-006-BLK-ONE-SIZE-3dd571e4-5339-4429-b3cc-a3bdd6264719.webp",
+      "variant_image_count": 1,
+      "image_format": "WEBP",
+      "image_size": [
+        375,
+        500
+      ],
+      "image_sha256": "323c345b7b49d8501885ba1e93e5ac83a8a633f70863b54e06dfeb0a08db68d8"
+    },
+    {
+      "product_id": "ELAN-007",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-007-WHITE-L-451e8fdd-3d6f-4e21-8a02-842a0dd799cd.webp",
+      "variant_image_count": 2,
+      "image_format": "WEBP",
+      "image_size": [
+        225,
+        298
+      ],
+      "image_sha256": "c4ee64bcbe6eafd10196d7f81a6c6ace65df538b40b6388a099951029b10305d"
+    },
+    {
+      "product_id": "ELAN-TEST-001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/ELAN-TEST-001-WHT-M-9b472ccd-d28f-495a-a690-d2d6a4b70298.jpg",
+      "variant_image_count": 2,
+      "image_format": "JPEG",
+      "image_size": [
+        447,
+        447
+      ],
+      "image_sha256": "4dac602699e0a6d7a23e9dd8a52e30eaab257d132883a8e832bcf73f7c6c6fd1"
+    },
+    {
+      "product_id": "HM-0225286014",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0225286014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1412,
+        1750
+      ],
+      "image_sha256": "d7639d63b4b1276dbd8ad39205782aa906418c772cf07e0412c8490665aa30fe"
+    },
+    {
+      "product_id": "HM-0272591023",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0272591023.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        518,
+        1750
+      ],
+      "image_sha256": "f4d007c72287835c6fa3aace4f61016d470e80913370bec50ac79c361dc5dad5"
+    },
+    {
+      "product_id": "HM-0272591028",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0272591028.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b3d516028984f1aae1d8a8c0997ec5f3c925bdc1e1431f7ed7ed63c75f747006"
+    },
+    {
+      "product_id": "HM-0276242022",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0276242022.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2a673452e1fb6d785eaa115f579e138e6c0f376646b9a4859f9c56a9bd857068"
+    },
+    {
+      "product_id": "HM-0292453013",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0292453013.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1827,
+        1749
+      ],
+      "image_sha256": "3aa77bebb254534877295cee6bf75d07f1b127626e16941963f9b8ad0f67b7bb"
+    },
+    {
+      "product_id": "HM-0296366031",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0296366031.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b274a03a324e86b37af2c75186ee63c4941d429181c87c3232cc3b6dccd97690"
+    },
+    {
+      "product_id": "HM-0315509033",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0315509033.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1048,
+        1750
+      ],
+      "image_sha256": "fcc1ebf3758dfd8c8250b078065f195300df5fff02b68032663076ba4faea303"
+    },
+    {
+      "product_id": "HM-0341242026",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0341242026.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6a7a30066d25a16727f909320250e63eb07e0a201ce9b2dd12d12ff66453bce2"
+    },
+    {
+      "product_id": "HM-0347182012",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0347182012.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "0229fb776e8da28d11a78c69133284830332c4c8c0c220851f4539fde557a3b5"
+    },
+    {
+      "product_id": "HM-0348330039",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0348330039.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "333c01d3c3b461b048ed3ef0ae8969b297f8656095d59e4fcbf217bfb9f4f53a"
+    },
+    {
+      "product_id": "HM-0355072031",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0355072031.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        909,
+        1750
+      ],
+      "image_sha256": "c8603dcb420b6198f497abc73aa8a8d8ea544397923851382d23b2ae63713d7f"
+    },
+    {
+      "product_id": "HM-0360950014",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0360950014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "8b313b8d203e8393ab9b2ded2282c6f2cad52385044e2dc1040e8b078c9d2ba6"
+    },
+    {
+      "product_id": "HM-0361401005",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0361401005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1669,
+        1750
+      ],
+      "image_sha256": "3c9e20cc4920c95bb19fc60ec81affcea081874ef6ef6487a3921574cadc956b"
+    },
+    {
+      "product_id": "HM-0375585025",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0375585025.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "4b9ecf4f2e3a446b8665ffa87651a4a9ccf86b0e7ee06301979adf6ee0186210"
+    },
+    {
+      "product_id": "HM-0378447043",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0378447043.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "acdcc250acb2acd179dd2f90f96ff2b67558ed93094453f6df45a327c760e96c"
+    },
+    {
+      "product_id": "HM-0379360043",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0379360043.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a07e0abdeef0cb9d1df5b9b61c128261b10cdae60a46a04abb3e3abe1e83485f"
+    },
+    {
+      "product_id": "HM-0379780043",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0379780043.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5b73292c6296d6bf6851e3b86432c90ea468bb55622634ecd3753933a26b59eb"
+    },
+    {
+      "product_id": "HM-0384482010",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0384482010.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "04767cd37d5186564b1da4604851e03302725b2da4785af2cef3e7c2177a55e8"
+    },
+    {
+      "product_id": "HM-0393447013",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0393447013.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1146,
+        1750
+      ],
+      "image_sha256": "7c4b96a1d479da59fce3b45c400884ffb1c22277fb919c796ffbc22a44be083d"
+    },
+    {
+      "product_id": "HM-0398947001",
+      "category": "Accessories",
+      "has_valid_image": false,
+      "primary_image_url": null,
+      "variant_image_count": 0,
+      "image_format": null,
+      "image_size": null,
+      "image_sha256": null
+    },
+    {
+      "product_id": "HM-0408875013",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0408875013.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1497,
+        1750
+      ],
+      "image_sha256": "7e37dcc3de9cc915be0e793d1f024ecc9cec55aca04a07b0dfc96de900874e56"
+    },
+    {
+      "product_id": "HM-0412664001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0412664001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "03f7743f3210a036fefe3b0c9e7dd3406c7c6e079afc57c5528469800b31df56"
+    },
+    {
+      "product_id": "HM-0433444006",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0433444006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1073,
+        1750
+      ],
+      "image_sha256": "6f520426f756395b8ac0a38cac4f37f14f1389146526c9bc418f51cb5842ceb4"
+    },
+    {
+      "product_id": "HM-0436570025",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0436570025.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3dfb1dba02aa590196e82625680b6b6384cabb1ca80070609c26e2ba20b06181"
+    },
+    {
+      "product_id": "HM-0442992006",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0442992006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b36e62613c673b1bfe7ba60be4674bfdfc2a0599e8617df5fab493d1f89f7e2d"
+    },
+    {
+      "product_id": "HM-0446224002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0446224002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "eea45fcb981332a5824b450b1664ccffa73c93c9b31a61e409ab4da292d27980"
+    },
+    {
+      "product_id": "HM-0447692025",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0447692025.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1319,
+        1750
+      ],
+      "image_sha256": "e9448f564cdf0a7aed829b28c2c4d035fe3536bd648ee110ed66231220eeba7a"
+    },
+    {
+      "product_id": "HM-0449570053",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0449570053.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "f73c7d479d9d6b374ad0304b60596171131a8416692578d5fb3bfb8fdb5f90a5"
+    },
+    {
+      "product_id": "HM-0452717001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0452717001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1075,
+        1750
+      ],
+      "image_sha256": "b87f83fc21043ce96f5d85e31247ec8ffd4faefdc602a332edb8c0265f2b04a0"
+    },
+    {
+      "product_id": "HM-0456245004",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0456245004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1301,
+        1750
+      ],
+      "image_sha256": "e6b7b24e546156745ae3d02596d062231feedbb8b76c11a677cfdd4e541ad77b"
+    },
+    {
+      "product_id": "HM-0457039006",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0457039006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "30cdc060b298022c66d980a50b768f068491285287fbcfa6ec2e5ccb85a276eb"
+    },
+    {
+      "product_id": "HM-0458239001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0458239001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "23aaeba62197c221b27664b9bff2b18d83a4f41273841248e0a8ed6f1a3a9c7d"
+    },
+    {
+      "product_id": "HM-0467738003",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0467738003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9866c0a1dad7b28f4677a481c17b55dbda510cf3af0104db0b42981ff3b5cf3f"
+    },
+    {
+      "product_id": "HM-0479095011",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0479095011.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "0b3e108a0ef1ce15c9c098842ca5a78827ae85a5a8e344b23da9026023faa8fa"
+    },
+    {
+      "product_id": "HM-0484767008",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0484767008.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        784,
+        1750
+      ],
+      "image_sha256": "5e120022f7c0ead525c3976f790e4dc344712d03dafc29574ddb0482bc44a0d1"
+    },
+    {
+      "product_id": "HM-0485414005",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0485414005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        3433,
+        1750
+      ],
+      "image_sha256": "ba68fcbebd05abbe5ecc8e22c2eeb3043f8403020ef7e6d4726cf2d0f839c814"
+    },
+    {
+      "product_id": "HM-0491912014",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0491912014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "f62097b2aae1c4a042518db98c5ab218b697b4c298bb6a2cb8715e41cbd6f738"
+    },
+    {
+      "product_id": "HM-0495560002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0495560002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d6bfd318136d74ac8f695000821aaf90b9e571fdd5fc015ca422cd63ac800d5d"
+    },
+    {
+      "product_id": "HM-0496111015",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0496111015.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1409,
+        1750
+      ],
+      "image_sha256": "f06003cc45b4c67a925a69032cf2bf9614f200df023fa74c56f282536db2d3c2"
+    },
+    {
+      "product_id": "HM-0501117006",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0501117006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        788,
+        1750
+      ],
+      "image_sha256": "06982ca731d6fa90bb2454ebfd99ec30d202984327119bc4326bfcdf64edcb35"
+    },
+    {
+      "product_id": "HM-0501620026",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0501620026.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b3347f6835b4072207778fa60bb357f7728340521026422971b77ddc7fb6f226"
+    },
+    {
+      "product_id": "HM-0502718001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0502718001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1137,
+        1750
+      ],
+      "image_sha256": "3b998bac82c9043c18dcc0be8e68f4f296a57d80d763a6ff6d3214e3204869a0"
+    },
+    {
+      "product_id": "HM-0503679002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0503679002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1358,
+        1750
+      ],
+      "image_sha256": "fadcb91018106219e404e133fb23b279aa53bb6ab3cc633d8c352f2525945a2b"
+    },
+    {
+      "product_id": "HM-0504658004",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0504658004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2cabfd1073ff791d69d3c931dc6f4fa99445f3d4903f869ee0c9bec8156b52e9"
+    },
+    {
+      "product_id": "HM-0505224014",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0505224014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5e4557fb21b8d4e0c13470d889c7fd52abc2655d4d574f31435a9f1362ea6bb9"
+    },
+    {
+      "product_id": "HM-0506993012",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0506993012.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d730991e2d5be038004ed9723ae8b4b38aed2871181c533fa154f0903db713d3"
+    },
+    {
+      "product_id": "HM-0508931020",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0508931020.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1677,
+        1749
+      ],
+      "image_sha256": "13883a688ea763658549a6cd95e8835e6aab8438cd04a5d8926bf09be56d33fe"
+    },
+    {
+      "product_id": "HM-0508932031",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0508932031.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6f793006f0a924c6ede2cb301d16bd5a6c03949eee108158cca7f1a44926f5a4"
+    },
+    {
+      "product_id": "HM-0510210003",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0510210003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1211,
+        1750
+      ],
+      "image_sha256": "33c6bc8b332e70e037c5eb4b54a82d2c37cf6be72b5272457f2b5e5d4f338031"
+    },
+    {
+      "product_id": "HM-0511296001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0511296001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        649,
+        1750
+      ],
+      "image_sha256": "c5910e6ef929ed5dbacfc65c4edc18b94e4bf6593e182d757d8a8a2483da958f"
+    },
+    {
+      "product_id": "HM-0512725001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0512725001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1362,
+        1750
+      ],
+      "image_sha256": "6bea8fd3f58dcea70cd1e57ec1ea67e20c60c18654e50ce054cd04197317e0c2"
+    },
+    {
+      "product_id": "HM-0512743006",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0512743006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6c944eaff13984982902473406bcea46ec6ae0965112ce6f2610a165c6032e2a"
+    },
+    {
+      "product_id": "HM-0513373021",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0513373021.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "65ef33bac918871af4f7c93d0db38f642d9b5ffeebecbb07a622fb670afe9966"
+    },
+    {
+      "product_id": "HM-0513733001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0513733001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1146,
+        1750
+      ],
+      "image_sha256": "15028e892db9243ae7726def7eb4f08ef0c34ac387e6ae648d39f385bc0bedf4"
+    },
+    {
+      "product_id": "HM-0514869001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0514869001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1066,
+        1750
+      ],
+      "image_sha256": "f1334ba384a6947ac9be29a7d9f66d57e3049d74cfb56828f51b4728a5ff0fa8"
+    },
+    {
+      "product_id": "HM-0516000087",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0516000087.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d2bcc45f0b9f6921db2878bcf6293746057bdb0a724c249a9e7d2a43adf9633e"
+    },
+    {
+      "product_id": "HM-0516806002",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0516806002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        963,
+        1750
+      ],
+      "image_sha256": "8a821919c4ead88a3cb660e51b7a0a338db7c2b5e09fedebc296ccde45ff67ec"
+    },
+    {
+      "product_id": "HM-0516900007",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0516900007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6d713cdc819ceb22e1c8457702d68bd75271acac0c552b85d50a158e7f7665b5"
+    },
+    {
+      "product_id": "HM-0516903025",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0516903025.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9959527266a9629ac1cc2cabfe5cae8a445a66ffd33fca8e6e0d98d66d9719de"
+    },
+    {
+      "product_id": "HM-0518754001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0518754001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        2220,
+        1750
+      ],
+      "image_sha256": "7f842958181c33056e5cc90fb3726bbe31713f4bd6e3edad74a22756f09b7f78"
+    },
+    {
+      "product_id": "HM-0519583033",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0519583033.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a383cd0509b16cc025452f8a312edc4e3a41910c3a62469bc0ed01da65365478"
+    },
+    {
+      "product_id": "HM-0528188004",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0528188004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1163,
+        1750
+      ],
+      "image_sha256": "c0b63250546ecf75fc19b29d38b0ef9684d42dd00dd24eb7f7da876db3dece94"
+    },
+    {
+      "product_id": "HM-0528790001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0528790001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        889,
+        1750
+      ],
+      "image_sha256": "0c62212f901e5fa53bbdc7128e74f5abb50e61571964ce95aadcf728e85a3476"
+    },
+    {
+      "product_id": "HM-0529861001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0529861001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1437,
+        1750
+      ],
+      "image_sha256": "4971fe743d883e5adceba378a4ee8b5dbfe7bceb008c4a4ae9ccca1d1d12cab9"
+    },
+    {
+      "product_id": "HM-0532578028",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0532578028.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ae91bd74148464fceb5ba40f38a3263e059580c652eba69554938e83def65193"
+    },
+    {
+      "product_id": "HM-0532928001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0532928001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1212,
+        1750
+      ],
+      "image_sha256": "71602014749095069f462216b19cafef76e66930b0921edd96b31c920c00024f"
+    },
+    {
+      "product_id": "HM-0533294014",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0533294014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "cd43e416c1db1ab8ae52670a1e592f69e83d496129260bc43aa0e915d2e90b27"
+    },
+    {
+      "product_id": "HM-0533404046",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0533404046.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ca22914372671b0f7d02c8b95369dcef76ccf5fb47dba72e9e157f722d6e599a"
+    },
+    {
+      "product_id": "HM-0537042002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0537042002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1373,
+        1750
+      ],
+      "image_sha256": "41a2ae0b6b9975b3309235a2a50441672279c0d6c7b33d1bddd9af3b1fb59ccf"
+    },
+    {
+      "product_id": "HM-0537920001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0537920001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1431,
+        1750
+      ],
+      "image_sha256": "9820ccfbb9add501611ddd390988cab59cb4ccacdc489374f81d9b7f9a7a3464"
+    },
+    {
+      "product_id": "HM-0542708009",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0542708009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1226,
+        1750
+      ],
+      "image_sha256": "8f382ab30e9948a3fdb9e85804928448ec286aed573920b46e168a681e7da917"
+    },
+    {
+      "product_id": "HM-0542917001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0542917001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1876,
+        1749
+      ],
+      "image_sha256": "f5b878c6aa7198536e2f7b4a32d34d251562c41e73545e390e0503aee64c29d1"
+    },
+    {
+      "product_id": "HM-0543491004",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0543491004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1163,
+        1750
+      ],
+      "image_sha256": "2cc925a01703017dd8c05d706745d7250b5cb0357f19aa4212f181b5b02d98aa"
+    },
+    {
+      "product_id": "HM-0543723014",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0543723014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1420,
+        1750
+      ],
+      "image_sha256": "0e9bfa5578a865e4ef02405639053c67fc379b60f5210150b1797cb3b5939220"
+    },
+    {
+      "product_id": "HM-0546169001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0546169001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1382,
+        1750
+      ],
+      "image_sha256": "fd9573ec4efe26509fa921a80302db7f859c43ccddc35ed843bc391a4e8e8d23"
+    },
+    {
+      "product_id": "HM-0546519013",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0546519013.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2ebbf4210c94994ea15f751dfac68a34428c95a711ee89b2571204ff3c195e4a"
+    },
+    {
+      "product_id": "HM-0547488002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0547488002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1701,
+        1749
+      ],
+      "image_sha256": "dee5847d7cc0f2b95d54c427e6d0fb1497e316244a960446deae793f4638ca96"
+    },
+    {
+      "product_id": "HM-0547841006",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0547841006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a7261dabac1d383d482d267abae3e26e79c3697cdb5173e8e4597b152f97363d"
+    },
+    {
+      "product_id": "HM-0548210003",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0548210003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1288,
+        1750
+      ],
+      "image_sha256": "3be70cf647e68bb81f486663d8fd30a1c54b82ff94c3bfd5ced48ebc93629085"
+    },
+    {
+      "product_id": "HM-0548963001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0548963001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "1eb85011fadbeacb6d8f10c623aafc2c2e7670a868742876acfbb68cad066e22"
+    },
+    {
+      "product_id": "HM-0549251005",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0549251005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "7147d2730c3585ec9bdef4e8fc5bc40028635c756dcd752dbc63b6b7ad4c45d5"
+    },
+    {
+      "product_id": "HM-0549262003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0549262003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "cf48dc567560e0d65d241fe46e7bcea99c5cbc7c88ab38153cfb4d9cf396251e"
+    },
+    {
+      "product_id": "HM-0551045078",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0551045078.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ee942c23f2d216b09af646b3f4f03bed0401caa8eb80cd14e58d17e19b7c7609"
+    },
+    {
+      "product_id": "HM-0551260001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0551260001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        717,
+        1750
+      ],
+      "image_sha256": "3e82fba1f3877f068f959cdf6757ecc62cf31f4dfc4641242ce9304d3b010c21"
+    },
+    {
+      "product_id": "HM-0551790005",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0551790005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "eb838591c174b64839ce73732e642dd0871e0795a5171e42f1359c060259fd7a"
+    },
+    {
+      "product_id": "HM-0552471033",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0552471033.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "63a777f878ccac5c92918e9e11a92fe4f006686566900d6eb10bd5c0b227d7bd"
+    },
+    {
+      "product_id": "HM-0552497006",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0552497006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "76fb9ca1ffca7e6c26ed3dbec40af514653836f7dba92c559a80900f7105cef3"
+    },
+    {
+      "product_id": "HM-0552743026",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0552743026.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "971a3afec47dd0c01c64c9bcf318b63839b29b450539b067830542de760de1ef"
+    },
+    {
+      "product_id": "HM-0553092017",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0553092017.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9f8aee6fa6067d95624a2c12b2275e810535b2610d5e39e23e76194ece4bd10b"
+    },
+    {
+      "product_id": "HM-0554568001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0554568001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        834,
+        1750
+      ],
+      "image_sha256": "226efc59088366c9ee0fdbf3997f22010cac5be8311ccd4fa61645d0f99f300d"
+    },
+    {
+      "product_id": "HM-0554716003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0554716003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1460,
+        1750
+      ],
+      "image_sha256": "242322a244d69c4572f9d53ab590d774735590bde15312989174a32c65961820"
+    },
+    {
+      "product_id": "HM-0555364011",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0555364011.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e849493a917b0354c53234fc5bb6613a86cea8f59ab0c88f6f873618090adab3"
+    },
+    {
+      "product_id": "HM-0555550003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0555550003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1591,
+        1750
+      ],
+      "image_sha256": "9b3dbbf72427a2d562ab55aac54ff45066b6ed0943eaffe2c3d2fe736e4caf89"
+    },
+    {
+      "product_id": "HM-0557075001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0557075001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        2242,
+        1750
+      ],
+      "image_sha256": "4a21907cd736b13565a76ba4d8150351e5a7258889f8fb26f388d85e2eb7d7b4"
+    },
+    {
+      "product_id": "HM-0558981004",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0558981004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "15edc2c16422ae0503035b7b5fb30af620de0b0116e2a3e568957072b167b361"
+    },
+    {
+      "product_id": "HM-0559061004",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0559061004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a9a771689eb02483ad6520af440dcec4721539c3677aa1ea15940afc7a0d32bc"
+    },
+    {
+      "product_id": "HM-0560030015",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0560030015.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9f2e25e4be0725bf020d0afc805bd56675564ffd7bd62e1877eeff59510350ba"
+    },
+    {
+      "product_id": "HM-0560783021",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0560783021.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "54180a4ae218c3f9a52879703eab4960b6330efb21b22a4a6a9b224322a6c9a2"
+    },
+    {
+      "product_id": "HM-0561297001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0561297001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1044,
+        1750
+      ],
+      "image_sha256": "203f7abf0f26dc611a50e6405c7af360b831125354b804fc68db07ca17b8ae64"
+    },
+    {
+      "product_id": "HM-0561479001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0561479001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1176,
+        1750
+      ],
+      "image_sha256": "aab1316ea1dbb94b02c3d0de99705536452a2a5b34eccc0167cad53f309c031e"
+    },
+    {
+      "product_id": "HM-0561548042",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0561548042.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ba08a799451ca97357d9ead9966a72cb7b677b258bf4e54ddb60d4065f7c2f66"
+    },
+    {
+      "product_id": "HM-0562677007",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0562677007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "4f7a63e1c0996e241044bfb544657709899399bb2d3ff45ec0a3a80efc485e2b"
+    },
+    {
+      "product_id": "HM-0563034004",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0563034004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1351,
+        1750
+      ],
+      "image_sha256": "20589a3d6963b95a8d29d3323aea9ae1a4c18341ac16fbc771170b6e804059f8"
+    },
+    {
+      "product_id": "HM-0564048010",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0564048010.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "749fea300d3a38e5e42368536ca5c68d4a6f87e3e6841329bfc0f7ebaa1d2847"
+    },
+    {
+      "product_id": "HM-0564358029",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0564358029.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ffb24769f89622cfa5155c212dc80b5043d6d2929f6bd84e8007253b06d1fcc8"
+    },
+    {
+      "product_id": "HM-0566126002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0566126002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "17ce2f25121c401b233a12ccc3ef2ab009d34ad7e6c87b0ff7d3ad3cc51c3787"
+    },
+    {
+      "product_id": "HM-0567424019",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0567424019.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "57069ae4ac8ccfb43dcd6fdd2a3b3f12fea87394dae90279be70e1a04b7d05ea"
+    },
+    {
+      "product_id": "HM-0567805003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0567805003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "81cfa8ef646ebce0c52b556cca216fb752837394dd0e37818e6b312287e6a74a"
+    },
+    {
+      "product_id": "HM-0568040002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0568040002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "eb61dbd76390ffd8dcb2cff571ab29d336bf2e08d5675b52de9be282d09f0c79"
+    },
+    {
+      "product_id": "HM-0569094003",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0569094003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "753b78884e4200f48bb3daaa0a02bd88f21bd6c40f459c5c1974f2f67b1f4154"
+    },
+    {
+      "product_id": "HM-0569984014",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0569984014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6cc23814f21bee9c45b28822241737c35612f96ba82f55042f58f65655068b59"
+    },
+    {
+      "product_id": "HM-0570002082",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0570002082.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "251a13f8d8c23b3294fd98c619e0e09789abb773aa878057c1b547a061ee11c8"
+    },
+    {
+      "product_id": "HM-0571598018",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0571598018.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e8edeb2cc6e50ebe85a43880c50682587be5abd2f1df8d3d88d37fe3332f2d88"
+    },
+    {
+      "product_id": "HM-0573373001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0573373001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3e3a44736c196e95c6dce105dfac7601617d948b61e6b6ec3e0c6cb82f1c86a2"
+    },
+    {
+      "product_id": "HM-0573445006",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0573445006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "125106220fcb0b5688b7951642a918acf85a1980ccf014e12724e94c5279b62c"
+    },
+    {
+      "product_id": "HM-0574428009",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0574428009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "49f16269084dfa15ae7f492644592508ede65cdeb5cf9fbf8cdeaf6099cf6039"
+    },
+    {
+      "product_id": "HM-0575523001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0575523001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        832,
+        1750
+      ],
+      "image_sha256": "b713603db83f06f6977fe9220a9b40e3c4a416affee8ebf7412408f666b559f7"
+    },
+    {
+      "product_id": "HM-0576112001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0576112001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        980,
+        1750
+      ],
+      "image_sha256": "2f3a26fa917aef275dab279cd59fb666330e6360aa56196dd28bf9dd5510c293"
+    },
+    {
+      "product_id": "HM-0576447003",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0576447003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        974,
+        1750
+      ],
+      "image_sha256": "c387d53fd244a470c8323e3c3678f5b5296a9b4f3ac64d842d6982fef0f86422"
+    },
+    {
+      "product_id": "HM-0576645001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0576645001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "921a2b4f930eb044d1ac48ca1046178eb8fc4296d5cc4d7011d1ef233557cb64"
+    },
+    {
+      "product_id": "HM-0576812002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0576812002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "440b324394dbb0e79d34104a2500b4eb57f26ff96cc2b5884aa47f6785aaa945"
+    },
+    {
+      "product_id": "HM-0577249005",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0577249005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "cf08d12b85a4c61c2728c0a09d5a4401c2f6715513608102bc4ee89c2c676810"
+    },
+    {
+      "product_id": "HM-0577250006",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0577250006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1438,
+        1750
+      ],
+      "image_sha256": "aacd3db32d3aab29e81234940c9b5ee07b2738929ad4505a5990bb8b91450145"
+    },
+    {
+      "product_id": "HM-0577759003",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0577759003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1465,
+        1750
+      ],
+      "image_sha256": "d9655934656accf1d59487896ac73e3a40f1facdd064c039817fab5a2b0686bc"
+    },
+    {
+      "product_id": "HM-0577935004",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0577935004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9ec3e83fe2c4b9c7518a5be16619e67facffeedce78114da86a23c1da4a854c5"
+    },
+    {
+      "product_id": "HM-0578483001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0578483001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1481,
+        1750
+      ],
+      "image_sha256": "d247046a17893e6f8b8327bfc2a1881cb67e790b4bf05422949293e41dd4e6ca"
+    },
+    {
+      "product_id": "HM-0579125001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0579125001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1540,
+        1750
+      ],
+      "image_sha256": "7c111bce1ab539c1daa60a5733c774bde737d3f6f83477969b9ec7434c4964f3"
+    },
+    {
+      "product_id": "HM-0581293002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0581293002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "bc083f8a80dfced7475c3ea63deb957a52143f8dee38f7689ea6ed43c427f1d9"
+    },
+    {
+      "product_id": "HM-0581980002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0581980002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "8dbc7c6dc681b55015c72f680c72c057f95c0bd4e4ed10bb49274547d7f798e9"
+    },
+    {
+      "product_id": "HM-0582536001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0582536001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        721,
+        1750
+      ],
+      "image_sha256": "9c1e2f48c0cba29715ee3d6c012ed9ae368311fe39dac3c8e0c05631ae91040e"
+    },
+    {
+      "product_id": "HM-0583787008",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0583787008.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "896053335c271b00a5cb87d306626cd55c0aab7002161f23c28d34e11a2e1d58"
+    },
+    {
+      "product_id": "HM-0583933003",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0583933003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "02d51707ebf526fbf2ad432a261fe4f04174b62b745a90be09fc80f0da988e2a"
+    },
+    {
+      "product_id": "HM-0584928010",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0584928010.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1177,
+        1750
+      ],
+      "image_sha256": "7cdfdad70c7bf78bc52b5b0a2fb38fe2ad9ab51e3eb71d4f6bb92416ed446300"
+    },
+    {
+      "product_id": "HM-0586051001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0586051001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1411,
+        1750
+      ],
+      "image_sha256": "3d0afa5857b2f07079e788e3a6c290dd3b3eedbaba1fb2d68a0a2b17910601d3"
+    },
+    {
+      "product_id": "HM-0588490002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0588490002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9164b7903dcdc64eb9c78dec86d6069faf9b72a6bfb1b77daf576cb1bee2335f"
+    },
+    {
+      "product_id": "HM-0588849001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0588849001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        942,
+        1750
+      ],
+      "image_sha256": "525c51745ed91df962d4c0e0e136279a3d6ad02c47eec2b6820cdc29c68a4a06"
+    },
+    {
+      "product_id": "HM-0591083003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0591083003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3310b5e2b16d6341ccceeb7de6d532bd62521da206ac1f48e9a118014fb4f603"
+    },
+    {
+      "product_id": "HM-0591181003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0591181003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "977ca534d534f6ae8147174feb0390dcea94997d50289a2bcd7c83eb9f4905d9"
+    },
+    {
+      "product_id": "HM-0591466028",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0591466028.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "8792f0eba4acf13e808a06b49bafe36250bde2e1537a33cd4efafbde46cb2c03"
+    },
+    {
+      "product_id": "HM-0591718001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0591718001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "14f59cdae426d5f84e46b6564104d759f09b7fcfee688f6cb4ccd910dd969b08"
+    },
+    {
+      "product_id": "HM-0595071002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0595071002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1520,
+        1750
+      ],
+      "image_sha256": "1f7a7868da7a9a0dd74e422c8574262a6af7650796be4cb5f1e4eef8d5943ee8"
+    },
+    {
+      "product_id": "HM-0596562003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0596562003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "caadc0ee8bce5dd7b7ba4e3432d562af5cea1e6089e6ad11991493142d46aa3d"
+    },
+    {
+      "product_id": "HM-0597678006",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0597678006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2ff8a8da56cc9793284f6daa83b17f14c90388361f9a45749d0ca23cf444e5b6"
+    },
+    {
+      "product_id": "HM-0598785003",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0598785003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1362,
+        1750
+      ],
+      "image_sha256": "684ef951ef7b3278374420c5df0451dc85802914f8266d9b3401fdd6eab99b59"
+    },
+    {
+      "product_id": "HM-0598807001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0598807001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "656b23bd909308b11e8e9c5614644470c6584166ffa9867ea7fd53edd5342e51"
+    },
+    {
+      "product_id": "HM-0599718044",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0599718044.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c67924567916d2c3ebb6e5946ac4a6a048bc4afdc10c29d611fa40a7beb8d0c9"
+    },
+    {
+      "product_id": "HM-0599945019",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0599945019.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "01c167a75fbf0576c86b65d998f7bb8603c10d27bd51da0dcc968bee71d5374a"
+    },
+    {
+      "product_id": "HM-0602010001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0602010001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1614,
+        1750
+      ],
+      "image_sha256": "139a9292214b1d4fa20d36650165dc43a989878e42ebbd6956fc1a6004c5a01a"
+    },
+    {
+      "product_id": "HM-0602167003",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0602167003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1396,
+        1750
+      ],
+      "image_sha256": "ccc1b00cede0857e3a0657b32a8d9a1987ebcc7684e6144239f6cac1f0af8014"
+    },
+    {
+      "product_id": "HM-0606409001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0606409001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1026,
+        1750
+      ],
+      "image_sha256": "129e8c1d42cfe4e1ef03d29cd4db0ee2b1729242d01bbd75ada69b3f0cbb7878"
+    },
+    {
+      "product_id": "HM-0606760004",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0606760004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "bc7175aa8731dcb08137a6eec7e557b0b50efb5f18ceacb094521b104bb7325a"
+    },
+    {
+      "product_id": "HM-0607390004",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0607390004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e0a70496c0a696b05a9353e79bda90b1641428531d1cadb59ef01a7ae93a3f0d"
+    },
+    {
+      "product_id": "HM-0607541004",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0607541004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5f4adbc724118a7520253eda60707861eaa3b11043eced23267402b8e7bbd15b"
+    },
+    {
+      "product_id": "HM-0609413001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0609413001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1560,
+        1750
+      ],
+      "image_sha256": "ec6cd9216112f8eabb348a965a17885a8dc83f2f6953d5f06b1f69fba292966e"
+    },
+    {
+      "product_id": "HM-0609483019",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0609483019.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a7d8f875bef4c3216ca11fd9cf453161a4825a52d876110ad631333f32e8cf71"
+    },
+    {
+      "product_id": "HM-0609813009",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0609813009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "275c5d621d94f6d09960832a01f953ccd5ee6ff889f1a8a0f3be6d877cb834dc"
+    },
+    {
+      "product_id": "HM-0610700002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0610700002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "48fcde847d2771a3e47ac81902c4bd2403977db9901252f832d06f81bb63c78f"
+    },
+    {
+      "product_id": "HM-0611924001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0611924001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c45e937f5cb10043d239ec7b21ef98a6b63cd1716579a025d428388b0095c6d6"
+    },
+    {
+      "product_id": "HM-0613371001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0613371001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1742,
+        1750
+      ],
+      "image_sha256": "aac9d23720df6de1a245f89d2cbbb1f97b4443e8738e9d2733d86a53396822ac"
+    },
+    {
+      "product_id": "HM-0614634004",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0614634004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "de9bae18085276d0ae1fde773193a2a99d6bc1a029b2a263e983ea3e3990f03e"
+    },
+    {
+      "product_id": "HM-0615042006",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0615042006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5ce126762f0dd3d555be3c65c21b63210d1dcc6ffda2382fde6a7ea91dcbc848"
+    },
+    {
+      "product_id": "HM-0616705002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0616705002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "58985d3757a590fd46efbff59d74f7577e6d4392150571f23145066bae1c4518"
+    },
+    {
+      "product_id": "HM-0616987001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0616987001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "826550a762744d38d93e21de7180c7d303334da51586d849d8f10ea95a3806b3"
+    },
+    {
+      "product_id": "HM-0617245002",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0617245002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e45a3707e56fe12aeb15781eef1cbf9032d5e5f893e826dcd1d4bca372cbbb8d"
+    },
+    {
+      "product_id": "HM-0618319019",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0618319019.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "38bd417812a9df10ee5048afa11622e78e9eff2c65047ddf6abf707c6a379326"
+    },
+    {
+      "product_id": "HM-0619884017",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0619884017.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d70b195d277025b9435dd4d500023826d3333389f6807b82c930ca0e5ed51cdf"
+    },
+    {
+      "product_id": "HM-0621558005",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0621558005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a928cbf6cdb2d9e358e10e25231562f8371c87eadd81bbf9a9a2bfd881ee60a7"
+    },
+    {
+      "product_id": "HM-0622026001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0622026001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "14f86644249b175af4bb20c0f59dca3b16b50c6055c00baed211d132e24bcb06"
+    },
+    {
+      "product_id": "HM-0624917001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0624917001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9fc53ac5810cb729702d91d76d00df5770dc1754be52e339fa35ae02ffbfb3ab"
+    },
+    {
+      "product_id": "HM-0625043002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0625043002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "1c69e2e3b758ed83f63579ebedf153d7331c0ce13d61b2b70b2d950475d45755"
+    },
+    {
+      "product_id": "HM-0625961004",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0625961004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "27eedae1d3c77a3e175913521689270c62307b5dc00b1cc9a10b7bc457f14923"
+    },
+    {
+      "product_id": "HM-0626257017",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0626257017.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c47d3a8d660d1194b859ccac1fed73b771610e7ea02d12551eebda3adc1dd59a"
+    },
+    {
+      "product_id": "HM-0626440001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0626440001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "313371a49a7330de6bf333fdf9d9b44bd18efdd37ca21b11a42d7f4f1ab1f84a"
+    },
+    {
+      "product_id": "HM-0626588005",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0626588005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b846eb1cac005c8539419526af029e59590fa9f99051590d85a683b3b2a28c6d"
+    },
+    {
+      "product_id": "HM-0627542001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0627542001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c1ed0ced0054ffd07ee93ebc5c9793ed6e778c62d73bfef5fec464d6785e93cf"
+    },
+    {
+      "product_id": "HM-0627725003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0627725003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9d213db79260787d0ff04409441ccbf9fec03891405b8f3abcb0e280cd50bc50"
+    },
+    {
+      "product_id": "HM-0627760006",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0627760006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "afd8f143d62a3a176e51ccb0077b5d439f207b46889020eded8f51877099e176"
+    },
+    {
+      "product_id": "HM-0628535001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0628535001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "13b95734ce26525f265564b71059d313dcb8400a051061520fc100a936426efd"
+    },
+    {
+      "product_id": "HM-0630030007",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0630030007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1525,
+        1750
+      ],
+      "image_sha256": "d84ac89f51cee6cc81725d2d4d752411dbfb08692e472f45f155eb256c49e8d6"
+    },
+    {
+      "product_id": "HM-0632938001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0632938001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "0df5118665edd9e1b544fd8be1a46fd19b39dbfab830ebc5f83f475dc0c75228"
+    },
+    {
+      "product_id": "HM-0633535001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0633535001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "1b9dafcf00e8617f9cb6117a567f033075c1860d94b8c746a577d9252e16f166"
+    },
+    {
+      "product_id": "HM-0633535004",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0633535004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c8f6a3d01d07525534961376620bc8eebc72583771b28c5f4f1985b59cfcb15b"
+    },
+    {
+      "product_id": "HM-0634426010",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0634426010.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "28753f6fa7cd7854d0cc6fdd1012c95524445c94ecb46c725130605dceddc046"
+    },
+    {
+      "product_id": "HM-0635040001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0635040001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d75bb9a7c549d2d479725369954353fc44a5a973bd8352a8e52b56d8459d4f89"
+    },
+    {
+      "product_id": "HM-0635240006",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0635240006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2fb05de86b01d8828395a7334709a4b3919550fd411717df898913c92dd3d2b2"
+    },
+    {
+      "product_id": "HM-0635896001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0635896001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ba863607c52ef84082d9919d75c4083ddc2387138c9e1e414782bceeaf169857"
+    },
+    {
+      "product_id": "HM-0635957003",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0635957003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d04d3e561c76a82de9273d71dd23f59a48c77fa8d90aae857f5b0812f46b12e9"
+    },
+    {
+      "product_id": "HM-0636140003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0636140003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "de7c2a685b13794eb52ce35f70ed1b0f9ebeb8e7104eb487a4ef193491019daa"
+    },
+    {
+      "product_id": "HM-0636265001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0636265001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "bc436ba9087330fb4d353c21856a89ab04e8e4eb255c94b5f436ca5d6d14957b"
+    },
+    {
+      "product_id": "HM-0637149009",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0637149009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2656caf280d9bd2bf3a58763adf6cc4996a21653976cee87160fa377cef76c5f"
+    },
+    {
+      "product_id": "HM-0638958011",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0638958011.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "4c7681ec76b15e982694a8a1b260a41d307fa120230d81ed7ec0aede3a98511d"
+    },
+    {
+      "product_id": "HM-0639374001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0639374001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "dd3661e56deda4334c47c690f92014f9131d7dfc0583b0441e5ba4a7b5481a7b"
+    },
+    {
+      "product_id": "HM-0639404002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0639404002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b1b17644d321e718b9fa0e6f13ee3ba849283c4bdd660bf359c4c4249fac6a1c"
+    },
+    {
+      "product_id": "HM-0641008026",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0641008026.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "daabd10cd91af579011553a70a1adb5fcf3dcddd3b59adbec708d9572568b941"
+    },
+    {
+      "product_id": "HM-0642465001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0642465001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "7e4880363294fb95203e214bead078d0eb9f61a7b98cec71e32c32cf44fd300c"
+    },
+    {
+      "product_id": "HM-0643588003",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0643588003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3e0dfd33e6b22281e34ae3b30e6212224cc04ce010aa8aaeaace1633c6f14d2e"
+    },
+    {
+      "product_id": "HM-0648424001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0648424001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "8f51dbfc401a6e1f561dd80e4e0a8c2e3f3e0bfb78663e34e929c48c4ec06906"
+    },
+    {
+      "product_id": "HM-0648703017",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0648703017.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "de7cbf0903fd5d016e79d090e3314eb731ceaee39eb882a0de0a00661c916598"
+    },
+    {
+      "product_id": "HM-0648950003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0648950003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e2ef87a2bd2e1f06bb908432820c1ca06cbf933c749c3f36291f2da0eae4a467"
+    },
+    {
+      "product_id": "HM-0651244004",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0651244004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b2daaa43448e42996f838507af507fccd82bb8804f3310801f65046f733da624"
+    },
+    {
+      "product_id": "HM-0651424003",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0651424003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "75f3c0027c32e19469bceb385386ef9f8b97e00660622a33704f396500adb003"
+    },
+    {
+      "product_id": "HM-0651461003",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0651461003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c86917cebabed27e5da95435a8cacbb29e0b0cb8694d3a157737fe1e07c0f750"
+    },
+    {
+      "product_id": "HM-0651558007",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0651558007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a36c8236688249d9981e10d75aec736b30fe89b89fde8e9933925e557786a0a1"
+    },
+    {
+      "product_id": "HM-0651893005",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0651893005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "db44a696d02a7897c08ba16fd30339d409de0dc9f48fcf0246ba110fda640716"
+    },
+    {
+      "product_id": "HM-0654410007",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0654410007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2999c99e97d2b904415abb0cfcf4f3bd35bac2475b0fc2373fa1a24e3a21b29a"
+    },
+    {
+      "product_id": "HM-0658450001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0658450001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "393686fef36d899978101ead707324a306af29a31307d340b21af8a8f11b0e62"
+    },
+    {
+      "product_id": "HM-0660273002",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0660273002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "db980ffc5dae846cc4774490f01795a13ef7522058d057abff86d9f5a49518ba"
+    },
+    {
+      "product_id": "HM-0660290004",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0660290004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "fcd578ef483450da3d224773d9848d1640752f66450b0159a2ae7cb8f8f29fe0"
+    },
+    {
+      "product_id": "HM-0661645003",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0661645003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "979397595604150cc095a9f99d8d5d421809f129302216c8234fdf65beb28fae"
+    },
+    {
+      "product_id": "HM-0663007008",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0663007008.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "46e762bc905571f294ac090e82f8d6446c70de16be8d82e5001c7dea1549ef2b"
+    },
+    {
+      "product_id": "HM-0663007011",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0663007011.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ad1326b9a1a1c0b5a87f63ea3ce85180ebab1c1b1b9b39cdf85c0a4adac8104d"
+    },
+    {
+      "product_id": "HM-0663233002",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0663233002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "df42cbf9ea3a420c06ac8ca5c43089db63bc6a300c7c53b927c99f76f49b92ef"
+    },
+    {
+      "product_id": "HM-0663942008",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0663942008.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "db607b2354743a6382f0181fef22729f7c36444c8acd01f05f5525acdbca3667"
+    },
+    {
+      "product_id": "HM-0664074018",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0664074018.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "22c6581d8db7591ecaaa3d98c25b2f864d4d434f9e9682e08aef92650def2946"
+    },
+    {
+      "product_id": "HM-0664074065",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0664074065.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "38c486543bdb9519aae563280eef5ccaa4a1e9f6e6ce0758743143cb44b34a64"
+    },
+    {
+      "product_id": "HM-0665481010",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0665481010.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "314bfe35be00eef9d8b512f5b80f22248c295ed95515911197a17088877fed28"
+    },
+    {
+      "product_id": "HM-0666354005",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0666354005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "aac79c91d59d646d74e73f4afbc9f9505f888c8319699e5ac53f08aa1e4debbb"
+    },
+    {
+      "product_id": "HM-0667300002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0667300002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "be8d4bbe7d72f4bb62274a335a1defde70091d6e25bdd15518ed5c3d17a516da"
+    },
+    {
+      "product_id": "HM-0667537009",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0667537009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6c17981695e5c5d3bc35154dc345efe48653508c0b04afff528832ed1157177c"
+    },
+    {
+      "product_id": "HM-0668213001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0668213001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a4f813fb1d2f0fa232334814bbee60bf514bc07532e383ca3ed03f01069cdbdd"
+    },
+    {
+      "product_id": "HM-0672957001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0672957001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "dfc0f3f970d068ec87c804160c8693f6205b6140f4c95e91c15c6c43cfcd1d63"
+    },
+    {
+      "product_id": "HM-0675281003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0675281003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "30c91ae1cd624a0dac674b5e881efe9d93eff530f44be51adb800a737431abf8"
+    },
+    {
+      "product_id": "HM-0677589002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0677589002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5cf37ce6049f861aeb26d8cf3e29cdbecf36273fec775aabdb005b947660c4c5"
+    },
+    {
+      "product_id": "HM-0678342005",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0678342005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "8e3387c2462e31dfd2d40762fd6a2c1b55bdf46a4d9cbb4b5c39b2e42235f547"
+    },
+    {
+      "product_id": "HM-0678602001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0678602001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "441b037b60e064657d1d589ed1f8aeb2402af1fa4234a99e23b0be080a6eef3f"
+    },
+    {
+      "product_id": "HM-0679633014",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0679633014.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ccea9b8cae02b3c329a5d74cfa92ee4fedbaa67f676c7a70b1901ab8f9f21084"
+    },
+    {
+      "product_id": "HM-0680186001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0680186001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "eb2fe62eb20222a46f27091db1ff4f5883b432162ae47760bc2589e9922ac481"
+    },
+    {
+      "product_id": "HM-0680396001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0680396001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "02bc9ba583a9f6198b0eff55ff6dd86cfb888e7d480388950fc3eae2a73dd3c2"
+    },
+    {
+      "product_id": "HM-0681096006",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0681096006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "280fb3513b20c16f30b51a8205d880a5402e387af70fc4fffd977290da59bedc"
+    },
+    {
+      "product_id": "HM-0682076012",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0682076012.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "658d273bd5263d7ee06a8fecc207598b65b456f4bdc1908d46a6d9b05297eee4"
+    },
+    {
+      "product_id": "HM-0682776002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0682776002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "89ca81544d31d66a0f1e05da76938f7075e10e6436b530a38e30fec774f6b6f5"
+    },
+    {
+      "product_id": "HM-0684021068",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0684021068.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a330749e664f2e77634a0e046408b8078c99c93de99510daa5faa3f61b0902a5"
+    },
+    {
+      "product_id": "HM-0685240003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0685240003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2df823911707a32b560ba97b0209ad91027adb800ca83af07e26607eada18fd2"
+    },
+    {
+      "product_id": "HM-0685812004",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0685812004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "936c4715a99c31143cf277e822ffbcd276819aa607f1e003c19d6fc93b264c5e"
+    },
+    {
+      "product_id": "HM-0690952001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0690952001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "cae40ca65695fae4afd46661e41ef560d27c27c4ccf7dfe5dc7e698f49eff5db"
+    },
+    {
+      "product_id": "HM-0693612004",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0693612004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "73baceb194d2d0d7dea9932cd572b6aa2adbcb2c269a114e2bdef8b90366cd21"
+    },
+    {
+      "product_id": "HM-0695166001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0695166001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "29600038bac7a58eb06778be552e4a51b1712dbc036eaa3a0f60738bca2bf27d"
+    },
+    {
+      "product_id": "HM-0696142003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0696142003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "1a6fc060739e93d0488e821332adbbecc4fb91740ed0e68abd7f368014628a1f"
+    },
+    {
+      "product_id": "HM-0698234002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0698234002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "35dc95e83d330dc1bc91b90309245a9ca7a674cdd7cc8fd7bc0b9ea5abf4afd3"
+    },
+    {
+      "product_id": "HM-0699070010",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0699070010.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "f07f8ccd68f8c971d19c6e4ad7055452de0c806628096e359578dbec6a94e431"
+    },
+    {
+      "product_id": "HM-0701574005",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0701574005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6a16d59707904ae292b1ae5ab0b17e529b1ce2c07fd7cd8380ab660fda73b101"
+    },
+    {
+      "product_id": "HM-0701994001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0701994001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3f2ac6a7f11f55e760fac5fd16cf76790b89dbf610c1544f8de8b98fcd4850a7"
+    },
+    {
+      "product_id": "HM-0702477002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0702477002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "077a3f8a8194d29a3c5a7d22c694361f5865e06a7d8c4bc0532939307b93e274"
+    },
+    {
+      "product_id": "HM-0703737002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0703737002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "488f4c7ebeff2be16a80bdf070528b24873ca690abb69eb36057e9b117533f56"
+    },
+    {
+      "product_id": "HM-0707743003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0707743003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "db0a8dd2c4cf05d4ab3ce6cabb4fd163273db0fb14cd20f62e71c1dbba06e23a"
+    },
+    {
+      "product_id": "HM-0707782002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0707782002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6ebed83a8493378d565de4f208388cd8e36ca42bda21606423980231c0829ed6"
+    },
+    {
+      "product_id": "HM-0708464002",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0708464002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "004e0cd962d381893bb35cdbeb0b569888306763a8d2f671163ad907aec7338f"
+    },
+    {
+      "product_id": "HM-0709407002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0709407002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "1a901b03cac33c4c732d6b1084b64763714781a6ff7469750e932e129654f26f"
+    },
+    {
+      "product_id": "HM-0709541005",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0709541005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c5b4d21474e2a6a7bf03904d6a9819afb72c7b8d3c803cb71de9ac3c3a8043a8"
+    },
+    {
+      "product_id": "HM-0712320003",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0712320003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "7a10bfddaa4a3876a6149a971f723d9c85a4d89c7928c95e6ea68fbe6664617c"
+    },
+    {
+      "product_id": "HM-0713618002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0713618002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "317db7d4e1d97f2a0473849cc20890d72088b60227bc3daf6d37ad5f93dc5a30"
+    },
+    {
+      "product_id": "HM-0713986007",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0713986007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e5b9612e0a829e6c97ae6c9e5ee64195c335427dd8516a5851dedd9c52f60903"
+    },
+    {
+      "product_id": "HM-0715599001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0715599001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3e2660376b6ff1b2c23cc59441fa60e25e8ab34421d0837513457abc4ffedd91"
+    },
+    {
+      "product_id": "HM-0716304006",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0716304006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c5bf6b92b4caff59ee51b342b5908ae186016150eb78429949553cc574cc3c8a"
+    },
+    {
+      "product_id": "HM-0716360001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0716360001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9eb1b9691d57e46ede1d8a4939976dbeacafee25c115d4e55b526452e8b70dde"
+    },
+    {
+      "product_id": "HM-0717811001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0717811001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "8d6c937a17863d7db01a4c68174f850ae5b2d3e5631ed1471197c46e2f63137b"
+    },
+    {
+      "product_id": "HM-0719258001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0719258001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6cd8fe504e638c955de77bfe58ad53cf35799aeb35e58d637f9e7aaf5c60957b"
+    },
+    {
+      "product_id": "HM-0720101003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0720101003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "10787f326927092a2f3d0c70713d3562e0c579b5d11a09b13754481a7fc065b3"
+    },
+    {
+      "product_id": "HM-0721388005",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0721388005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "df4236791b79a4e28d5d51bed28786b04e7c822bcec4085c091a43ecf64dda97"
+    },
+    {
+      "product_id": "HM-0722439007",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0722439007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "790b3fa096afda41c427f9e2b3a20833c2a1d7ebeeb4d1526824c3b6fc2d5e2f"
+    },
+    {
+      "product_id": "HM-0724338002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0724338002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "4ae9aac0380c7989eeca7c3ba3336726195d9a65376d39c494f37725c306f14f"
+    },
+    {
+      "product_id": "HM-0728703012",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0728703012.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ade2a692bd0c11291b74cbb7e77e4664dde4a00010b30b6caa7e1f5bc4024d90"
+    },
+    {
+      "product_id": "HM-0732705002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0732705002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "65b827b9501084ff40b12e2c45478372d162d8455137e46e85ef5b3e2d661fa8"
+    },
+    {
+      "product_id": "HM-0732708001",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0732708001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6ffce2b8d7fb52a672c480e16509b14b38a2985065f797bf2b58905a1e964d6b"
+    },
+    {
+      "product_id": "HM-0734273003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0734273003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b8d058746508e27cf805167cdfcf9cbaa2beefa821fad4b03683e42b7d5e8209"
+    },
+    {
+      "product_id": "HM-0734919002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0734919002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c779a04542f0ede9819f3e88e328d5b5d21d8dde633815ccd1f973976161cd4c"
+    },
+    {
+      "product_id": "HM-0736049003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0736049003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "7139a964d092ea8b5f45a2e6714a113b580a260c7d696ea2b35c94a8d7f00f22"
+    },
+    {
+      "product_id": "HM-0737852003",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0737852003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "aa38c142071ada851cdc84bbc04ee8374d5386a7a358ec53ff0c8fcf0fa231bb"
+    },
+    {
+      "product_id": "HM-0739493001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0739493001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "d422142cb40e73af363f622ecf7a807819930841e8be75a9728236f5332c0fff"
+    },
+    {
+      "product_id": "HM-0739510002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0739510002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c6b2256664074e7735b6147a93ff17051ac3458b77632f07b006383deb488cd3"
+    },
+    {
+      "product_id": "HM-0739705003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0739705003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "60971dc952e1010055fbbdf4b7af08dd80e8eef09b21f0c49969d4a8b6f502ae"
+    },
+    {
+      "product_id": "HM-0743908017",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0743908017.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "73d8daaf690663aa47df9ab917619828cf5e607d725ce9dc53ddc338e338dec8"
+    },
+    {
+      "product_id": "HM-0746000009",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0746000009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "63c3f5325afc857a7194254db9a1241887982993f6715ae2e9301896e0d653ee"
+    },
+    {
+      "product_id": "HM-0749352001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0749352001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "0754b96d5eaa01a0d3fe8ace2cff2ce6b5e66b093a820e0b75d9baa71f0ac51a"
+    },
+    {
+      "product_id": "HM-0751320001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0751320001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "9fc649fca1c2ed45773d324f1d6d6e08447dc1ab0d925099b0df2c153974da72"
+    },
+    {
+      "product_id": "HM-0752512007",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0752512007.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "c974e21b82d2d72cc736d12a8c7d86ceb55b35840a7e74c898705d9bc1bdd384"
+    },
+    {
+      "product_id": "HM-0752869003",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0752869003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5baf0885ab5b339f8344502a4ec804c752d08b233bf9a0e8b0fc152a1381f629"
+    },
+    {
+      "product_id": "HM-0754763004",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0754763004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "57dc62bdfc9317ad3f3e3ca807c2b20d6525afa658326177ff82e52196a7b153"
+    },
+    {
+      "product_id": "HM-0760250002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0760250002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "79a693c97f6d9bbb193d2d66a8f2eaa595849b494fcf0d9e0533e6f5b7580fba"
+    },
+    {
+      "product_id": "HM-0763280004",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0763280004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "502c47b7f39e356de1218f6e4a4b3fbd92ef8087fbf958980994af02ab4774ee"
+    },
+    {
+      "product_id": "HM-0764593005",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0764593005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "44adebb31e4ec3e252305723906c6dc746810891a47ce432acbb5dda4de2434e"
+    },
+    {
+      "product_id": "HM-0765945001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0765945001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "3d4b868f9a0c1d0a383266bf517be5c60d305572bb120653a1cfe7208d3d5f43"
+    },
+    {
+      "product_id": "HM-0766439003",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0766439003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "1a3bfb9c157b40bebfbb340f0c6dc1b54a0c148d02b43e0ea206c74de4d4ad3a"
+    },
+    {
+      "product_id": "HM-0772349015",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0772349015.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "984eaa9f991bc6ed021253f9d61ebd09723c47c1fbbbafd06a223e2961668a7e"
+    },
+    {
+      "product_id": "HM-0779965001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0779965001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "a9b87d0a778e2cfd43ba38393d32c482fed978c9264a2c37301ff1472457ce31"
+    },
+    {
+      "product_id": "HM-0784143001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0784143001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b226ae7d90315707fefad8aae4e840bbe91567af9afb16a8e36f013157613ca3"
+    },
+    {
+      "product_id": "HM-0786627001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0786627001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "81565926e04d97a7b5476c633e7f55f33f708542ff7ba8c27561adf222474c56"
+    },
+    {
+      "product_id": "HM-0790315001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0790315001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "f77abd6c1d0320f211d4fdfc97276fbede3104fefa6ce544d5b8418c3e9e5a15"
+    },
+    {
+      "product_id": "HM-0793886001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0793886001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "37e2e2744639718e5508a9aa2c600da5c6f50f8378409d66faa905d5c48a44fd"
+    },
+    {
+      "product_id": "HM-0796275006",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0796275006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e3e6a5955f2e39a25ce5e3251fb24d600b8ef5f259e289ca3416628b30178278"
+    },
+    {
+      "product_id": "HM-0796700002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0796700002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e7cc289817fc222c48bc0baf081dc006a631b20b56550678e3384238d2156131"
+    },
+    {
+      "product_id": "HM-0797312005",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0797312005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "65a6186af8cbd349c447fde405eb4a053e09c370f8db75c0a5721e90b94e8f53"
+    },
+    {
+      "product_id": "HM-0797394009",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0797394009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "e82a198afff0d426c287e627c55d5853764ef388a7d7d3b0b6e79f809db5c71b"
+    },
+    {
+      "product_id": "HM-0798763005",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0798763005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "0f665796ec38ed27b7d5e0c2bb9565f916ae043ae7ce853728f9277b84bb0d3b"
+    },
+    {
+      "product_id": "HM-0798842002",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0798842002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "97e441f02ecab00c25999e2bfd94be65aeea7ab90526f7415a186a14de42d25a"
+    },
+    {
+      "product_id": "HM-0805524005",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0805524005.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "4d778f7d332abe43644939629401cf6327f4e2f6b17843db7a151d61dffe192b"
+    },
+    {
+      "product_id": "HM-0805986003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0805986003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "14257904483acf267fc9bfc020d553a58df7ca3d29dd3d390952896bae6fa6cd"
+    },
+    {
+      "product_id": "HM-0808237001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0808237001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "484d4f1c5e5a6666afd31d53d86d6312fb2ffad1f03228c956b1f51909cf88e5"
+    },
+    {
+      "product_id": "HM-0813025001",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0813025001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2493e27f6d4617a309e1e4c74931d85b381443af8108e604eeba65cc4d73a819"
+    },
+    {
+      "product_id": "HM-0814594009",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0814594009.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "6ca5b4913e4b2cb454832743ffec28667e1548e32149317602f8f3aaa24287ec"
+    },
+    {
+      "product_id": "HM-0817353006",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0817353006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "304c52e72cfd555b2310d36fe0d99cceb277e359aa27b381a933ab1fe26c8899"
+    },
+    {
+      "product_id": "HM-0825564003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0825564003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "fce2d824d56bca9ded18e392cada6e92621837907dbbef6115879488f7756322"
+    },
+    {
+      "product_id": "HM-0825719003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0825719003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "567c9781e743ce0b7b98b969440a290c9b86d15cb4c31794d86516a3cb519e8e"
+    },
+    {
+      "product_id": "HM-0825924001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0825924001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5edcc13c7ad00819972f070909ec54bf614e56ea1c7290cf747c41c0063ee0b2"
+    },
+    {
+      "product_id": "HM-0832481003",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0832481003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "adea79e59d67f52ec209654e27e841691658940e21565d7dcc4d31ced60673a1"
+    },
+    {
+      "product_id": "HM-0841109004",
+      "category": "Accessories",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0841109004.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "87c24a8b81fb6319dd106ab2644620498497d2d7b3607b144f07ccb33fbd3d3b"
+    },
+    {
+      "product_id": "HM-0842000002",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0842000002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "b88d7fac980daffe961f28a3b460e08120a470d5d00e861517bb631341841554"
+    },
+    {
+      "product_id": "HM-0843555006",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0843555006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "aefc16291f8974283d091c18170374f5c29f614cbc43bfc1987f74f53e6ae540"
+    },
+    {
+      "product_id": "HM-0844118001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0844118001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "7cdbd77789179e8122ee6d2f14fe81fa5cf03d072fee9b5dd2e25b5e065c5426"
+    },
+    {
+      "product_id": "HM-0857413001",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0857413001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "34fcac945494f0a181ab1b2d930e36a192d7b857afe70bc5275b40d1ab1c5b11"
+    },
+    {
+      "product_id": "HM-0859622001",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0859622001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2eb1be7affdffaa508199ff97a0f34af512aa4112e52d63d6a424a16ea67ef2b"
+    },
+    {
+      "product_id": "HM-0865457002",
+      "category": "Dresses",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0865457002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "5743e1b8b0cff29ab8602cc63e65d4af37540e80fa928135eede58e121fc0230"
+    },
+    {
+      "product_id": "HM-0869398001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0869398001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "eedb7d471084df0b9459c7ec134132de2a23db521376d68c4a2dca663eef17f1"
+    },
+    {
+      "product_id": "HM-0872085001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0872085001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "97a1b637b4e16a3ea2bc8ecd1098749b07eaf6a9969861ebc172588558dc43b6"
+    },
+    {
+      "product_id": "HM-0875922001",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0875922001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "2c6e0d27e223891c4ff286a8af4e718889b3e0474bf2a7bf7074e5eab684a66a"
+    },
+    {
+      "product_id": "HM-0889347002",
+      "category": "Bottoms",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0889347002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "ce77e20471bc1a4b76c95ffcb52f24c154d82777c14d1717139ffdb521ec7307"
+    },
+    {
+      "product_id": "HM-0892558006",
+      "category": "Knitwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0892558006.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "969e5d0b79b47280dd026d58e6c09dd59d6294994a1edc37969910b60d32821d"
+    },
+    {
+      "product_id": "HM-0894762002",
+      "category": "Outerwear",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0894762002.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "da136bb01ef75b4357b399db1c7d4e1c09a291cbccf8b76c6e141ce91743c0ef"
+    },
+    {
+      "product_id": "HM-0900670003",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0900670003.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "18033253873c1a4a355746f2a5f9308309ad5a51a638de794de9e0974cbcd8b0"
+    },
+    {
+      "product_id": "HM-0909529001",
+      "category": "Tops",
+      "has_valid_image": true,
+      "primary_image_url": "/products/hm-0909529001.jpg",
+      "variant_image_count": 1,
+      "image_format": "JPEG",
+      "image_size": [
+        1166,
+        1750
+      ],
+      "image_sha256": "211d5c3d8f6b30921bd79b061c418ed2836cbad9d2caf26e9593027e75779e2e"
+    }
+  ]
+}
