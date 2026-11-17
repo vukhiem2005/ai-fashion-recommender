@@ -178,9 +178,6 @@ export default function YouMayAlsoLike({ productId }: { productId: string }) {
                   <p className="mt-2 text-xs leading-5 text-[#817a72]">
                     {item.reason}
                   </p>
-                  <p className="mt-1 text-xs text-[#817a72]">
-                    Match score: {(item.similarity * 100).toFixed(0)}%
-                  </p>
                 </Link>
               </li>
             );
