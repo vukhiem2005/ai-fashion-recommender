@@ -24,6 +24,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -51,6 +52,19 @@ h4 {
 
 p {
   text-wrap: pretty;
+}
+
+:where(a, code) {
+  overflow-wrap: anywhere;
+}
+
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 :where(a:any-link, button, input, select, textarea, [tabindex]):focus-visible {
@@ -277,4 +291,21 @@ p {
 .elan-product-card:has(a.elan-card-link:focus-visible) {
   outline: 2px solid var(--elan-text);
   outline-offset: 4px;
+}
+
+/* Modal confirmation dialog */
+.elan-confirm-dialog {
+  margin: auto;
+  width: min(26rem, calc(100dvw - 2rem));
+  max-width: none;
+  border: 1px solid var(--elan-border-strong);
+  background-color: var(--elan-surface);
+  color: var(--elan-text);
+  padding: 1.75rem;
+  box-shadow: 0 20px 48px rgb(36 34 31 / 0.22);
+}
+
+.elan-confirm-dialog::backdrop {
+  background-color: rgb(36 34 31 / 0.45);
+  backdrop-filter: blur(2px);
 }

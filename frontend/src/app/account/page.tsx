@@ -1,5 +1,5 @@
-
 "use client";
+
 import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 import Link from "next/link";
@@ -13,7 +13,10 @@ export default function AccountPage() {
   const [savedName, setSavedName] = useState<string | null>(null);
   const [itemCount, setItemCount] = useState(0);
   const [loaded, setLoaded] = useState(false);
-  const [message, setMessage] = useState("");
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     function initialize() {
@@ -24,7 +27,10 @@ export default function AccountPage() {
         setSavedName(name);
         setDisplayName(name ?? "");
       } catch {
-        setMessage("Unable to access saved demo profile.");
+        setFeedback({
+          type: "error",
+          text: "Unable to access saved profile preferences.",
+        });
       }
 
       const items = readCart();
@@ -55,7 +61,10 @@ export default function AccountPage() {
     const name = displayName.trim().replace(/\s+/g, " ");
 
     if (name.length < 2) {
-      setMessage("Please enter at least two characters.");
+      setFeedback({
+        type: "error",
+        text: "Please enter at least two characters for your display name.",
+      });
       return;
     }
 
@@ -63,9 +72,15 @@ export default function AccountPage() {
       window.localStorage.setItem(PROFILE_KEY, name);
       setSavedName(name);
       setDisplayName(name);
-      setMessage("Your demo profile has been saved.");
+      setFeedback({
+        type: "success",
+        text: "Your display name has been saved in this browser.",
+      });
     } catch {
-      setMessage("Unable to save your demo profile.");
+      setFeedback({
+        type: "error",
+        text: "Unable to save your display name.",
+      });
     }
   }
 
@@ -74,177 +89,194 @@ export default function AccountPage() {
       window.localStorage.removeItem(PROFILE_KEY);
       setSavedName(null);
       setDisplayName("");
-      setMessage("Demo profile cleared. You can continue as a guest.");
+      setFeedback({
+        type: "success",
+        text: "Display name cleared.",
+      });
     } catch {
-      setMessage("Unable to clear your demo profile.");
+      setFeedback({
+        type: "error",
+        text: "Unable to clear your display name.",
+      });
     }
   }
 
   return (
     <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
       <StoreHeader />
-      <main id="main-content" className="mx-auto w-full max-w-5xl flex-1 px-6 py-14 md:py-20">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
-          ÉLAN Member Experience
-        </p>
 
-        <h1 className="mt-4 font-serif text-4xl md:text-5xl">
-          Your Account
-        </h1>
+      <main id="main-content" className="elan-container flex-1 py-10 md:py-16">
+        <div className="max-w-2xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#9a6b48]">
+            Personal Preferences
+          </p>
 
-<p className="mt-5 max-w-2xl text-sm leading-7 text-[#77716b]">
-  Choose how you would like to explore ÉLAN.
-  Continue as a guest or access the product administration area.
-</p>
+          <h1 className="mt-3 font-serif text-4xl sm:text-5xl">
+            Your Account
+          </h1>
 
-<div className="mt-9 grid gap-4 sm:grid-cols-2">
-  <a
-    href="#customer-profile"
-    className="border border-[#e7e2dc] bg-white p-6 transition hover:border-[#ae805f]"
-  >
-    <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
-      Customer Experience
-    </p>
+          <p className="mt-4 text-sm leading-7 text-[#686159] sm:text-base">
+            Manage your local display preferences and review your shopping bag.
+          </p>
+        </div>
 
-    <h2 className="mt-3 font-serif text-2xl">
-      Continue as Guest
-    </h2>
-
-    <p className="mt-3 text-sm leading-6 text-[#77716b]">
-      Create a local demo profile and explore the collection.
-      No password or registration required.
-    </p>
-
-    <p className="mt-5 text-sm font-semibold">
-      Explore Customer Profile →
-    </p>
-  </a>
-
-  <Link
-    href="/admin/products"
-    className="border border-[#e7e2dc] bg-white p-6 transition hover:border-[#ae805f]"
-  >
-    <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
-      Store Management
-    </p>
-
-    <h2 className="mt-3 font-serif text-2xl">
-      Administrator
-    </h2>
-
-    <p className="mt-3 text-sm leading-6 text-[#77716b]">
-      Manage products, prices and product images.
-      An administrator key is required.
-    </p>
-
-    <p className="mt-5 text-sm font-semibold">
-      Admin Access →
-    </p>
-  </Link>
-</div>
         {!loaded ? (
-          <p role="status" className="mt-12 text-sm text-[#817a72]">
-            Loading demo profile...
+          <p role="status" className="mt-12 text-sm text-[#686159]">
+            Loading your preferences...
           </p>
         ) : (
-          <div className="mt-12 grid gap-8 md:grid-cols-[minmax(0,1fr)_300px]">
+          <div className="mt-10 grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-12">
+            {/* Primary Section: Your Profile */}
             <section
-  id="customer-profile"
-  className="scroll-mt-8 border border-[#e7e2dc] bg-white p-7 md:p-10"
->
-            
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
-                Customer Profile
+              aria-labelledby="profile-section-heading"
+              className="border border-[#e7e2dc] bg-white p-6 sm:p-9"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9a6b48]">
+                Guest Profile
               </p>
 
-              <h2 className="mt-4 font-serif text-3xl">
-                {savedName ? `Welcome, ${savedName}` : "Continue as Guest"}
+              <h2
+                id="profile-section-heading"
+                className="mt-3 font-serif text-2xl sm:text-3xl"
+              >
+                {savedName ? `Welcome, ${savedName}` : "Your Profile"}
               </h2>
 
-              <p className="mt-4 text-sm leading-7 text-[#77716b]">
+              <p className="mt-3 text-sm leading-7 text-[#686159]">
                 {savedName
-                  ? "Your demo display name is saved in this browser."
-                  : "Save a display name or continue browsing as a guest."}
+                  ? "Your display name is stored locally in this browser for your shopping session."
+                  : "Set a preferred display name for this browser, or continue browsing as a guest."}
               </p>
 
-              <form onSubmit={saveProfile} className="mt-9">
+              <form onSubmit={saveProfile} className="mt-7 max-w-md">
                 <label
                   htmlFor="display-name"
-                  className="block text-sm font-medium"
+                  className="block text-xs font-semibold uppercase tracking-[0.18em] text-[#24221f]"
                 >
-                  Display name
+                  Display Name
                 </label>
 
                 <input
                   id="display-name"
+                  name="displayName"
                   type="text"
                   value={displayName}
-                  onChange={(event) => setDisplayName(event.target.value)}
+                  onChange={(event) => {
+                    setDisplayName(event.target.value);
+                    if (feedback?.type === "error") {
+                      setFeedback(null);
+                    }
+                  }}
                   maxLength={40}
-                  autoComplete="off"
-                  placeholder="Enter your display name"
-                  className="mt-3 w-full border border-[#ddd6cf] bg-[#faf9f6] px-4 py-3 text-sm outline-none focus:border-[#ae805f]"
+                  autoComplete="name"
+                  placeholder="Enter your preferred name"
+                  aria-describedby="display-name-hint"
+                  className="mt-2 min-h-11 w-full border border-[#d5cdc3] bg-[#faf9f6] px-4 py-2.5 text-sm text-[#24221f] transition-colors focus:border-[#9a6b48] focus:bg-white"
                 />
 
-                <button
-                  type="submit"
-                  className="mt-6 bg-[#24221f] px-7 py-3 text-sm font-medium text-white transition hover:bg-[#ae805f]"
+                <p
+                  id="display-name-hint"
+                  className="mt-2 text-xs text-[#756d65]"
                 >
-                  Save Demo Profile
-                </button>
+                  2–40 characters. Saved locally in your browser without
+                  registration or passwords.
+                </p>
 
-                {savedName && (
-                  <button
-                    type="button"
-                    onClick={clearProfile}
-                    className="ml-4 mt-4 text-sm text-[#817a72] underline hover:text-[#24221f]"
-                  >
-                    Clear Profile
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <button type="submit" className="elan-btn-primary">
+                    Save Profile
                   </button>
-                )}
+
+                  {savedName && (
+                    <button
+                      type="button"
+                      onClick={clearProfile}
+                      className="elan-btn-secondary"
+                    >
+                      Clear Profile
+                    </button>
+                  )}
+                </div>
               </form>
 
-              {message && (
-                <p role="status" aria-live="polite" className="mt-5 text-sm text-[#706961]">
-                  {message}
+              {feedback && (
+                <p
+                  role={feedback.type === "error" ? "alert" : "status"}
+                  aria-live="polite"
+                  className={`mt-5 border px-4 py-3 text-sm ${
+                    feedback.type === "error"
+                      ? "border-red-200 bg-red-50 text-red-700"
+                      : "border-[#d5cdc3] bg-[#f4efe8] text-[#24221f]"
+                  }`}
+                >
+                  {feedback.text}
                 </p>
               )}
 
-              <p className="mt-9 border-t border-[#e7e2dc] pt-6 text-xs leading-6 text-[#817a72]">
-                Demo profile only. This does not create an authenticated
-                account. Do not enter sensitive personal information.
+              <p className="mt-8 border-t border-[#e7e2dc] pt-5 text-xs leading-6 text-[#756d65]">
+                Local guest profile only. This simulation does not create an
+                authenticated customer account; please do not enter sensitive
+                personal information.
               </p>
             </section>
 
-            <aside className="h-fit border border-[#e7e2dc] bg-white p-7">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#ae805f]">
-                Shopping Overview
+            {/* Secondary Section: Your Shopping Bag */}
+            <aside
+              aria-labelledby="account-bag-heading"
+              className="border border-[#e7e2dc] bg-white p-6 sm:p-8"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#9a6b48]">
+                Bag Summary
               </p>
 
-              <h2 className="mt-4 font-serif text-2xl">
+              <h2
+                id="account-bag-heading"
+                className="mt-3 font-serif text-2xl sm:text-3xl"
+              >
                 Your Shopping Bag
               </h2>
 
-              <p className="mt-5 text-sm text-[#77716b]">
-                {itemCount} {itemCount === 1 ? "item" : "items"} saved
+              <p className="mt-3 text-sm leading-6 text-[#686159]">
+                {itemCount === 0
+                  ? "Your shopping bag is currently empty."
+                  : `You have ${itemCount} ${
+                      itemCount === 1 ? "piece" : "pieces"
+                    } saved in your shopping bag.`}
               </p>
 
-              <Link
-                href="/cart"
-                className="mt-7 block bg-[#24221f] px-5 py-4 text-center text-sm font-medium text-white hover:bg-[#ae805f]"
-              >
-                View Shopping Bag
-              </Link>
+              <div className="mt-7 flex flex-col gap-3">
+                <Link
+                  href="/cart"
+                  className="elan-btn-primary w-full text-center"
+                >
+                  View Shopping Bag ({itemCount})
+                </Link>
 
-              <Link
-                href="/shop"
-                className="mt-4 block text-center text-sm text-[#817a72] underline hover:text-[#24221f]"
-              >
-                Explore Collection
-              </Link>
+                <Link
+                  href="/shop"
+                  className="elan-btn-secondary w-full text-center"
+                >
+                  Explore Collection
+                </Link>
+              </div>
             </aside>
           </div>
         )}
+
+        {/* Discreet Administrator Access Footer Section */}
+        <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-[#e7e2dc] pt-6 text-xs text-[#756d65] sm:flex-row sm:items-center">
+          <p className="m-0">
+            Catalog management tools are restricted to authorized local
+            administrators.
+          </p>
+          <Link
+            href="/admin/products"
+            className="inline-flex min-h-9 items-center gap-1.5 font-medium uppercase tracking-[0.16em] text-[#686159] underline underline-offset-4 transition-colors hover:text-[#24221f]"
+          >
+            <span>Catalog Administration</span>
+            <span aria-hidden="true">→</span>
+          </Link>
+        </div>
       </main>
 
       <StoreFooter />
