@@ -9,29 +9,6 @@ export const metadata: Metadata = {
     "Learn about ÉLAN, an academic AI-powered fashion e-commerce simulation combining editorial design with intelligent style discovery.",
 };
 
-const technologies = [
-  {
-    label: "AI Recommendations",
-    value: "CLIP Late Fusion, ItemKNN, TF-IDF + Cosine Similarity",
-  },
-  {
-    label: "Frontend",
-    value: "Next.js, React, TypeScript",
-  },
-  {
-    label: "Backend",
-    value: "Python, FastAPI",
-  },
-  {
-    label: "Database",
-    value: "SQLite",
-  },
-  {
-    label: "Deployment",
-    value: "Vercel and Render",
-  },
-];
-
 export default function AboutPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
@@ -97,36 +74,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Section 3 — Technology Behind ÉLAN */}
-        <section className="border-y border-[#e7e2dc] bg-[#f4efe8]/70 py-14 md:py-18">
-          <div className="elan-container">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6b48]">
-              System Overview
-            </p>
-            <h2 className="mt-2.5 font-serif text-3xl sm:text-4xl">
-              Technology Behind ÉLAN
-            </h2>
-
-            <dl className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {technologies.map((item) => (
-                <div
-                  key={item.label}
-                  className="border border-[#e2dbd2] bg-white p-5"
-                >
-                  <dt className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a6b48]">
-                    {item.label}
-                  </dt>
-                  <dd className="mt-2 font-serif text-lg leading-snug text-[#24221f]">
-                    {item.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-
-        {/* Section 4 — Explore the Project */}
-        <section className="elan-container py-14 md:py-18">
+        {/* Explore the Project */}
+        <section className="elan-container pb-16 md:pb-22">
           <div className="flex flex-col items-start justify-between gap-8 border border-[#e7e2dc] bg-white p-7 sm:p-10 lg:flex-row lg:items-center">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[#9a6b48]">
