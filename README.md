@@ -6,7 +6,7 @@
 
 ÉLAN combines a Next.js storefront, a FastAPI product service, a SQLite product catalog, and a TF-IDF recommendation engine. The central engineering goal is to build and evaluate a transparent, maintainable similar-product recommendation system, not to present unvalidated improvements as production-ready.
 
-> **Status: Public portfolio demo deployed.** The **V1 TF-IDF + cosine similarity** engine powers recommendations on the live website. V2, V3, and V4 are preserved as **offline experiments**, not deployed models. This is a demonstration storefront: there is **no real checkout, payment processing, or order fulfillment**.
+> **Status: Public portfolio demo deployed.** **CLIP Late Fusion** (with **V1 TF-IDF + cosine similarity** fallback) powers similar-item recommendations on product pages, and **ItemKNN Collaborative Filtering** powers the synthetic personalized style-profile demonstration on `/shop`. Other researched algorithms (`TruncatedSVD`, `Apriori` / `FP-Growth`, `Hybrid`, and `V2–V4`) are preserved as **offline evaluation benchmarks**. This is an academic demonstration storefront: there is **no real checkout, payment processing, or order fulfillment**.
 
 ## Website Screenshots
 
@@ -80,22 +80,34 @@ Render - FastAPI backend
         +-- V1 TF-IDF + cosine similarity recommendation engine
 ```
 
-**Active recommendation path:** `frontend/src/components/YouMayAlsoLike.tsx` -> Next.js proxy -> `GET /recommendations/{product_id}` -> `backend/app/recommender.py` (V1).
+**Active recommendation paths:**
+- **Similar Styles (`/shop/[slug]`):** `frontend/src/components/YouMayAlsoLike.tsx` -> Next.js proxy -> `GET /recommendations/{product_id}` -> `backend/app/clip_service.py` (**CLIP Late Fusion**, falling back automatically to `backend/app/recommender.py` **V1 TF-IDF** when an item has no image embedding or when multimodal mode is disabled).
+- **Your Style Edit (`/shop`):** `frontend/src/components/PersonalizedDemo.tsx` -> Next.js proxy -> `GET /recommendations/personalized` -> `backend/app/personalization_service.py` (**ItemKNN Collaborative Filtering** over deterministic `SYNTHETIC_SIMULATION_V5` shopper profiles, with popularity fallback for cold-start profiles).
 
-The application recommends **similar products from catalog content**. It does **not** implement collaborative filtering, behavioral personalization, or user-profile training.
+## Recommendation Models & Evidence-Based Selection
 
-## Recommendation Models
+Across Milestones 1–5, candidate algorithms were evaluated offline and integrated into the live storefront only when justified by measured ranking quality and catalog coverage:
 
-| Version | Method | Application status |
-|---|---|---|
-| **V1** | Weighted text from category, product name, description, and colors -> TF-IDF (unigrams/bigrams) -> cosine similarity | **Active production baseline** |
-| V2 | V1 similarity plus category and name-derived subtype reranking | Offline experiment |
-| V3 | Refined subtype recognition and type-relation heuristics | Offline experiment |
-| V4 | Reranking with H&M `product_type_name` metadata | Offline experiment |
+| Task / Milestone | Model | Application Status | Summary of Offline Evidence |
+|---|---|---|---|
+| **Similar Items (Milestone 4B)** | **CLIP Late Fusion** (`clip-vit-B-32` + `V1 TF-IDF`, `w_vis=0.5`) | **Deployed primary (`/shop/[slug]`)** | Holdout-18 `nDCG@5 = 0.7625` (`+9.44%` vs V1 `0.6967`), `P@5 = 71.11%`, `Strict P@5 = 26.67%`, `Coverage@5 = 95.43% (313/328)`, `0.485 ms/query` via precomputed `.npz` cache |
+| **Similar Items (Baseline)** | **V1 TF-IDF + Cosine Similarity** | **Deployed fallback (`/shop/[slug]`)** | `100%` catalog availability (`96.65%` `Coverage@5`); serves missing-image item `HM-0398947001` (`has_image = 0` among `327/328` embedded products) |
+| **Personalized Demo (Milestone 2)** | **ItemKNN Collaborative Filtering** (`log_sum`, `IUF=0.5`, `shrinkage=20`, `k=100`) | **Deployed synthetic demo (`/shop`)** | Best collaborative model on `SYNTHETIC_SIMULATION_V5`: Test Protocol A1 `Graded nDCG@5 = 0.0514` (`P@5 = 4.11%`, `Recall@5 = 5.61%`, `Coverage@5 = 36.59%`), Protocol A2 `0.0544`; `192/192` grid configs met the `>=25%` coverage floor |
+| **Personalized CF (Milestone 2)** | **TruncatedSVD** (`n_components=16`) | Offline benchmark (deferred) | Test Protocol A1 `Graded nDCG@5 = 0.0464`, Protocol A2 `0.0485`, `Coverage@5 = 33.54%`; trailed `ItemKNN` on all accuracy and coverage metrics |
+| **Basket Completion (Milestone 3)** | **Apriori & FP-Growth ARM** (`min_support_count=2`, `104` rules) | Offline benchmark (deferred) | Exact Apriori/FP-Growth equivalence verified (`351` itemsets), but `0/256` configs met validation coverage floors; Test Protocol B1 pure `HitRate@5 = 1.29%` (`2/155` orders), `Catalog Coverage@5 = 14.02%` |
+| **Hybrid Ranking (Milestone 5)** | **Calibrated Linear Hybrid** (`0.50` Content + `0.35` CF + `0.15` ARM) | Offline benchmark (deferred) | Track 1 Test Protocol A1 `Graded nDCG@5 = 0.0501` (Content+CF) and `0.0493` (Content+CF+ARM), trailing standalone `ItemKNN` (`0.0514`); Track 2 Basket `HitRate@5 = 6.45%` |
+| **Content Rerankers (V2–V4 & Phase 4A)** | Heuristic subtype rerankers & handcrafted HSV/edge fusion | Offline benchmark (superseded) | Superseded by Phase 4B `CLIP Late Fusion` (`nDCG@5 = 0.7625` vs Phase 4A Late Fusion `0.7282`) |
 
-V1 ranks active products and excludes the selected reference product from its results. V2-V4 were evaluated offline and are **not** connected to the public API.
+### Milestone 1–5 Research Reports (`backend/evaluation/v5/`)
 
-## Offline Model Evaluation
+- [Milestone 1 — Reproducible Synthetic Interaction Dataset (`SYNTHETIC_SIMULATION_V5`)](backend/evaluation/v5/synthetic_dataset_report.md)
+- [Milestone 2 — Collaborative Filtering (`ItemKNN` vs. `TruncatedSVD`) Benchmark Report](backend/evaluation/v5/cf_milestone2_report.md)
+- [Milestone 3 — Association Rule Mining (`Apriori` & `FP-Growth`) Benchmark Report](backend/evaluation/v5/arm_milestone3_report.md)
+- [Milestone 4A — Lightweight Multimodal Retrieval Report](backend/evaluation/v5/multimodal_milestone4_report.md)
+- [Milestone 4B — Neural CLIP Multimodal (`Dev-18` & `Holdout-18`) Final Report](backend/evaluation/v5/neural_multimodal_milestone4b_final_report.md)
+- [Milestone 5 — Calibrated Hybrid Recommendation & Ablation Report](backend/evaluation/v5/hybrid_milestone5_report.md)
+
+## Legacy Content Baseline Evaluation (V1–V4)
 
 The saved blind-review holdout includes **18 reference products** (3 per category), **140 unique reference-candidate pairs**, and **90 Top-5 positions per model**.
 
