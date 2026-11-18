@@ -18,6 +18,11 @@ import {
   type BackendProduct,
 } from "@/data/product-api";
 
+function isMeaningfulOption(value: string): boolean {
+  const normalized = value.trim().toLowerCase();
+  return normalized !== "" && normalized !== "not specified";
+}
+
 export default function ProductDetailPage() {
   const { slug } = useParams<{ slug: string }>();
 
@@ -64,10 +69,11 @@ function ProductDetailContent({ slug }: { slug: string }) {
           setProduct(
             backendProduct ? toStorefrontProduct(backendProduct) : null
           );
+          setLoadError(null);
         }
       } catch {
         if (!controller.signal.aborted) {
-          setLoadError("Unable to load product information. Please try again.");
+          setLoadError("Unable to load product details. Please try again.");
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -83,45 +89,60 @@ function ProductDetailContent({ slug }: { slug: string }) {
 
   if (loading) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-[#faf9f6] px-6">
-        <p role="status" className="text-sm text-[#77716b]">
-          Loading product...
-        </p>
-      </main>
+      <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
+        <StoreHeader />
+        <main
+          id="main-content"
+          className="elan-container flex flex-1 flex-col items-center justify-center py-20 text-center"
+        >
+          <p role="status" className="text-sm text-[#686159]">
+            Loading piece details...
+          </p>
+        </main>
+        <StoreFooter />
+      </div>
     );
   }
 
   if (loadError) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6 text-center">
-        <h1 className="font-serif text-4xl">Unable to load product</h1>
-        <p role="alert" className="mt-4 text-[#77716b]">
-          {loadError}
-        </p>
-        <Link
-          href="/shop"
-          className="mt-8 bg-[#24221f] px-8 py-3 text-sm text-white"
+      <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
+        <StoreHeader />
+        <main
+          id="main-content"
+          className="elan-container flex flex-1 flex-col items-center justify-center py-20 text-center"
         >
-          Back to Shop
-        </Link>
-      </main>
+          <h1 className="font-serif text-4xl">Unable to load piece</h1>
+          <p role="alert" className="mt-4 text-sm text-red-700">
+            {loadError}
+          </p>
+          <Link href="/shop" className="elan-btn-primary mt-8">
+            Back to Collection
+          </Link>
+        </main>
+        <StoreFooter />
+      </div>
     );
   }
 
   if (!product) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6 text-center">
-        <h1 className="font-serif text-4xl">Product not found</h1>
-        <p className="mt-4 text-[#77716b]">
-          This product is not available in our demo catalog.
-        </p>
-        <Link
-          href="/shop"
-          className="mt-8 bg-[#24221f] px-8 py-3 text-sm text-white"
+      <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
+        <StoreHeader />
+        <main
+          id="main-content"
+          className="elan-container flex flex-1 flex-col items-center justify-center py-20 text-center"
         >
-          Back to Shop
-        </Link>
-      </main>
+          <h1 className="font-serif text-4xl">Piece not found</h1>
+          <p className="mt-4 text-sm text-[#686159]">
+            This piece is not available in the current collection.
+          </p>
+          <Link href="/shop" className="elan-btn-primary mt-8">
+            Back to Collection
+          </Link>
+        </main>
+        <StoreFooter />
+      </div>
     );
   }
 
@@ -131,12 +152,21 @@ function ProductDetailContent({ slug }: { slug: string }) {
 
   if (!selectedVariant) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center bg-[#faf9f6] px-6 text-center">
-        <p className="text-[#77716b]">No product variants available.</p>
-        <Link href="/shop" className="mt-8 underline">
-          Back to Shop
-        </Link>
-      </main>
+      <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
+        <StoreHeader />
+        <main
+          id="main-content"
+          className="elan-container flex flex-1 flex-col items-center justify-center py-20 text-center"
+        >
+          <p className="text-sm text-[#686159]">
+            No product variants available.
+          </p>
+          <Link href="/shop" className="elan-btn-secondary mt-8">
+            Back to Collection
+          </Link>
+        </main>
+        <StoreFooter />
+      </div>
     );
   }
 
@@ -152,6 +182,9 @@ function ProductDetailContent({ slug }: { slug: string }) {
     ),
   ];
 
+  const selectableColors = availableColors.filter(isMeaningfulOption);
+  const selectableSizes = availableSizes.filter(isMeaningfulOption);
+
   function chooseColor(color: string) {
     if (!product) return;
 
@@ -166,6 +199,7 @@ function ProductDetailContent({ slug }: { slug: string }) {
       setCartFeedback(null);
     }
   }
+
   function chooseSize(size: string) {
     if (!product) return;
 
@@ -181,12 +215,10 @@ function ProductDetailContent({ slug }: { slug: string }) {
   }
 
   function handleAddToCart() {
-    // The click handler is a separate closure: guard both values here
-    // so TypeScript knows they exist when the button is clicked.
     if (!product || !selectedVariant) {
       setCartFeedback({
         type: "error",
-        message: "Please select an available product variant.",
+        message: "Please select an available option.",
       });
       return;
     }
@@ -202,9 +234,22 @@ function ProductDetailContent({ slug }: { slug: string }) {
         imageUrl: selectedVariant.imageUrl,
       });
 
+      const variantDetails = [
+        isMeaningfulOption(selectedVariant.color)
+          ? selectedVariant.color
+          : null,
+        isMeaningfulOption(selectedVariant.size)
+          ? `Size ${selectedVariant.size}`
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" · ");
+
       setCartFeedback({
         type: "success",
-        message: `${product.name} (${selectedVariant.color} / ${selectedVariant.size}) added to your bag.`,
+        message: variantDetails
+          ? `${product.name} (${variantDetails}) added to your bag.`
+          : `${product.name} added to your bag.`,
       });
     } catch {
       setCartFeedback({
@@ -217,155 +262,215 @@ function ProductDetailContent({ slug }: { slug: string }) {
   return (
     <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
       <StoreHeader />
-      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 pb-20">
-        <div className="mb-10 text-sm text-[#80776e]">
-          <Link href="/shop" className="hover:underline">
-            Shop
-          </Link>
-          {" / "}
-          {product.category}
-          {" / "}
-          <span className="text-[#24221f]">{product.name}</span>
-        </div>
 
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="relative aspect-[3/4] overflow-hidden bg-[#eee8e0]">
+      <main id="main-content" className="elan-container flex-1 py-10 pb-20 md:py-14">
+        {/* Breadcrumb Navigation */}
+        <nav aria-label="Breadcrumb" className="mb-8 text-xs uppercase tracking-[0.16em] text-[#686159]">
+          <ol className="m-0 flex flex-wrap items-center gap-2 p-0 list-none">
+            <li>
+              <Link href="/shop" className="transition-colors hover:text-[#24221f]">
+                Collection
+              </Link>
+            </li>
+            <li aria-hidden="true" className="text-[#b8afa6]">
+              /
+            </li>
+            <li>{product.category}</li>
+            <li aria-hidden="true" className="text-[#b8afa6]">
+              /
+            </li>
+            <li aria-current="page" className="font-semibold text-[#24221f]">
+              {product.name}
+            </li>
+          </ol>
+        </nav>
+
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
+          {/* Product Gallery */}
+          <div className="relative aspect-[3/4] w-full overflow-hidden border border-[#e7e2dc] bg-[#eee8e0]">
             {selectedVariant.imageUrl ? (
               <Image
                 src={selectedVariant.imageUrl}
-                alt={`${product.name} - ${selectedVariant.color}`}
+                alt={
+                  isMeaningfulOption(selectedVariant.color)
+                    ? `${product.name} in ${selectedVariant.color}`
+                    : product.name
+                }
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
+                className="object-cover object-top"
                 priority
+                fetchPriority="high"
               />
             ) : (
-              <div className="flex h-full flex-col items-center justify-center">
-                <span className="font-serif text-5xl text-[#b5a79a]">
+              <div className="flex h-full flex-col items-center justify-center px-6 text-center">
+                <span className="font-serif text-5xl tracking-widest text-[#b5a79a]">
                   ÉLAN.
                 </span>
-
-                <p className="mt-5 text-xs uppercase tracking-wider text-[#a39385]">
-                  Product Image Coming Soon
+                <p className="mt-4 text-xs uppercase tracking-[0.2em] text-[#a39385]">
+                  Image Coming Soon
                 </p>
               </div>
             )}
-
-            <span className="absolute left-5 top-5 bg-white px-3 py-2 text-xs">
-              DEMO
-            </span>
           </div>
 
-          <div className="lg:py-8">
-            <p className="text-xs uppercase tracking-[0.25em] text-[#ae805f]">
+          {/* Primary Purchase & Product Information Panel */}
+          <div className="flex flex-col justify-center lg:py-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#9a6b48]">
               {product.category}
             </p>
 
-            <h1 className="mt-5 font-serif text-4xl md:text-5xl">
+            <h1 className="mt-3 font-serif text-3xl leading-tight sm:text-4xl md:text-5xl">
               {product.name}
             </h1>
 
-            <p className="mt-6 text-2xl font-semibold">
+            <p className="mt-4 text-xl font-medium text-[#24221f] sm:text-2xl">
               {formatPrice(product.price)}
             </p>
 
-            <p className="mt-8 leading-8 text-[#77716b]">
+            <p className="mt-6 max-w-xl text-sm leading-7 text-[#686159] sm:text-base sm:leading-8">
               {product.description}
             </p>
 
-            <div className="mt-10 border-t border-[#e7e2dc] pt-8">
-              <p className="mb-4 text-sm font-medium">
-                Color: {selectedVariant.color}
-              </p>
+            {/* Color Presentation: selector only when multiple colors exist */}
+            {selectableColors.length > 0 && (
+              <div className="mt-8 border-t border-[#e7e2dc] pt-7">
+                {selectableColors.length === 1 ? (
+                  <p className="text-xs uppercase tracking-[0.18em] text-[#686159]">
+                    Color:{" "}
+                    <span className="font-semibold text-[#24221f]">
+                      {selectableColors[0]}
+                    </span>
+                  </p>
+                ) : (
+                  <div>
+                    <p className="mb-3 text-xs uppercase tracking-[0.18em] text-[#686159]">
+                      Color:{" "}
+                      <span className="font-semibold text-[#24221f]">
+                        {selectedVariant.color}
+                      </span>
+                    </p>
 
-              <div className="flex flex-wrap gap-3">
-                {availableColors.map((color) => (
-                  <button
-                    key={color}
-                    type="button"
-                    onClick={() => chooseColor(color)}
-                    aria-pressed={selectedVariant.color === color}
-                    className={`border px-5 py-3 text-sm transition ${
-                      selectedVariant.color === color
-                        ? "border-[#24221f] bg-[#24221f] text-white"
-                        : "border-[#ddd6cf] bg-white hover:border-[#ae805f]"
-                    }`}
-                  >
-                    {color}
-                  </button>
-                ))}
+                    <div
+                      role="group"
+                      aria-label="Select color"
+                      className="flex flex-wrap gap-2.5"
+                    >
+                      {selectableColors.map((color) => {
+                        const active = selectedVariant.color === color;
+                        return (
+                          <button
+                            key={color}
+                            type="button"
+                            onClick={() => chooseColor(color)}
+                            aria-pressed={active}
+                            className={`inline-flex min-h-11 items-center border px-5 py-2.5 text-xs font-medium uppercase tracking-[0.14em] transition-colors ${
+                              active
+                                ? "border-[#24221f] bg-[#24221f] font-semibold text-white"
+                                : "border-[#d5cdc3] bg-white text-[#24221f] hover:border-[#9a6b48]"
+                            }`}
+                          >
+                            {color}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
+            )}
 
-            <div className="mt-8">
-              <p className="mb-4 text-sm font-medium">Select Size</p>
+            {/* Size Presentation: hide "Not specified", selector only when multiple sizes exist */}
+            {selectableSizes.length > 0 && (
+              <div
+                className={
+                  selectableColors.length > 0
+                    ? "mt-6"
+                    : "mt-8 border-t border-[#e7e2dc] pt-7"
+                }
+              >
+                {selectableSizes.length === 1 ? (
+                  <p className="text-xs uppercase tracking-[0.18em] text-[#686159]">
+                    Size:{" "}
+                    <span className="font-semibold text-[#24221f]">
+                      {selectableSizes[0]}
+                    </span>
+                  </p>
+                ) : (
+                  <div>
+                    <p className="mb-3 text-xs uppercase tracking-[0.18em] text-[#686159]">
+                      Select Size:{" "}
+                      <span className="font-semibold text-[#24221f]">
+                        {selectedVariant.size}
+                      </span>
+                    </p>
 
-              <div className="flex flex-wrap gap-3">
-                {availableSizes.map((size) => (
-                  <button
-                    key={size}
-                    type="button"
-                    onClick={() => chooseSize(size)}
-                    aria-pressed={selectedVariant.size === size}
-                    className={`min-w-14 border px-4 py-3 text-sm transition ${
-                      selectedVariant.size === size
-                        ? "border-[#24221f] bg-[#24221f] text-white"
-                        : "border-[#ddd6cf] bg-white hover:border-[#ae805f]"
-                    }`}
-                  >
-                    {size}
-                  </button>
-                ))}
+                    <div
+                      role="group"
+                      aria-label="Select size"
+                      className="flex flex-wrap gap-2.5"
+                    >
+                      {selectableSizes.map((size) => {
+                        const active = selectedVariant.size === size;
+                        return (
+                          <button
+                            key={size}
+                            type="button"
+                            onClick={() => chooseSize(size)}
+                            aria-pressed={active}
+                            className={`inline-flex min-h-11 min-w-13 items-center justify-center border px-4 py-2.5 text-xs font-medium uppercase tracking-[0.14em] transition-colors ${
+                              active
+                                ? "border-[#24221f] bg-[#24221f] font-semibold text-white"
+                                : "border-[#d5cdc3] bg-white text-[#24221f] hover:border-[#9a6b48]"
+                            }`}
+                          >
+                            {size}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-
-            <div className="mt-10 border-t border-[#e7e2dc] pt-6">
-              <p className="text-sm text-[#817a72]">
-                Product ID: {product.id}
-              </p>
-
-              <p className="mt-2 text-sm text-[#817a72]">
-                Selected SKU: {selectedVariant.sku}
-              </p>
-            </div>
+            )}
 
             <button
               type="button"
               onClick={handleAddToCart}
-              className="mt-10 w-full bg-[#24221f] px-8 py-5 text-sm font-medium text-white transition hover:bg-[#ae805f]"
+              className="elan-btn-primary mt-9 w-full py-4"
             >
-              Add to Cart
+              Add to Bag
             </button>
 
             {cartFeedback && (
-              <p
+              <div
                 role={cartFeedback.type === "error" ? "alert" : "status"}
                 aria-live="polite"
-                className={`mt-4 text-sm ${
+                className={`mt-4 flex flex-wrap items-center justify-between gap-3 border px-4 py-3 text-sm ${
                   cartFeedback.type === "success"
-                    ? "text-green-700"
-                    : "text-red-700"
+                    ? "border-[#d5cdc3] bg-[#f4efe8] text-[#24221f]"
+                    : "border-red-200 bg-red-50 text-red-700"
                 }`}
               >
-                {cartFeedback.message}
-              </p>
+                <span>{cartFeedback.message}</span>
+                {cartFeedback.type === "success" && (
+                  <Link
+                    href="/cart"
+                    className="text-xs font-semibold uppercase tracking-[0.16em] text-[#9a6b48] underline underline-offset-4 hover:text-[#24221f]"
+                  >
+                    View Shopping Bag →
+                  </Link>
+                )}
+              </div>
             )}
-{cartFeedback?.type === "success" && (
-  <Link
-    href="/cart"
-    className="mt-3 inline-block text-sm font-semibold text-[#ae805f] underline"
-  >
-    View Shopping Bag
-  </Link>
-)}
 
-
-            <p className="mt-5 text-xs leading-6 text-[#817a72]">
-              Portfolio demo only. Your shopping bag is saved in this browser.
-              Checkout and payments are not active.
+            <p className="mt-5 text-xs leading-6 text-[#756d65]">
+              Your shopping bag is saved in this browser. Checkout and payments
+              are not active.
             </p>
           </div>
         </div>
+
         <YouMayAlsoLike productId={product.id} />
       </main>
 

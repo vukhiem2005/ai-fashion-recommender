@@ -5,7 +5,7 @@ import Link from "next/link";
 import PersonalizedDemo from "@/components/PersonalizedDemo";
 import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import {
   formatPrice,
@@ -22,13 +22,58 @@ type CategoryFilter = "All" | ProductCategory;
 type SortOption = "featured" | "price-asc" | "price-desc";
 
 const PAGE_SIZE = 24;
+const PERSONALIZED_BREAK_COUNT = 8;
+
+function ProductCard({ product }: { product: Product }) {
+  return (
+    <article className="elan-product-card group flex flex-col">
+      <div className="relative aspect-[3/4] overflow-hidden border border-[#e7e2dc] bg-[#eee8e0]">
+        {product.imageUrl ? (
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover object-top transition duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-full flex-col items-center justify-center px-4 text-center">
+            <span className="font-serif text-3xl tracking-widest text-[#b5a79a]">
+              ÉLAN.
+            </span>
+            <p className="mt-3 text-xs uppercase tracking-widest text-[#a39385]">
+              Image Coming Soon
+            </p>
+          </div>
+        )}
+      </div>
+
+      <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a6b48]">
+        {product.category}
+      </p>
+
+      <h2 className="mt-1.5 font-serif text-lg leading-snug font-medium text-[#24221f] transition-colors group-hover:text-[#9a6b48] sm:text-xl">
+        <Link
+          href={`/shop/${product.slug}`}
+          className="elan-card-link"
+        >
+          {product.name}
+        </Link>
+      </h2>
+
+      <p className="mt-1.5 text-sm font-medium text-[#24221f]">
+        {formatPrice(product.price)}
+      </p>
+    </article>
+  );
+}
 
 export default function ShopPage() {
+  const searchInputId = useId();
+  const sortSelectId = useId();
   const [search, setSearch] = useState("");
-  const [category, setCategory] =
-    useState<CategoryFilter>("All");
-  const [sort, setSort] =
-    useState<SortOption>("featured");
+  const [category, setCategory] = useState<CategoryFilter>("All");
+  const [sort, setSort] = useState<SortOption>("featured");
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -89,8 +134,7 @@ export default function ShopPage() {
   const visibleProducts = products
     .filter((product) => {
       const matchesCategory =
-        category === "All" ||
-        product.category === category;
+        category === "All" || product.category === category;
 
       const searchableText = [
         product.name,
@@ -101,10 +145,7 @@ export default function ShopPage() {
         .join(" ")
         .toLowerCase();
 
-      return (
-        matchesCategory &&
-        searchableText.includes(query)
-      );
+      return matchesCategory && searchableText.includes(query);
     })
     .sort((a, b) => {
       if (sort === "price-asc") {
@@ -135,6 +176,9 @@ export default function ShopPage() {
     visibleProducts.length
   );
 
+  const hasActiveFilters =
+    search.trim() !== "" || category !== "All" || sort !== "featured";
+
   function changePage(nextPage: number) {
     setPage(Math.max(1, Math.min(nextPage, totalPages)));
     filtersRef.current?.scrollIntoView({
@@ -150,242 +194,228 @@ export default function ShopPage() {
     setPage(1);
   }
 
+  const firstBatch = pageProducts.slice(0, PERSONALIZED_BREAK_COUNT);
+  const remainingBatch = pageProducts.slice(PERSONALIZED_BREAK_COUNT);
+
   return (
     <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
-      {/* Navigation */}
       <StoreHeader />
 
-      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 md:py-16">
+      <main id="main-content" className="elan-container flex-1 py-10 md:py-16">
         {/* Page Heading */}
-        <div className="mb-12">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
-            The ÉLAN Collection
-          </p>
-
-          <h1 className="font-serif text-5xl md:text-6xl">
-            Shop the Collection
-          </h1>
-
-          <p className="mt-5 max-w-2xl leading-7 text-[#77716b]">
-            Discover contemporary essentials designed
-            for effortless everyday styling.
-          </p>
-        </div>
-
-        {/* Search, Filters, Sorting */}
-        <section
-          ref={filtersRef}
-          aria-label="Product filters"
-          className="mb-10 space-y-6 border-y border-[#e7e2dc] py-6"
-        >
-          <div className="flex flex-col gap-4 md:flex-row">
-            <input
-              type="search"
-              value={search}
-              onChange={(event) => {
-                setSearch(event.target.value);
-                setPage(1);
-              }}
-              placeholder="Search products..."
-              aria-label="Search products"
-              className="w-full border border-[#ddd6cf] bg-white px-5 py-3 text-sm outline-none focus:border-[#ae805f] md:max-w-md"
-            />
-
-            <select
-              value={sort}
-              onChange={(event) => {
-                setSort(event.target.value as SortOption);
-                setPage(1);
-              }}
-              aria-label="Sort products"
-              className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm outline-none md:ml-auto"
-            >
-              <option value="featured">
-                Featured
-              </option>
-              <option value="price-asc">
-                Price: Low to High
-              </option>
-              <option value="price-desc">
-                Price: High to Low
-              </option>
-            </select>
-          </div>
-
-          {/* Category Filters */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((item) => (
-              <button
-                key={item}
-                type="button"
-                onClick={() => {
-                  setCategory(item);
-                  setPage(1);
-                }}
-                aria-pressed={category === item}
-                className={`border px-4 py-2 text-xs transition ${
-                  category === item
-                    ? "border-[#24221f] bg-[#24221f] text-white"
-                    : "border-[#ddd6cf] bg-white hover:border-[#ae805f]"
-                }`}
-              >
-                {item === "All"
-                  ? "All Products"
-                  : item}
-              </button>
-            ))}
-          </div>
-
-          <p className="text-sm text-[#817a72]">
-            {loading
-              ? "Loading collection..."
-              : loadError
-                ? "Product list unavailable"
-                : (
-                  <>
-                    Showing {firstShown}–{lastShown} of{" "}
-                    {visibleProducts.length} products
-                    {visibleProducts.length !== products.length && (
-                      <> (filtered from {products.length} total)</>
-                    )}
-                  </>
-                )}
-          </p>
-        </section>
-
-        {/* Product Grid */}
-        {loading ? (
-          <p role="status" className="py-20 text-center text-[#817a72]">
-            Loading products...
-          </p>
-        ) : loadError ? (
-          <p role="alert" className="py-20 text-center text-red-700">
-            {loadError}
-          </p>
-        ) : visibleProducts.length === 0 ? (
-          <div className="py-20 text-center">
-            <h2 className="font-serif text-3xl">
-              No products found
-            </h2>
-
-            <p className="mt-3 text-sm text-[#817a72]">
-              Try another search or category.
+        <div className="mb-10 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#9a6b48]">
+              The ÉLAN Collection
             </p>
 
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="mt-6 bg-[#24221f] px-6 py-3 text-sm text-white"
-            >
-              Clear Filters
-            </button>
+            <h1 className="mt-3 font-serif text-4xl sm:text-5xl md:text-6xl">
+              Shop the Collection
+            </h1>
+
+            <p className="mt-4 text-sm leading-7 text-[#686159] sm:text-base">
+              Discover contemporary essentials designed for effortless everyday
+              styling across outerwear, tailoring, knitwear, and accessories.
+            </p>
           </div>
-        ) : (
-          <section
-            aria-label="Product catalog"
-            className="grid grid-cols-1 gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-3"
+
+          <a
+            href="#personalized-demo-heading"
+            className="inline-flex min-h-11 w-fit items-center gap-2 border border-[#d5cdc3] bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#24221f] transition-colors hover:border-[#9a6b48] hover:text-[#9a6b48]"
           >
-            {pageProducts.map((product) => (
-              <article
-                key={product.id}
-                className="group"
+            <span>Explore Your Style Edit</span>
+            <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        {/* Search, Category Filters, and Sorting */}
+        <search
+          ref={filtersRef}
+          aria-label="Catalog search and filters"
+          className="mb-10 space-y-5 border-y border-[#e7e2dc] bg-[#faf9f6] py-6"
+        >
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div className="w-full md:max-w-md">
+              <label
+                htmlFor={searchInputId}
+                className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#686159]"
               >
-                {/* Clickable Product Image */}
-                <Link
-                  href={`/shop/${product.slug}`}
-                  aria-label={`View ${product.name}`}
-                  className="relative block aspect-[3/4] overflow-hidden bg-[#eee8e0]"
+                Search Pieces
+              </label>
+              <div className="relative mt-1.5 flex items-center">
+                <input
+                  id={searchInputId}
+                  type="search"
+                  value={search}
+                  onChange={(event) => {
+                    setSearch(event.target.value);
+                    setPage(1);
+                  }}
+                  placeholder="Search by piece, category, or color..."
+                  autoCorrect="off"
+                  autoCapitalize="none"
+                  spellCheck={false}
+                  className="min-h-11 w-full border border-[#d5cdc3] bg-white px-4 py-2.5 text-sm text-[#24221f] transition-colors focus:border-[#9a6b48]"
+                />
+              </div>
+            </div>
+
+            <div className="w-full sm:w-60">
+              <label
+                htmlFor={sortSelectId}
+                className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-[#686159]"
+              >
+                Sort By
+              </label>
+              <select
+                id={sortSelectId}
+                value={sort}
+                onChange={(event) => {
+                  setSort(event.target.value as SortOption);
+                  setPage(1);
+                }}
+                className="mt-1.5 min-h-11 w-full border border-[#d5cdc3] bg-white px-4 py-2.5 text-sm text-[#24221f] transition-colors hover:border-[#9a6b48]"
+              >
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Category Filter Pills */}
+          <div
+            role="group"
+            aria-label="Filter by category"
+            className="flex flex-wrap gap-2 pt-1"
+          >
+            {categories.map((item) => {
+              const active = category === item;
+              return (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => {
+                    setCategory(item);
+                    setPage(1);
+                  }}
+                  aria-pressed={active}
+                  className={`inline-flex min-h-10 items-center border px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] transition-colors ${
+                    active
+                      ? "border-[#24221f] bg-[#24221f] font-semibold text-white"
+                      : "border-[#d5cdc3] bg-white text-[#686159] hover:border-[#9a6b48] hover:text-[#24221f]"
+                  }`}
                 >
-                  {product.imageUrl ? (
-                    <Image
-                      src={product.imageUrl}
-                      alt={`Product image: ${product.name}`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="flex h-full flex-col items-center justify-center px-6 text-center">
-                      <span className="font-serif text-4xl tracking-widest text-[#b5a79a]">
-                        ÉLAN.
-                      </span>
+                  {item === "All" ? "All Pieces" : item}
+                </button>
+              );
+            })}
+          </div>
 
-                      <p className="mt-5 text-xs uppercase tracking-widest text-[#a39385]">
-                        Product Image Coming Soon
-                      </p>
-                    </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs text-[#686159]">
+            <p className="m-0">
+              {loading ? (
+                "Loading collection..."
+              ) : loadError ? (
+                "Product list unavailable"
+              ) : (
+                <>
+                  Showing{" "}
+                  <strong className="font-semibold text-[#24221f]">
+                    {firstShown}–{lastShown}
+                  </strong>{" "}
+                  of{" "}
+                  <strong className="font-semibold text-[#24221f]">
+                    {visibleProducts.length}
+                  </strong>{" "}
+                  pieces
+                  {visibleProducts.length !== products.length && (
+                    <> (filtered from {products.length} total)</>
                   )}
+                </>
+              )}
+            </p>
 
-                  <span className="pointer-events-none absolute left-4 top-4 bg-white px-3 py-2 text-[10px] font-semibold tracking-wider">
-                    DEMO
-                  </span>
-                </Link>
+            {hasActiveFilters && (
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="font-semibold uppercase tracking-[0.14em] text-[#9a6b48] underline underline-offset-4 hover:text-[#24221f]"
+              >
+                Reset Filters
+              </button>
+            )}
+          </div>
+        </search>
 
-                {/* Product Information */}
-                <div className="mt-5">
-                  <p className="text-xs uppercase tracking-widest text-[#a58a76]">
-                    {product.category}
-                  </p>
+        {/* Product Grid + In-Journey Personalized Discovery */}
+        {loading ? (
+          <>
+            <p role="status" className="py-16 text-center text-sm text-[#686159]">
+              Loading collection...
+            </p>
+            <PersonalizedDemo />
+          </>
+        ) : loadError ? (
+          <>
+            <p role="alert" className="py-16 text-center text-sm text-red-700">
+              {loadError}
+            </p>
+            <PersonalizedDemo />
+          </>
+        ) : visibleProducts.length === 0 ? (
+          <>
+            <div className="border border-[#e7e2dc] bg-white px-6 py-16 text-center">
+              <h2 className="font-serif text-3xl">No matching pieces found</h2>
 
-                  {/* Clickable Product Name */}
-                  <h2 className="mt-2 text-xl font-medium">
-                    <Link
-                      href={`/shop/${product.slug}`}
-                      className="transition hover:text-[#ae805f]"
-                    >
-                      {product.name}
-                    </Link>
-                  </h2>
+              <p className="mt-3 text-sm text-[#686159]">
+                Try adjusting your search keywords or selecting another
+                category.
+              </p>
 
-                  <p className="mt-2 text-base font-semibold">
-                    {formatPrice(product.price)}
-                  </p>
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="elan-btn-primary mt-6"
+              >
+                Clear Filters
+              </button>
+            </div>
+            <PersonalizedDemo />
+          </>
+        ) : (
+          <>
+            <section
+              aria-label="Product catalog"
+              className="grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-6 sm:gap-y-11 md:grid-cols-3 lg:grid-cols-4"
+            >
+              {firstBatch.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </section>
 
-                  <p className="mt-2 text-xs text-[#817a72]">
-                    {product.id}
-                  </p>
+            <PersonalizedDemo />
 
-                  {/* Product Details Summary */}
-                  <details className="mt-5 border-t border-[#e7e2dc] pt-4">
-                    <summary className="cursor-pointer text-sm font-medium">
-                      Product Information
-                    </summary>
-
-                    <div className="space-y-3 pt-4 text-sm text-[#77716b]">
-                      <p>{product.description}</p>
-
-                      <p>
-                        <strong>Colors:</strong>{" "}
-                        {product.colors.join(", ")}
-                      </p>
-
-                      <p>
-                        <strong>Sizes:</strong>{" "}
-                        {product.sizes.join(", ")}
-                      </p>
-                    </div>
-                  </details>
-
-                  {/* Product Detail Navigation */}
-                  <Link
-                    href={`/shop/${product.slug}`}
-                    className="mt-5 inline-block border-b border-[#24221f] pb-1 text-sm font-medium transition hover:border-[#ae805f] hover:text-[#ae805f]"
-                  >
-                    View Product Details
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </section>
+            {remainingBatch.length > 0 && (
+              <section
+                aria-label="More catalog pieces"
+                className="mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:gap-x-6 sm:gap-y-11 md:grid-cols-3 lg:grid-cols-4"
+              >
+                {remainingBatch.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </section>
+            )}
+          </>
         )}
 
-        {/* Client-side pagination: only 24 cards render per page. */}
+        {/* Client-side pagination: 24 cards per page */}
         {!loading && !loadError && visibleProducts.length > PAGE_SIZE && (
           <nav
             aria-label="Product pagination"
-            className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#e7e2dc] pt-6 sm:flex-row"
+            className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-[#e7e2dc] pt-8 sm:flex-row"
           >
-            <p className="text-sm text-[#817a72]">
+            <p className="text-xs font-medium uppercase tracking-[0.16em] text-[#686159]">
               Page {currentPage} of {totalPages}
             </p>
 
@@ -394,7 +424,7 @@ export default function ShopPage() {
                 type="button"
                 onClick={() => changePage(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm transition hover:border-[#ae805f] disabled:cursor-not-allowed disabled:opacity-40"
+                className="elan-btn-secondary disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Previous
               </button>
@@ -403,15 +433,13 @@ export default function ShopPage() {
                 type="button"
                 onClick={() => changePage(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="border border-[#ddd6cf] bg-white px-5 py-3 text-sm transition hover:border-[#ae805f] disabled:cursor-not-allowed disabled:opacity-40"
+                className="elan-btn-secondary disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Next
               </button>
             </div>
           </nav>
         )}
-
-        <PersonalizedDemo />
       </main>
 
       <StoreFooter />

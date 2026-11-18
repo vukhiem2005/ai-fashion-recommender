@@ -257,3 +257,24 @@ p {
     transition: rotate 0.2s ease;
   }
 }
+
+/* Stretched-link editorial product card (per modern-web-guidance card) */
+.elan-product-card:has(a.elan-card-link) {
+  position: relative;
+}
+
+.elan-product-card a.elan-card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.elan-product-card a.elan-card-link:focus-visible {
+  outline: none;
+}
+
+.elan-product-card:has(a.elan-card-link:focus-visible) {
+  outline: 2px solid var(--elan-text);
+  outline-offset: 4px;
+}

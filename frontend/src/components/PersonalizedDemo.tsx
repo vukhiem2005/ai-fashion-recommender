@@ -52,6 +52,25 @@ type PersonalizedResponse = {
   recommendations: PersonalizedItem[];
 };
 
+const EDITORIAL_PROFILE_LABELS: Record<string, string> = {
+  "SYN-U0001": "Tops & Casual Edit",
+  "SYN-U0002": "Dresses & Occasion Edit",
+  "SYN-U0003": "Outerwear & Tailoring Edit",
+  "SYN-U0007": "Bottoms & Denim Edit",
+  "SYN-U0016": "Knitwear & Layering Edit",
+  "SYN-U0048": "Accessories & Finishing Edit",
+  "SYN-COLD-START": "New Visitor — Most-Loved Essentials",
+};
+
+function formatStyleProfileLabel(userId: string, rawLabel: string): string {
+  const mapped = EDITORIAL_PROFILE_LABELS[userId];
+  if (mapped) return mapped;
+  return rawLabel
+    .replace(/^Simulated Shopper \d+\s*—\s*/i, "")
+    .replace(/\s*\(Popularity Fallback\)/i, "")
+    .trim();
+}
+
 export default function PersonalizedDemo() {
   const selectId = useId();
   const [profiles, setProfiles] = useState<SyntheticProfile[]>([]);
@@ -126,104 +145,74 @@ export default function PersonalizedDemo() {
 
   return (
     <section
-      className="mt-20 border-t border-[#e7e2dc] pt-12"
+      className="my-14 scroll-mt-24 border border-[#e7e2dc] bg-[#f4efe8]/80 px-6 py-9 sm:px-8 sm:py-11"
       aria-labelledby="personalized-demo-heading"
     >
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div className="max-w-2xl">
           <div className="flex flex-wrap items-center gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
-              Synthetic Behavioral AI Demo
+            <p className="text-xs font-semibold uppercase tracking-[0.26em] text-[#9a6b48]">
+              PERSONALIZED DISCOVERY
             </p>
-            <span className="border border-[#e7e2dc] bg-white px-2.5 py-0.5 text-[11px] uppercase tracking-[0.16em] text-[#706961]">
-              {payload?.cold_start_fallback
-                ? "ItemKNN · Popularity Fallback"
-                : "ItemKNN Collaborative Filtering"}
+            <span className="border border-[#dfd8cf] bg-[#faf9f6] px-2.5 py-0.5 text-[11px] font-medium uppercase tracking-[0.14em] text-[#686159]">
+              Demo style profiles
             </span>
           </div>
+
           <h2
             id="personalized-demo-heading"
-            className="mt-3 font-serif text-3xl md:text-4xl"
+            className="mt-3 font-serif text-3xl text-[#24221f] sm:text-4xl"
           >
-            Recommended for Synthetic Shopper
+            Your Style Edit
           </h2>
+
+          <p className="mt-2.5 text-sm leading-6 text-[#686159]">
+            Discover pieces curated around different style profiles.
+          </p>
         </div>
 
         <div className="w-full sm:w-80">
           <label
             htmlFor={selectId}
-            className="block text-xs font-semibold uppercase tracking-[0.18em] text-[#706961]"
+            className="block text-xs font-semibold uppercase tracking-[0.18em] text-[#24221f]"
           >
-            Simulated Shopper Profile
+            Explore a Style Profile
           </label>
           <select
             id={selectId}
             value={selectedUserId}
             onChange={(e) => setSelectedUserId(e.target.value)}
-            className="mt-2 w-full border border-[#d9d2c9] bg-white px-3.5 py-2.5 text-sm text-[#24221f] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24221f]"
+            className="mt-2 min-h-11 w-full border border-[#d5cdc3] bg-white px-3.5 py-2.5 text-sm text-[#24221f] transition-colors hover:border-[#9a6b48]"
           >
             {profiles.length > 0 ? (
               profiles.map((p) => (
                 <option key={p.user_id} value={p.user_id}>
-                  {p.display_label}
+                  {formatStyleProfileLabel(p.user_id, p.display_label)}
                 </option>
               ))
             ) : (
-              <option value="SYN-U0001">
-                Simulated Shopper 01 — Tops &amp; Casual Edit
-              </option>
+              <option value="SYN-U0001">Tops &amp; Casual Edit</option>
             )}
           </select>
         </div>
       </div>
 
-      {payload && !loading && !error ? (
-        <div className="mt-6 border border-[#e7e2dc] bg-white/80 p-4 text-xs text-[#706961]">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span>
-              <strong className="text-[#24221f]">Profile:</strong>{" "}
-              {payload.reference_user_id}
-            </span>
-            <span>
-              <strong className="text-[#24221f]">Simulated Train Events:</strong>{" "}
-              {payload.interaction_summary.total_train_events} (
-              {payload.interaction_summary.views} views,{" "}
-              {payload.interaction_summary.add_to_carts} cart adds,{" "}
-              {payload.interaction_summary.purchases} purchases)
-            </span>
-          </div>
-          {payload.recent_history.length > 0 ? (
-            <p className="mt-2 leading-6">
-              <strong className="text-[#24221f]">Sampled History:</strong>{" "}
-              {payload.recent_history
-                .map((h) => `${h.name} (${h.event_type.replaceAll("_", " ")})`)
-                .join(" · ")}
-            </p>
-          ) : (
-            <p className="mt-2 leading-6">
-              Zero prior interactions — demonstrating deterministic cold-start
-              popularity fallback.
-            </p>
-          )}
-        </div>
-      ) : null}
-
       {loading ? (
-        <p className="mt-8 text-sm text-[#817a72]" aria-busy="true">
-          Loading synthetic personalized recommendations...
+        <p className="mt-8 py-8 text-sm text-[#686159]" aria-busy="true">
+          Curating your style edit...
         </p>
       ) : error ? (
-        <p role="alert" className="mt-8 text-sm text-[#817a72]">
-          Synthetic personalized recommendations are temporarily unavailable.
+        <p role="alert" className="mt-8 py-8 text-sm text-[#686159]">
+          Style profile recommendations are temporarily unavailable.
         </p>
       ) : items.length === 0 ? (
-        <p className="mt-8 text-sm text-[#817a72]">
-          No personalized recommendations available for this simulated profile.
+        <p className="mt-8 py-8 text-sm text-[#686159]">
+          No curated pieces available for this style profile.
         </p>
       ) : (
         <ul
           role="list"
-          className="mt-8 grid list-none grid-cols-2 gap-5 p-0 sm:grid-cols-3 lg:grid-cols-5"
+          className="mt-8 grid list-none grid-cols-2 gap-4 p-0 sm:grid-cols-3 sm:gap-5 lg:grid-cols-5"
         >
           {items.map((item) => {
             const imageUrl = item.image_url?.startsWith("/")
@@ -232,43 +221,45 @@ export default function PersonalizedDemo() {
 
             return (
               <li key={item.id} className="min-w-0">
-                <Link
-                  href={`/shop/${encodeURIComponent(item.slug)}`}
-                  className="group block min-w-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#24221f]"
-                >
-                  <div className="relative aspect-[3/4] overflow-hidden bg-[#eee8e0]">
+                <article className="elan-product-card group flex h-full flex-col">
+                  <div className="relative aspect-[3/4] overflow-hidden border border-[#e7e2dc] bg-[#eee8e0]">
                     {imageUrl ? (
                       <Image
                         src={imageUrl}
                         alt={item.name}
                         fill
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="flex h-full flex-col items-center justify-center text-center">
                         <span className="font-serif text-3xl text-[#b5a79a]">
                           ÉLAN.
                         </span>
-                        <span className="mt-3 px-3 text-xs text-[#a39385]">
+                        <span className="mt-2 px-3 text-xs text-[#a39385]">
                           Image Coming Soon
                         </span>
                       </div>
                     )}
                   </div>
-                  <p className="mt-4 text-xs uppercase tracking-wider text-[#ae805f]">
+
+                  <p className="mt-3.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9a6b48]">
                     {item.category}
                   </p>
-                  <h3 className="mt-1 text-sm font-medium leading-6 group-hover:underline">
-                    {item.name}
+
+                  <h3 className="mt-1 font-serif text-lg leading-snug font-medium text-[#24221f] transition-colors group-hover:text-[#9a6b48]">
+                    <Link
+                      href={`/shop/${encodeURIComponent(item.slug)}`}
+                      className="elan-card-link"
+                    >
+                      {item.name}
+                    </Link>
                   </h3>
-                  <p className="mt-1 text-sm font-semibold">
+
+                  <p className="mt-1 text-sm font-medium text-[#24221f]">
                     {formatPrice(item.price_cents / 100)}
                   </p>
-                  <p className="mt-2 text-xs leading-5 text-[#817a72]">
-                    {item.reason}
-                  </p>
-                </Link>
+                </article>
               </li>
             );
           })}
