@@ -1,180 +1,74 @@
-# ÉLAN - AI Fashion Recommender
+# ÉLAN — AI-Powered Fashion Discovery
 
-**A full-stack fashion storefront with content-based recommendations, reproducible model evaluation, and a public live demo.**
+**A full-stack contemporary fashion storefront pairing multimodal visual discovery and collaborative filtering with reproducible offline evaluation.**
 
-[**Live Website**](https://elan-fashion-store.vercel.app/) | [**Backend Health**](https://elan-fashion-api.onrender.com/health) | [**Source Repository**](https://github.com/vukhiem2005/ai-fashion-recommender)
+[**Live Demo**](https://elan-fashion-store.vercel.app/) · [**Backend Health**](https://elan-fashion-api.onrender.com/health) · [**Source Repository**](https://github.com/vukhiem2005/ai-fashion-recommender)
 
-ÉLAN combines a Next.js storefront, a FastAPI product service, a SQLite product catalog, and a TF-IDF recommendation engine. The central engineering goal is to build and evaluate a transparent, maintainable similar-product recommendation system, not to present unvalidated improvements as production-ready.
+ÉLAN is a full-stack AI-powered fashion e-commerce simulation featuring 328 active products and 343 SKU variants across six apparel categories.
+Built with a minimalist editorial aesthetic, the platform integrates only recommendation models that have been validated through offline benchmarks.
 
-> **Status: Public portfolio demo deployed.** **CLIP Late Fusion** (with **V1 TF-IDF + cosine similarity** fallback) powers similar-item recommendations on product pages, and **ItemKNN Collaborative Filtering** powers the synthetic personalized style-profile demonstration on `/shop`. Other researched algorithms (`TruncatedSVD`, `Apriori` / `FP-Growth`, `Hybrid`, and `V2–V4`) are preserved as **offline evaluation benchmarks**. This is an academic demonstration storefront: there is **no real checkout, payment processing, or order fulfillment**.
+## Key Features
 
-## Website Screenshots
+- **Collection Browsing:**
+  Keyword search, category filtering (`Outerwear`, `Tops`, `Bottoms`, `Dresses`, `Knitwear`, `Accessories`), price sorting, and 24-item pagination.
+- **Product Detail & Shopping Bag:**
+  Variant selection by color and size, persistent browser shopping bag with quantity controls, and local guest profile preferences.
+- **Similar-Product Discovery (`You May Also Like`):**
+  Top-5 visually and textually related product recommendations surfaced on every product detail page.
+- **Synthetic Shopper Personalization (`Your Style Edit`):**
+  Interactive style-profile switcher on `/shop` demonstrating personalized Top-5 recommendations across distinct shopper personas and cold-start visitors.
 
-### Homepage
+## AI Recommendation Systems
 
-![ELAN homepage - fashion storefront](docs/screenshots/home.png)
+- **CLIP Late Fusion (Primary Similar-Item Engine):**
+  Combines pretrained visual image embeddings with textual attribute similarity to rank complementary styles across the catalog.
+- **TF-IDF + Cosine Similarity (Content Fallback):**
+  Ranks products from weighted category, title, color, and description metadata whenever an item lacks an image embedding or multimodal serving is disabled.
+- **ItemKNN Collaborative Filtering (Synthetic Personalization):**
+  Recommends Top-5 unseen pieces for selectable simulated shopper profiles based on item co-interaction neighborhoods, with popularity fallback for cold-start profiles.
 
-| Style Inspirations | Product Collection |
-|:--:|:--:|
-| ![Style inspirations section](docs/screenshots/style-inspirations.png) | ![Collection with product filters and catalog](docs/screenshots/collection.png) |
+## Evaluation Highlights
 
-| Product Details | AI-Powered Recommendations |
-|:--:|:--:|
-| ![Product details with variant selection](docs/screenshots/product-details.png) | ![Top-5 similar products with similarity scores](docs/screenshots/recommendations.png) |
+Models are evaluated separately by recommendation task and deployed only when supported by offline evidence:
 
-**Try it:** [Open the ÉLAN Live Demo](https://elan-fashion-store.vercel.app/).
+- **Similar-Item Retrieval:**
+  On the 18-reference Holdout benchmark (`140` judged candidate pairs), **CLIP Late Fusion** achieved `nDCG@5 = 0.7625` compared to `0.6967` for the **TF-IDF** baseline (`+9.44%`), with `Precision@5 = 71.11%` and `Strict Precision@5 = 26.67%`.
+- **Personalized Next-Item Ranking:**
+  On the chronological synthetic interaction split (Test Protocol A1, `545` users), **ItemKNN** achieved `Graded nDCG@5 = 0.0514` (`Precision@5 = 4.11%`, `Catalog Coverage@5 = 36.59%`), outperforming `TruncatedSVD` (`0.0464`) and popularity/content baselines.
+- **Deferred Research Models:**
+  `TruncatedSVD`, `Apriori` / `FP-Growth` association rule mining (pure test `HitRate@5 = 1.29%`, `0/256` configs meeting validation coverage floors), and linear `Hybrid` fusion (`Graded nDCG@5 = 0.0501`) are preserved offline rather than deployed to the storefront.
 
-## Features
-
-- **Storefront:** keyword search, category filtering, price sorting, and pagination (24 products per page).
-- **Product pages:** descriptions, images, color/size variants, SKU selection, and product pricing.
-- **Content-based discovery:** **You May Also Like** suggests the Top-5 most similar active products, with similarity scores and short explanations.
-- **Shopping bag:** interactive portfolio-demo cart; no real purchases or payments.
-- **Catalog administration:** admin-key-protected endpoints and interface for catalog maintenance. Administrative access is **not enabled** on the public demo.
-- **Offline experimentation:** V1-V4 model comparisons using frozen rankings and relevance labels.
-- **Reproducible evaluation:** scripts and committed reports for Precision@5, Strict Precision@5, and pooled-candidate nDCG@5.
-
-### Demo Catalog
-
-| Measure | Verified value |
-|---|---:|
-| Active products | **328** |
-| Product variants (SKUs) | **343** |
-| Product image assets in Git | **335** |
-| Variants with image URLs | **341 / 343** |
-| Top-K recommendations | **5** |
-
-The demo catalog includes **320 sampled H&M articles and 8 original ÉLAN demo products**. Product prices are illustrative, not current retail prices. The counts above describe the verified release snapshot and repository assets; image-file count and product count are not expected to match one-to-one.
+> **Evaluation Scope:**
+> The 18-reference holdout is a historically reused exploratory benchmark with AI-assisted relevance labels rather than an independent human-annotated blind test.
+> Personalization metrics are computed on computer-generated synthetic interactions (`SYNTHETIC_SIMULATION_V5`) and do not measure real customer behavior.
+> Item-similarity and user-personalization metrics use distinct protocols and are not directly comparable.
 
 ## Tech Stack
 
-| Layer | Technology |
+| Layer | Technologies |
 |---|---|
-| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS 4 |
-| Backend | Python, FastAPI, SQLModel, SQLAlchemy, Uvicorn |
-| Database | SQLite (versioned release snapshot for the public demo) |
-| Recommendation | scikit-learn, TF-IDF, cosine similarity; heuristic rerankers for offline experiments |
-| Evaluation | Python, CSV/JSON reports, Precision@5, Strict Precision@5, nDCG@5 |
-| Deployment | Vercel (frontend), Render (backend) |
-| Development | Windows PowerShell, VS Code, Git, GitHub |
-
-## System Architecture
-
-```text
-Browser (Public HTTPS)
-        |
-        v
-Vercel - Next.js frontend
-        |-- Storefront, collection, product details, shopping bag
-        |-- /api/products and /api/recommendations/[productId]
-        |
-        |  Server-side API proxy (ELAN_BACKEND_URL)
-        v
-Render - FastAPI backend
-        |-- GET /health
-        |-- GET /products
-        |-- GET /products/{slug}
-        |-- GET /recommendations/{product_id}
-        |
-        +-- SQLModel / SQLite (elan_release.db)
-        +-- V1 TF-IDF + cosine similarity recommendation engine
-```
-
-**Active recommendation paths:**
-- **Similar Styles (`/shop/[slug]`):** `frontend/src/components/YouMayAlsoLike.tsx` -> Next.js proxy -> `GET /recommendations/{product_id}` -> `backend/app/clip_service.py` (**CLIP Late Fusion**, falling back automatically to `backend/app/recommender.py` **V1 TF-IDF** when an item has no image embedding or when multimodal mode is disabled).
-- **Your Style Edit (`/shop`):** `frontend/src/components/PersonalizedDemo.tsx` -> Next.js proxy -> `GET /recommendations/personalized` -> `backend/app/personalization_service.py` (**ItemKNN Collaborative Filtering** over deterministic `SYNTHETIC_SIMULATION_V5` shopper profiles, with popularity fallback for cold-start profiles).
-
-## Recommendation Models & Evidence-Based Selection
-
-Across Milestones 1–5, candidate algorithms were evaluated offline and integrated into the live storefront only when justified by measured ranking quality and catalog coverage:
-
-| Task / Milestone | Model | Application Status | Summary of Offline Evidence |
-|---|---|---|---|
-| **Similar Items (Milestone 4B)** | **CLIP Late Fusion** (`clip-vit-B-32` + `V1 TF-IDF`, `w_vis=0.5`) | **Deployed primary (`/shop/[slug]`)** | Holdout-18 `nDCG@5 = 0.7625` (`+9.44%` vs V1 `0.6967`), `P@5 = 71.11%`, `Strict P@5 = 26.67%`, `Coverage@5 = 95.43% (313/328)`, `0.485 ms/query` via precomputed `.npz` cache |
-| **Similar Items (Baseline)** | **V1 TF-IDF + Cosine Similarity** | **Deployed fallback (`/shop/[slug]`)** | `100%` catalog availability (`96.65%` `Coverage@5`); serves missing-image item `HM-0398947001` (`has_image = 0` among `327/328` embedded products) |
-| **Personalized Demo (Milestone 2)** | **ItemKNN Collaborative Filtering** (`log_sum`, `IUF=0.5`, `shrinkage=20`, `k=100`) | **Deployed synthetic demo (`/shop`)** | Best collaborative model on `SYNTHETIC_SIMULATION_V5`: Test Protocol A1 `Graded nDCG@5 = 0.0514` (`P@5 = 4.11%`, `Recall@5 = 5.61%`, `Coverage@5 = 36.59%`), Protocol A2 `0.0544`; `192/192` grid configs met the `>=25%` coverage floor |
-| **Personalized CF (Milestone 2)** | **TruncatedSVD** (`n_components=16`) | Offline benchmark (deferred) | Test Protocol A1 `Graded nDCG@5 = 0.0464`, Protocol A2 `0.0485`, `Coverage@5 = 33.54%`; trailed `ItemKNN` on all accuracy and coverage metrics |
-| **Basket Completion (Milestone 3)** | **Apriori & FP-Growth ARM** (`min_support_count=2`, `104` rules) | Offline benchmark (deferred) | Exact Apriori/FP-Growth equivalence verified (`351` itemsets), but `0/256` configs met validation coverage floors; Test Protocol B1 pure `HitRate@5 = 1.29%` (`2/155` orders), `Catalog Coverage@5 = 14.02%` |
-| **Hybrid Ranking (Milestone 5)** | **Calibrated Linear Hybrid** (`0.50` Content + `0.35` CF + `0.15` ARM) | Offline benchmark (deferred) | Track 1 Test Protocol A1 `Graded nDCG@5 = 0.0501` (Content+CF) and `0.0493` (Content+CF+ARM), trailing standalone `ItemKNN` (`0.0514`); Track 2 Basket `HitRate@5 = 6.45%` |
-| **Content Rerankers (V2–V4 & Phase 4A)** | Heuristic subtype rerankers & handcrafted HSV/edge fusion | Offline benchmark (superseded) | Superseded by Phase 4B `CLIP Late Fusion` (`nDCG@5 = 0.7625` vs Phase 4A Late Fusion `0.7282`) |
-
-### Milestone 1–5 Research Reports (`backend/evaluation/v5/`)
-
-- [Milestone 1 — Reproducible Synthetic Interaction Dataset (`SYNTHETIC_SIMULATION_V5`)](backend/evaluation/v5/synthetic_dataset_report.md)
-- [Milestone 2 — Collaborative Filtering (`ItemKNN` vs. `TruncatedSVD`) Benchmark Report](backend/evaluation/v5/cf_milestone2_report.md)
-- [Milestone 3 — Association Rule Mining (`Apriori` & `FP-Growth`) Benchmark Report](backend/evaluation/v5/arm_milestone3_report.md)
-- [Milestone 4A — Lightweight Multimodal Retrieval Report](backend/evaluation/v5/multimodal_milestone4_report.md)
-- [Milestone 4B — Neural CLIP Multimodal (`Dev-18` & `Holdout-18`) Final Report](backend/evaluation/v5/neural_multimodal_milestone4b_final_report.md)
-- [Milestone 5 — Calibrated Hybrid Recommendation & Ablation Report](backend/evaluation/v5/hybrid_milestone5_report.md)
-
-## Legacy Content Baseline Evaluation (V1–V4)
-
-The saved blind-review holdout includes **18 reference products** (3 per category), **140 unique reference-candidate pairs**, and **90 Top-5 positions per model**.
-
-| Model | Precision@5 | Strict Precision@5 | nDCG@5* |
-|---|---:|---:|---:|
-| **V1 - Active baseline** | 66.7% | **24.4%** | **0.784** |
-| V2 | 70.0% | 22.2% | 0.741 |
-| V3 | 70.0% | 22.2% | 0.741 |
-| V4 | **71.1%** | **24.4%** | 0.759 |
-
-**Label scheme:** `0` = irrelevant; `1` = related; `2` = close substitute. Precision@5 counts labels >= 1; Strict Precision@5 counts only label 2.
-
-* **nDCG@5** uses gain `2^relevance - 1` and an ideal ranking from **pooled retrieved candidates**, not the full catalog. The displayed nDCG@5 mean covers **16** references with defined ideal DCG; two references without relevant pooled candidates are excluded.
-* Labels were assigned by an **AI evaluator** from product images and names without model-ranking identities. They were **not independently validated by human annotators**. These results are exploratory, not a confirmed measure of consumer recommendation quality.
-* V4 improves Precision@5 over V1 by **4.4 percentage points** (4 of 90 positions), but trails V1 on nDCG@5 and ties it on Strict Precision@5. Its Tops-category Precision@5 decreases from **73.3%** to **53.3%**.
-* A paired reference-bootstrap 95% percentile interval for V4 minus V1 Precision@5 is approximately **-7.8 to +15.6 percentage points**. The small holdout does not establish a robust improvement.
-
-### Why V1 Is Deployed
-
-**V1 remains the production engine** because it achieved the highest measured pooled-candidate nDCG@5, tied the highest strict precision, and already had a stable API integration. V4's modest gain on broad precision, category-level regression, uncertainty, and reliance on separately held metadata did not justify replacing V1.
-
-The objective is **evidence-based model selection**, not maximizing one isolated benchmark number.
-
-### Evaluation Evidence
-
-- [Detailed evaluation report](backend/evaluation/holdout_v4_evaluation_report.md)
-- [Structured metrics](backend/evaluation/holdout_v4_metrics.json)
-- [Blind relevance labels](backend/evaluation/holdout_v4_blind_labeled.csv)
-- [Frozen candidate rankings](backend/evaluation/holdout_v4_candidate_union.csv)
-- [Evaluation script](backend/evaluation/evaluate_holdout_v4_results.py)
-
-### Reproduce the Saved Evaluation (Windows PowerShell)
-
-Run from the repository root after creating the backend virtual environment and installing its requirements:
-
-```powershell
-.\backend\.venv\Scripts\python.exe .\backend\evaluation\evaluate_holdout_v4_results.py --out-dir .\backend\evaluation\recomputed
-```
-
-This script recalculates metrics from committed CSV inputs, without executing recommendation models or accessing SQLite. It writes to a separate output directory; use a new directory on subsequent runs, or explicitly pass `--overwrite` if appropriate.
+| **Frontend** | Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS 4 |
+| **Backend** | Python, FastAPI, SQLModel, SQLAlchemy, Uvicorn |
+| **AI / ML** | CLIP (`clip-vit-B-32` precomputed `.npz` embeddings), scikit-learn (`TF-IDF`), NumPy (`ItemKNN`, `TruncatedSVD`, `Apriori`, `FP-Growth`) |
+| **Database** | SQLite (versioned read-only release snapshot `backend/data/elan_release.db`) |
+| **Deployment** | Vercel (frontend), Render (backend) |
 
 ## Run Locally (Windows PowerShell)
-
-**Prerequisites:** Python compatible with `backend/requirements.txt`, Node.js/npm compatible with Next.js 16, and Git.
 
 ### 1. Backend (Terminal 1)
 
 ```powershell
-git clone https://github.com/vukhiem2005/ai-fashion-recommender.git
-cd ai-fashion-recommender\backend
-
+cd backend
 py -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 
-# Use the committed release snapshot; do not overwrite the local catalog.
 $env:ELAN_CATALOG_MODE = "release"
+$env:ELAN_CLIP_RECOMMENDATIONS_ENABLED = "true"
 python -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8001
 ```
 
-Check `http://127.0.0.1:8001/health`. The `release` mode reads `backend/data/elan_release.db`. The default `local` mode uses `backend/data/elan.db`, which is intentionally **not** committed.
-
-For **local-only admin operations**, explicitly configure your own secret as `ELAN_ADMIN_KEY` and use a suitable local catalog. The deployed public demo does not expose enabled administrative access.
-
 ### 2. Frontend (Terminal 2)
-
-From the repository root in another PowerShell terminal:
 
 ```powershell
 cd frontend
@@ -183,82 +77,21 @@ $env:ELAN_BACKEND_URL = "http://127.0.0.1:8001"
 npm run dev
 ```
 
-Open `http://localhost:3000` or `http://localhost:3000/shop`.
+Open `http://localhost:3000` (health check: `http://127.0.0.1:8001/health`).
 
-## Deployment
+## Research & Documentation
 
-| Component | Hosting | Configuration |
-|---|---|---|
-| Frontend | Vercel | Root directory: `frontend`; Next.js framework |
-| Backend | Render Web Service | Root directory: `backend`; Python / Uvicorn |
-| Production catalog | SQLite snapshot shipped with backend | `ELAN_CATALOG_MODE=release` |
-| Frontend-to-backend routing | Server-side Next.js API proxy | `ELAN_BACKEND_URL=https://elan-fashion-api.onrender.com` |
+Detailed experimental protocols, hyperparameter grids, ablation tables, and SHA-256 artifact digests are committed in the repository:
 
-**Render build:** `pip install -r requirements.txt`
+- [Milestone 1 — Reproducible Synthetic Interaction Dataset (`SYNTHETIC_SIMULATION_V5`)](backend/evaluation/v5/synthetic_dataset_report.md)
+- [Milestone 2 — Collaborative Filtering (`ItemKNN` vs. `TruncatedSVD`) Report](backend/evaluation/v5/cf_milestone2_report.md)
+- [Milestone 3 — Association Rule Mining (`Apriori` & `FP-Growth`) Report](backend/evaluation/v5/arm_milestone3_report.md)
+- [Milestone 4A — Lightweight Multimodal Retrieval Report](backend/evaluation/v5/multimodal_milestone4_report.md)
+- [Milestone 4B — Neural CLIP Multimodal (`Dev-18` & `Holdout-18`) Final Report](backend/evaluation/v5/neural_multimodal_milestone4b_final_report.md)
+- [Milestone 5 — Calibrated Hybrid Recommendation & Ablation Report](backend/evaluation/v5/hybrid_milestone5_report.md)
+- [Historical Content Baseline Evaluation (V1–V4 Holdout Report)](backend/evaluation/holdout_v4_evaluation_report.md)
 
-**Render start:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-
-**Render health-check path:** `/health`
-
-**Hosting limitation:** The Render Free instance may spin down after inactivity, producing a slow first request. Its local filesystem is ephemeral. The committed SQLite snapshot makes the read-oriented catalog available on startup; production data writes should not be treated as durable storage.
-
-## Academic Simulation & Data Provenance
-
-- **Academic AI e-commerce simulation:** ÉLAN is an academic AI-powered fashion e-commerce simulation built for recommendation systems research and technical demonstration.
-- **Synthetic interaction histories:** Personalized recommendations on `/shop` (`ItemKNN`) are generated from deterministic, simulated shopper interaction profiles (`SYNTHETIC_SIMULATION_V5`) rather than real user accounts.
-- **Offline model evaluation:** The `ItemKNN` collaborative filtering recommender was trained and evaluated offline against split interaction histories, not through live customer tracking or telemetry.
-- **Illustrative catalog and imagery:** Catalog prices are illustrative, and product images are included strictly for academic and portfolio demonstration.
-- **Simulated checkout only:** No real purchases, orders, or payment transactions are processed.
-
-## Data and Image Assets
-
-- The release catalog is the versioned snapshot `backend/data/elan_release.db` (328 products, 343 variants); the working `backend/data/elan.db` remains excluded from Git.
-- Product images used by the storefront are under `frontend/public/products/` (**335 tracked `.jpg` / `.webp` assets**).
-- The sample references metadata from the *H&M Personalized Fashion Recommendations* dataset. The full source dataset and private local source CSV files are not included.
-- Demo pricing is illustrative; this portfolio site does not perform live retail pricing, orders, or payments.
-- Anyone publishing or redistributing catalog data or product imagery should verify applicable dataset and image usage rights before making the repository public.
-- The two variants without an image URL are preserved; missing local image-file paths were not found among image URLs in the verified release catalog.
-
-## Project Structure
-
-```text
-ai-fashion-recommender/
-|-- backend/
-|   |-- app/
-|   |   |-- main.py              # FastAPI application
-|   |   |-- database.py          # local / public_demo / release modes
-|   |   |-- models.py            # Product and variant schemas
-|   |   |-- recommendations.py   # Public V1 API route
-|   |   |-- recommender.py       # Active TF-IDF baseline
-|   |   |-- recommender_v2.py    # Offline experiment
-|   |   |-- recommender_v3.py    # Offline experiment
-|   |   `-- recommender_v4.py    # Offline experiment
-|   |-- data/
-|   |   `-- elan_release.db      # Versioned public demo snapshot
-|   |-- evaluation/              # Frozen labels, metrics, scripts
-|   `-- requirements.txt
-|-- frontend/
-|   |-- public/products/         # Product image assets
-|   |-- src/app/shop/            # Storefront and product pages
-|   |-- src/app/api/             # Backend proxy endpoints
-|   `-- src/components/YouMayAlsoLike.tsx
-|-- docs/screenshots/
-|   |-- home.png
-|   |-- style-inspirations.png
-|   |-- collection.png
-|   |-- product-details.png
-|   `-- recommendations.png
-`-- README.md
-```
-
-## Limitations and Future Work
-
-- Expand the evaluation set and obtain **independent human relevance judgments**.
-- Improve catalog taxonomy, subtype consistency, and coverage for uncommon product types.
-- Add automated regression and end-to-end tests for public deployments.
-- Consider a persistent production database if durable catalog editing becomes a requirement.
-- Investigate embeddings or hybrid retrieval only when broader evaluation supports a measurable gain.
-
----
-
-**Portfolio emphasis:** full-stack AI integration, transparent content-based retrieval, reproducible offline evaluation, careful production model selection, and cost-conscious deployment.
+**Academic Simulation & Data Provenance:**
+ÉLAN is an academic simulation and engineering portfolio project.
+The release catalog (`328` products, `335` tracked image files) combines `320` sampled articles from the *H&M Personalized Fashion Recommendations* dataset with `8` original ÉLAN demo items, and personalized profiles use deterministic synthetic interactions (`seed=20260501`).
+All product prices are illustrative, shopping bag state is stored locally in the browser, and real checkout, orders, or payment processing are unavailable.
