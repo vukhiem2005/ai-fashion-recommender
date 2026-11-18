@@ -190,6 +190,14 @@ Open `http://localhost:3000` or `http://localhost:3000/shop`.
 
 **Hosting limitation:** The Render Free instance may spin down after inactivity, producing a slow first request. Its local filesystem is ephemeral. The committed SQLite snapshot makes the read-oriented catalog available on startup; production data writes should not be treated as durable storage.
 
+## Academic Simulation & Data Provenance
+
+- **Academic AI e-commerce simulation:** ÉLAN is an academic AI-powered fashion e-commerce simulation built for recommendation systems research and technical demonstration.
+- **Synthetic interaction histories:** Personalized recommendations on `/shop` (`ItemKNN`) are generated from deterministic, simulated shopper interaction profiles (`SYNTHETIC_SIMULATION_V5`) rather than real user accounts.
+- **Offline model evaluation:** The `ItemKNN` collaborative filtering recommender was trained and evaluated offline against split interaction histories, not through live customer tracking or telemetry.
+- **Illustrative catalog and imagery:** Catalog prices are illustrative, and product images are included strictly for academic and portfolio demonstration.
+- **Simulated checkout only:** No real purchases, orders, or payment transactions are processed.
+
 ## Data and Image Assets
 
 - The release catalog is the versioned snapshot `backend/data/elan_release.db` (328 products, 343 variants); the working `backend/data/elan.db` remains excluded from Git.

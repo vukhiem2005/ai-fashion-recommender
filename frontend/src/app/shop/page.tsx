@@ -416,13 +416,6 @@ export default function ShopPage() {
         )}
 
         <PersonalizedDemo />
-
-        {/* Demo Disclaimer */}
-        <p className="mt-16 border-t border-[#e7e2dc] pt-6 text-xs leading-6 text-[#817a72]">
-          Demonstration catalog with illustrative prices.
-          Product images are for demonstration only.
-          No real purchases are processed.
-        </p>
       </main>
 
       <footer className="bg-[#24221f] px-6 py-8 text-center text-xs text-[#c2bab2]">

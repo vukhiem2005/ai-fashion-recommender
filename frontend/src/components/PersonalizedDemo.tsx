@@ -147,10 +147,6 @@ export default function PersonalizedDemo() {
           >
             Recommended for Synthetic Shopper
           </h2>
-          <p className="mt-3 text-sm leading-6 text-[#77716b]">
-            Academic demonstration using simulated shopper interaction histories
-            from offline collaborative filtering evaluation — not live customer tracking.
-          </p>
         </div>
 
         <div className="w-full sm:w-80">
