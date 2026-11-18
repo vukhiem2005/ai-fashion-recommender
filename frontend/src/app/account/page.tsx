@@ -1,5 +1,6 @@
 
 "use client";
+import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 import Link from "next/link";
 import { useEffect, useState, type FormEvent } from "react";
@@ -80,12 +81,9 @@ export default function AccountPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#24221f]">
-      <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
-        ÉLAN Fashion Store — Portfolio Demo
-      </div>
-<StoreHeader />
-      <main className="mx-auto max-w-5xl px-6 py-14 md:py-20">
+    <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
+      <StoreHeader />
+      <main id="main-content" className="mx-auto w-full max-w-5xl flex-1 px-6 py-14 md:py-20">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
           ÉLAN Member Experience
         </p>
@@ -248,6 +246,8 @@ export default function AccountPage() {
           </div>
         )}
       </main>
+
+      <StoreFooter />
     </div>
   );
 }

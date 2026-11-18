@@ -1,4 +1,5 @@
 "use client";
+import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 import Image from "next/image";
 import Link from "next/link";
@@ -49,14 +50,10 @@ export default function CartPage() {
   const subtotalCents = cartSubtotal(items);
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#24221f]">
-      <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
-        ÉLAN Fashion Store — Portfolio Demo
-      </div>
-
+    <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
       <StoreHeader />
 
-      <main className="mx-auto max-w-7xl px-6 py-12 md:py-16">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 md:py-16">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
           The ÉLAN Collection
         </p>
@@ -210,6 +207,8 @@ export default function CartPage() {
           </div>
         )}
       </main>
+
+      <StoreFooter />
     </div>
   );
 }

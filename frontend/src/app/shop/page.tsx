@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import PersonalizedDemo from "@/components/PersonalizedDemo";
+import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 import { useEffect, useRef, useState } from "react";
 
@@ -150,16 +151,11 @@ export default function ShopPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#24221f]">
-      {/* Announcement Bar */}
-      <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
-        ÉLAN Fashion Store — Portfolio Demo
-      </div>
-
+    <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
       {/* Navigation */}
       <StoreHeader />
 
-      <main className="mx-auto max-w-7xl px-6 py-12 md:py-16">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 md:py-16">
         {/* Page Heading */}
         <div className="mb-12">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
@@ -418,9 +414,7 @@ export default function ShopPage() {
         <PersonalizedDemo />
       </main>
 
-      <footer className="bg-[#24221f] px-6 py-8 text-center text-xs text-[#c2bab2]">
-        ÉLAN. — AI Fashion Recommendation E-Commerce
-      </footer>
+      <StoreFooter />
     </div>
   );
 }

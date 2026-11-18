@@ -1,6 +1,7 @@
 
 "use client";
 
+import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 import { useState } from "react";
 import AddProductForm from "@/components/AddProductForm";
@@ -204,10 +205,10 @@ async function changeProductStatus(
   });
 
   return (
-    <div className="min-h-screen bg-[#f8f7f5] text-[#24221f]">
-     <StoreHeader />
+    <div className="flex min-h-screen flex-col bg-[#f8f7f5] text-[#24221f]">
+      <StoreHeader />
 
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-6 py-12">
         <div className="mb-10">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#ae805f]">
             Product Management
@@ -498,6 +499,7 @@ async function changeProductStatus(
   />
 )}
 
+      <StoreFooter />
     </div>
   );
 }

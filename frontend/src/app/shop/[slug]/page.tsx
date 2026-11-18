@@ -1,6 +1,7 @@
 "use client";
 
 import YouMayAlsoLike from "@/components/YouMayAlsoLike";
+import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 import { addToCart } from "@/lib/cart";
 import Image from "next/image";
@@ -214,13 +215,9 @@ function ProductDetailContent({ slug }: { slug: string }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#24221f]">
-      <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
-        ÉLAN Fashion Store — Portfolio Demo
-      </div>
-
+    <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
       <StoreHeader />
-      <main className="mx-auto max-w-7xl px-6 py-12">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-6 py-12 pb-20">
         <div className="mb-10 text-sm text-[#80776e]">
           <Link href="/shop" className="hover:underline">
             Shop
@@ -372,9 +369,7 @@ function ProductDetailContent({ slug }: { slug: string }) {
         <YouMayAlsoLike productId={product.id} />
       </main>
 
-      <footer className="mt-20 bg-[#24221f] px-6 py-10 text-center text-xs text-white">
-        ÉLAN. — AI Fashion Recommendation E-Commerce
-      </footer>
+      <StoreFooter />
     </div>
   );
 }

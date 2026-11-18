@@ -1,16 +1,200 @@
 
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
 :root {
   color-scheme: light;
+  --elan-bg: #faf9f6;
+  --elan-surface: #ffffff;
+  --elan-surface-muted: #f2ece4;
+  --elan-text: #24221f;
+  --elan-text-secondary: #686159;
+  --elan-text-muted: #756d65;
+  --elan-accent: #9a6b48;
+  --elan-accent-hover: #7d5536;
+  --elan-accent-soft: #ae805f;
+  --elan-border: #e7e2dc;
+  --elan-border-strong: #d5cdc3;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
-  background: #faf9f6;
-  color: #24221f;
+  background-color: var(--elan-bg);
+  color: var(--elan-text);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  text-align: start;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:where(a:any-link, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--elan-text);
+  outline-offset: 3px;
+}
+
+/* Visually hidden skip link that surfaces cleanly on keyboard focus */
+.elan-skip-link:where(:not(:focus-visible, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.elan-skip-link:is(:focus-visible, :active) {
+  position: fixed;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  z-index: 100;
+  background-color: var(--elan-text);
+  color: #ffffff;
+  padding-block: 0.625rem;
+  padding-inline: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgb(36 34 31 / 0.18);
+}
+
+/* Shared container and editorial button foundations */
+.elan-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.elan-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.75rem;
+  padding-block: 0.75rem;
+  padding-inline: 1.75rem;
+  background-color: var(--elan-text);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.elan-btn-primary:hover {
+  background-color: var(--elan-accent);
+}
+
+.elan-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.75rem;
+  padding-block: 0.75rem;
+  padding-inline: 1.5rem;
+  border: 1px solid var(--elan-border-strong);
+  background-color: var(--elan-surface);
+  color: var(--elan-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, color 180ms ease, background-color 180ms ease;
+}
+
+.elan-btn-secondary:hover {
+  border-color: var(--elan-accent);
+  color: var(--elan-accent);
+}
+
+/* Mobile navigation modal <dialog> sheet */
+.elan-mobile-drawer {
+  inset: 0;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.elan-mobile-drawer::backdrop {
+  background-color: rgb(36 34 31 / 0.42);
+  backdrop-filter: blur(2px);
+}
+
+.elan-mobile-drawer-sheet {
+  margin-inline-start: auto;
+  inline-size: min(22rem, 86dvw);
+  max-inline-size: calc(100dvw - 1.5rem);
+  block-size: 100svh;
+  background-color: var(--elan-bg);
+  color: var(--elan-text);
+  border-inline-start: 1px solid var(--elan-border);
+  box-shadow: -12px 0 36px rgb(36 34 31 / 0.14);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .elan-mobile-drawer,
+  .elan-mobile-drawer::backdrop {
+    transition: opacity 180ms ease, display 180ms ease, overlay 180ms ease;
+    transition-behavior: allow-discrete;
+  }
+
+  .elan-mobile-drawer-sheet {
+    transition: translate 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @starting-style {
+    .elan-mobile-drawer[open],
+    .elan-mobile-drawer[open]::backdrop {
+      opacity: 0;
+    }
+
+    .elan-mobile-drawer[open] .elan-mobile-drawer-sheet {
+      translate: 1.5rem 0;
+    }
+  }
+}
+
+@media (forced-colors: active) {
+  .elan-mobile-drawer-sheet {
+    border-inline-start: 2px solid CanvasText;
+  }
 }

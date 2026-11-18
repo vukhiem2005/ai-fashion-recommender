@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 
 
 export const metadata: Metadata = {
-  title: "ÉLAN | AI Fashion Recommendation Store",
+  title: "ÉLAN — Contemporary Fashion & AI Discovery",
   description:
-    "Explore curated fashion collections with AI-powered product recommendations using TF-IDF and cosine similarity. An AI engineering portfolio demo.",
-  applicationName: "ÉLAN AI Fashion",
+    "Explore contemporary fashion collections with intelligent visual and personalized style discovery.",
+  applicationName: "ÉLAN",
 };
 
 

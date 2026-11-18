@@ -1,6 +1,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import StoreFooter from "@/components/StoreFooter";
 import StoreHeader from "@/components/StoreHeader";
 const products = [
   {
@@ -35,12 +36,9 @@ const products = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#faf9f6] text-[#24221f]">
-      <div className="bg-[#24221f] px-4 py-2 text-center text-xs tracking-wider text-white">
-        AI Fashion Store — Portfolio Demo
-      </div>
-<StoreHeader />
-      <main>
+    <div className="flex min-h-screen flex-col bg-[#faf9f6] text-[#24221f]">
+      <StoreHeader />
+      <main id="main-content" className="flex-1">
         <section
           id="home"
           className="mx-auto grid max-w-7xl items-center gap-8 px-6 py-12 lg:grid-cols-2 lg:py-20"
@@ -216,24 +214,7 @@ export default function Home() {
 
       </main>
 
-      <footer className="bg-[#24221f] px-6 py-10 text-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4">
-          <span className="font-serif text-2xl tracking-widest">
-            ÉLAN.
-          </span>
-
-          <p className="text-xs text-[#c2bab2]">
-            AI Fashion Recommendation E-Commerce ·
-            Portfolio Project
-          </p>
-        </div>
-
-        <p className="mx-auto mt-5 max-w-7xl text-xs text-[#a9a19a]">
-          Demo-only products and illustrative prices.
-          Editorial images from Unsplash; not H&M
-          product SKUs. No real purchases or payments.
-        </p>
-      </footer>
+      <StoreFooter />
     </div>
   );
 }
