@@ -8,7 +8,7 @@ const collectionLinks = [
 ];
 
 const brandLinks = [
-  { label: "About ÉLAN", href: "/#about" },
+  { label: "About ÉLAN", href: "/about" },
   {
     label: "Project Documentation (GitHub)",
     href: "https://github.com/vukhiem2005/ai-fashion-recommender",
@@ -91,7 +91,7 @@ export default function StoreFooter() {
             <Link href="/shop" className="hover:text-white">
               Collection
             </Link>
-            <Link href="/#about" className="hover:text-white">
+            <Link href="/about" className="hover:text-white">
               About
             </Link>
             <a

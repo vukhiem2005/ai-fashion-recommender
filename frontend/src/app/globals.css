@@ -198,3 +198,62 @@ p {
     border-inline-start: 2px solid CanvasText;
   }
 }
+
+/* Editorial non-exclusive <details> accordion (per modern-web-guidance accordion) */
+.elan-accordion details {
+  border-block-end: 1px solid var(--elan-border);
+  background-color: var(--elan-surface);
+}
+
+.elan-accordion details:first-of-type {
+  border-block-start: 1px solid var(--elan-border);
+}
+
+.elan-accordion summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75ch;
+  min-block-size: 3.25rem;
+  padding-block: 1rem;
+  padding-inline: 1.25rem;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--elan-text);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.elan-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.elan-accordion summary:hover {
+  background-color: var(--elan-bg);
+  color: var(--elan-accent);
+}
+
+.elan-accordion summary::before {
+  content: "";
+  inline-size: 1em;
+  block-size: 1em;
+  flex-shrink: 0;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  rotate: -90deg;
+}
+
+.elan-accordion summary:dir(rtl)::before {
+  rotate: 90deg;
+}
+
+.elan-accordion details[open] > summary::before {
+  rotate: 0deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .elan-accordion summary::before {
+    transition: rotate 0.2s ease;
+  }
+}

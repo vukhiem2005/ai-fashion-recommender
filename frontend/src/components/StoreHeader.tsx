@@ -8,7 +8,7 @@ import { readCart, subscribeToCart } from "@/lib/cart";
 const primaryNavigation = [
   { label: "Home", href: "/" },
   { label: "Collection", href: "/shop" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
 ];
 
 const utilityNavigation = [
@@ -45,8 +45,8 @@ export default function StoreHeader() {
   }, []);
 
   function isActive(href: string): boolean {
-    if (href === "/#about") {
-      return false;
+    if (href === "/about") {
+      return pathname === "/about" || pathname.startsWith("/about/");
     }
 
     if (href === "/shop") {
